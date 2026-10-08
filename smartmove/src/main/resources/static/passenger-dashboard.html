@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Passenger Dashboard
+    </title>
+
+    <link rel="stylesheet"
+          href="css/passenger-dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MENU
+             ================================================= -->
+
+        <nav class="passenger-menu">
+
+
+            <!-- DASHBOARD -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item active">
+
+                <span>
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </button>
+
+
+
+            <!-- SEARCH TRIPS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html';">
+
+                <span>
+                    ⌕
+                </span>
+
+                Search Trips
+
+            </button>
+
+
+
+            <!-- AVAILABLE TRIPS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html';">
+
+                <span>
+                    ▶
+                </span>
+
+                Available Trips
+
+            </button>
+
+
+
+            <!-- MY TICKETS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-tickets.html';">
+
+                <span>
+                    ▤
+                </span>
+
+                My Tickets
+
+            </button>
+
+
+
+            <!-- PAYMENTS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-payments.html';">
+
+                <span>
+                    Rs
+                </span>
+
+                Payments
+
+            </button>
+
+
+
+            <!-- TRAVEL HISTORY -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="travelHistoryButton">
+
+                <span>
+                    ↺
+                </span>
+
+                Travel History
+
+            </button>
+
+
+
+            <!-- MY REVIEWS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myReviewsButton">
+
+                <span>
+                    ★
+                </span>
+
+                My Reviews
+
+            </button>
+
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="announcementsButton">
+
+                <span>
+                    !
+                </span>
+
+                Announcements
+
+            </button>
+
+
+
+            <!-- PROFILE -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="profileButton">
+
+                <span>
+                    ●
+                </span>
+
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             LOGOUT
+             ================================================= -->
+
+        <button
+                type="button"
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+
+            <div>
+
+                <h1>
+                    Passenger Dashboard
+                </h1>
+
+                <p>
+                    SmartMove Transport Management System
+                </p>
+
+            </div>
+
+
+
+            <div class="passenger-profile">
+
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD CONTENT
+             ================================================= -->
+
+        <section
+                id="dashboard"
+                class="passenger-section active">
+
+
+            <!-- =================================================
+                 WELCOME
+                 ================================================= -->
+
+            <div class="welcome-card">
+
+
+                <div>
+
+                    <h2 id="welcomePassenger">
+                        Welcome!
+                    </h2>
+
+                    <p>
+                        Find your next journey
+                        with SmartMove.
+                    </p>
+
+                </div>
+
+
+                <div id="currentDate">
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STATISTICS
+                 ================================================= -->
+
+            <div class="passenger-stats">
+
+
+                <!-- MY TICKETS -->
+
+                <div class="passenger-stat-card">
+
+                    <span>
+                        My Tickets
+                    </span>
+
+                    <strong id="myTicketCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- UPCOMING -->
+
+                <div class="passenger-stat-card">
+
+                    <span>
+                        Upcoming Trips
+                    </span>
+
+                    <strong id="upcomingTripCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="passenger-stat-card">
+
+                    <span>
+                        Completed Trips
+                    </span>
+
+                    <strong id="completedTripCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- TOTAL SPENT -->
+
+                <div class="passenger-stat-card">
+
+                    <span>
+                        Total Spent
+                    </span>
+
+                    <strong id="totalSpent">
+                        Rs. 0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 QUICK ACCESS
+                 ================================================= -->
+
+            <div class="dashboard-panel">
+
+
+                <h3>
+                    Quick Access
+                </h3>
+
+
+                <div class="quick-grid">
+
+
+                    <!-- SEARCH TRIPS -->
+
+                    <button
+                            type="button"
+                            id="findTripCard"
+                            onclick="window.location.href='/passenger-trips.html';">
+
+                        Search Trips
+
+                    </button>
+
+
+
+                    <!-- MY TICKETS -->
+
+                    <button
+                            type="button"
+                            id="ticketCard"
+                            onclick="window.location.href='/passenger-tickets.html';">
+
+                        My Tickets
+
+                    </button>
+
+
+
+                    <!-- PAYMENTS -->
+
+                    <button
+                            type="button"
+                            id="paymentCard"
+                            onclick="window.location.href='/passenger-payments.html';">
+
+                        Payments
+
+                    </button>
+
+
+
+                    <!-- TRAVEL HISTORY -->
+
+                    <button
+                            type="button"
+                            id="historyCard">
+
+                        Travel History
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/passenger-dashboard.js?v=20"></script>
+
+
+</body>
+
+</html>

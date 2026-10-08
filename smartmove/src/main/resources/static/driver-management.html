@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Driver Management</title>
+
+    <link rel="stylesheet"
+          href="css/driver-management.css">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                SM
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Driver Management
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong id="adminUsername">
+                        admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                    class="dashboard-button"
+                    id="dashboardButton">
+
+                ← Dashboard
+
+            </button>
+
+
+            <button
+                    class="logout-button"
+                    id="logoutButton">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    Drivers
+                </h1>
+
+                <p>
+                    View, add, edit and delete registered drivers
+                </p>
+
+            </div>
+
+
+            <button
+                    class="add-button"
+                    id="addDriverButton">
+
+                + Add Driver
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             DRIVER FORM
+             ================================================= -->
+
+        <div
+                class="form-card"
+                id="driverFormCard"
+                style="display: none;">
+
+            <div class="form-header">
+
+                <div>
+
+                    <h2 id="formTitle">
+                        Add Driver
+                    </h2>
+
+                    <p>
+                        Enter driver information
+                    </p>
+
+                </div>
+
+                <button
+                        class="close-button"
+                        id="closeFormButton">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <form id="driverForm">
+
+                <input
+                        type="hidden"
+                        id="driverId">
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            First Name
+                        </label>
+
+                        <input
+                                type="text"
+                                id="firstName"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Last Name
+                        </label>
+
+                        <input
+                                type="text"
+                                id="lastName"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            NIC Number
+                        </label>
+
+                        <input
+                                type="text"
+                                id="nicNumber"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            License Number
+                        </label>
+
+                        <input
+                                type="text"
+                                id="licenseNumber"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            License Expiry
+                        </label>
+
+                        <input
+                                type="date"
+                                id="licenseExpiry"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input
+                                type="text"
+                                id="phone"
+                                required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                                type="email"
+                                id="email">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                                type="date"
+                                id="dateOfBirth">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Hire Date
+                        </label>
+
+                        <input
+                                type="date"
+                                id="hireDate">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="status">
+
+                            <option value="ACTIVE">
+                                ACTIVE
+                            </option>
+
+                            <option value="ON_LEAVE">
+                                ON LEAVE
+                            </option>
+
+                            <option value="TERMINATED">
+                                TERMINATED
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                        id="formMessage"
+                        class="form-message">
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            type="button"
+                            class="cancel-button"
+                            id="cancelButton">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                            type="submit"
+                            class="save-button"
+                            id="saveButton">
+
+                        Save Driver
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================================
+             DRIVER TABLE
+             ================================================= -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div>
+
+                    <h2>
+                        Registered Drivers
+                    </h2>
+
+                    <p>
+                        All drivers currently registered in SmartMove
+                    </p>
+
+                </div>
+
+
+                <button
+                        class="refresh-button"
+                        id="refreshButton">
+
+                    ↻ Refresh
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>NIC</th>
+
+                        <th>License</th>
+
+                        <th>License Expiry</th>
+
+                        <th>Phone</th>
+
+                        <th>Email</th>
+
+                        <th>Hire Date</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody id="driverTableBody">
+
+                    <tr>
+
+                        <td colspan="10"
+                            class="loading">
+
+                            Loading drivers...
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="js/driver-management.js"></script>
+
+</body>
+
+</html>

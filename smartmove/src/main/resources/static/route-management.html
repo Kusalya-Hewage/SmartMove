@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Route Management
+    </title>
+
+
+    <link
+            rel="stylesheet"
+            href="/css/route-management.css?v=2">
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+
+                SM
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Admin Panel
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <!-- MAIN MENU -->
+
+            <div class="menu-title">
+                MAIN MENU
+            </div>
+
+
+            <a
+                    href="/admin-dashboard.html"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    D
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/vehicle-management.html"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    V
+                </span>
+
+                <span>
+                    Vehicles
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/driver-management.html"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    D
+                </span>
+
+                <span>
+                    Drivers
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/route-management.html"
+                    class="menu-item active">
+
+                <span class="menu-icon">
+                    R
+                </span>
+
+                <span>
+                    Routes
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#route-stops"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    S
+                </span>
+
+                <span>
+                    Route Stops
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#passengers"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    P
+                </span>
+
+                <span>
+                    Passengers
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#trips"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    T
+                </span>
+
+                <span>
+                    Trips
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#tickets"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    T
+                </span>
+
+                <span>
+                    Tickets
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#payments"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    P
+                </span>
+
+                <span>
+                    Payments
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#maintenance"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    M
+                </span>
+
+                <span>
+                    Maintenance
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#feedback"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    F
+                </span>
+
+                <span>
+                    Feedback
+                </span>
+
+            </a>
+
+
+            <!-- MONGODB -->
+
+            <div class="menu-title second-title">
+                MONGODB
+            </div>
+
+
+            <a
+                    href="/admin-dashboard.html#documents"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    D
+                </span>
+
+                <span>
+                    Vehicle Documents
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#reviews"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    R
+                </span>
+
+                <span>
+                    Passenger Reviews
+                </span>
+
+            </a>
+
+
+            <a
+                    href="/admin-dashboard.html#announcements"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    A
+                </span>
+
+                <span>
+                    Announcements
+                </span>
+
+            </a>
+
+
+            <!-- ANALYSIS -->
+
+            <div class="menu-title second-title">
+                ANALYSIS
+            </div>
+
+
+            <a
+                    href="/admin-dashboard.html#reports"
+                    class="menu-item">
+
+                <span class="menu-icon">
+                    R
+                </span>
+
+                <span>
+                    Reports
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-footer">
+
+            <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button">
+
+                <span>
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+                <h1>
+                    Route Management
+                </h1>
+
+                <p>
+                    Manage SmartMove routes
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- DASHBOARD BUTTON -->
+
+                <button
+                        type="button"
+                        id="dashboardButton"
+                        class="dashboard-button">
+
+                    ← Dashboard
+
+                </button>
+
+
+                <!-- ADMIN PROFILE -->
+
+                <div class="admin-profile">
+
+
+                    <div class="admin-avatar">
+
+                        A
+
+                    </div>
+
+
+                    <div>
+
+                        <strong id="adminUsername">
+
+                            Admin
+
+                        </strong>
+
+
+                        <small>
+
+                            Administrator
+
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        <div class="page-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+                 ================================================= -->
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <h2>
+                        Routes
+                    </h2>
+
+                    <p>
+                        Add, update, view and delete routes
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="primary-button"
+                        id="showRouteFormButton">
+
+                    + Add Route
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ROUTE FORM
+                 ================================================= -->
+
+            <div
+                    id="routeFormPanel"
+                    class="form-panel"
+                    style="display: none;">
+
+
+                <div class="form-panel-header">
+
+
+                    <div>
+
+                        <h3 id="routeFormTitle">
+                            Add Route
+                        </h3>
+
+                        <p>
+                            Enter route information
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            class="close-button"
+                            id="closeRouteFormButton">
+
+                        ×
+
+                    </button>
+
+
+                </div>
+
+
+                <form id="routeForm">
+
+
+                    <input
+                            type="hidden"
+                            id="routeId">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- ROUTE NAME -->
+
+                        <div class="form-group">
+
+                            <label for="routeName">
+
+                                Route Name
+
+                            </label>
+
+                            <input
+                                    type="text"
+                                    id="routeName"
+                                    placeholder="Colombo - Kandy"
+                                    required>
+
+                        </div>
+
+
+                        <!-- SOURCE -->
+
+                        <div class="form-group">
+
+                            <label for="sourceLocation">
+
+                                Source Location
+
+                            </label>
+
+                            <input
+                                    type="text"
+                                    id="sourceLocation"
+                                    placeholder="Colombo"
+                                    required>
+
+                        </div>
+
+
+                        <!-- DESTINATION -->
+
+                        <div class="form-group">
+
+                            <label for="destinationLocation">
+
+                                Destination Location
+
+                            </label>
+
+                            <input
+                                    type="text"
+                                    id="destinationLocation"
+                                    placeholder="Kandy"
+                                    required>
+
+                        </div>
+
+
+                        <!-- DISTANCE -->
+
+                        <div class="form-group">
+
+                            <label for="distanceKm">
+
+                                Distance (KM)
+
+                            </label>
+
+                            <input
+                                    type="number"
+                                    id="distanceKm"
+                                    placeholder="115"
+                                    min="0.1"
+                                    step="0.1"
+                                    required>
+
+                        </div>
+
+
+                        <!-- DURATION -->
+
+                        <div class="form-group">
+
+                            <label for="estimatedDurationMin">
+
+                                Estimated Duration (Minutes)
+
+                            </label>
+
+                            <input
+                                    type="number"
+                                    id="estimatedDurationMin"
+                                    placeholder="210"
+                                    min="1"
+                                    required>
+
+                        </div>
+
+
+                        <!-- FARE -->
+
+                        <div class="form-group">
+
+                            <label for="baseFare">
+
+                                Base Fare (Rs.)
+
+                            </label>
+
+                            <input
+                                    type="number"
+                                    id="baseFare"
+                                    placeholder="1500"
+                                    min="0"
+                                    step="0.01"
+                                    required>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="form-group">
+
+                            <label for="routeStatus">
+
+                                Status
+
+                            </label>
+
+                            <select
+                                    id="routeStatus"
+                                    required>
+
+                                <option value="ACTIVE">
+
+                                    Active
+
+                                </option>
+
+                                <option value="SUSPENDED">
+
+                                    Suspended
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                            id="routeFormMessage"
+                            class="form-message">
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                                type="button"
+                                class="secondary-button"
+                                id="cancelRouteButton">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                                type="submit"
+                                class="primary-button"
+                                id="saveRouteButton">
+
+                            Save Route
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ROUTE LIST
+                 ================================================= -->
+
+            <div class="panel">
+
+
+                <div class="table-toolbar">
+
+
+                    <div>
+
+                        <h3>
+                            Route List
+                        </h3>
+
+                        <p>
+                            Registered SmartMove transport routes
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            class="refresh-button"
+                            id="refreshRoutesButton">
+
+                        ↻ Refresh
+
+                    </button>
+
+
+                </div>
+
+
+                <div id="routesContent">
+
+
+                    <div class="loading">
+
+                        Loading routes...
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<script
+        src="/js/route-management.js?v=2">
+</script>
+
+
+</body>
+
+</html>

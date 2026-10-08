@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Passenger Management
+    </title>
+
+
+    <!-- PAGE CSS -->
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-management.css?v=2">
+
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+
+    <header class="passenger-topbar">
+
+
+        <!-- =================================================
+             LEFT SIDE
+             ================================================= -->
+
+        <div class="topbar-left">
+
+
+            <!-- BACK TO ADMIN DASHBOARD -->
+
+            <button
+                    type="button"
+                    class="back-button"
+                    id="backToAdminButton">
+
+                ←
+
+            </button>
+
+
+            <div>
+
+
+                <h1>
+
+                    Passenger Management
+
+                </h1>
+
+
+                <p>
+
+                    View and manage registered SmartMove passengers
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT SIDE
+             ================================================= -->
+
+        <div class="admin-profile">
+
+
+            <div class="admin-avatar">
+
+                A
+
+            </div>
+
+
+            <div>
+
+
+                <strong id="adminUsername">
+
+                    Admin
+
+                </strong>
+
+
+                <small>
+
+                    Administrator
+
+                </small>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="passenger-content">
+
+
+        <!-- =================================================
+             PAGE HEADER
+             ================================================= -->
+
+        <div class="section-header">
+
+
+            <div>
+
+
+                <h2>
+
+                    Passengers
+
+                </h2>
+
+
+                <p>
+
+                    Manage registered passenger accounts
+
+                </p>
+
+
+            </div>
+
+
+            <!-- REFRESH -->
+
+            <button
+                    type="button"
+                    class="secondary-button"
+                    id="refreshPassengersButton">
+
+                ↻ Refresh
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SEARCH / FILTER
+             ================================================= -->
+
+        <div class="search-filter-panel">
+
+
+            <!-- SEARCH -->
+
+            <div class="form-group">
+
+
+                <label
+                        for="passengerSearch">
+
+                    Search Passenger
+
+                </label>
+
+
+                <input
+                        type="text"
+                        id="passengerSearch"
+                        placeholder="Search by name, email or phone">
+
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+
+                <label
+                        for="passengerStatusFilter">
+
+                    Status
+
+                </label>
+
+
+                <select
+                        id="passengerStatusFilter">
+
+
+                    <option value="">
+
+                        All Statuses
+
+                    </option>
+
+
+                    <option value="ACTIVE">
+
+                        Active
+
+                    </option>
+
+
+                    <option value="SUSPENDED">
+
+                        Suspended
+
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                    type="button"
+                    class="secondary-button"
+                    id="clearPassengerFilterButton">
+
+                Clear
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             EDIT PASSENGER FORM
+             ================================================= -->
+
+        <div
+                id="passengerFormPanel"
+                class="form-panel"
+                style="display: none;">
+
+
+            <!-- FORM HEADER -->
+
+            <div class="form-panel-header">
+
+
+                <div>
+
+
+                    <h3>
+
+                        Edit Passenger
+
+                    </h3>
+
+
+                    <p>
+
+                        Update passenger information
+
+                    </p>
+
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="close-button"
+                        id="closePassengerFormButton">
+
+                    ×
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="passengerForm">
+
+
+                <!-- HIDDEN ID -->
+
+                <input
+                        type="hidden"
+                        id="editPassengerId">
+
+
+
+                <div class="form-grid">
+
+
+                    <!-- =================================================
+                         FULL NAME
+                         ================================================= -->
+
+                    <div class="form-group">
+
+
+                        <label
+                                for="passengerFullName">
+
+                            Full Name
+
+                        </label>
+
+
+                        <input
+                                type="text"
+                                id="passengerFullName"
+                                placeholder="Passenger full name"
+                                required>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         EMAIL
+                         ================================================= -->
+
+                    <div class="form-group">
+
+
+                        <label
+                                for="passengerEmail">
+
+                            Email
+
+                        </label>
+
+
+                        <input
+                                type="email"
+                                id="passengerEmail"
+                                placeholder="passenger@example.com"
+                                required>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         PHONE
+                         ================================================= -->
+
+                    <div class="form-group">
+
+
+                        <label
+                                for="passengerPhone">
+
+                            Phone
+
+                        </label>
+
+
+                        <input
+                                type="text"
+                                id="passengerPhone"
+                                placeholder="0771234567"
+                                required>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         STATUS
+                         ================================================= -->
+
+                    <div class="form-group">
+
+
+                        <label
+                                for="passengerStatus">
+
+                            Status
+
+                        </label>
+
+
+                        <select
+                                id="passengerStatus"
+                                required>
+
+
+                            <option value="ACTIVE">
+
+                                Active
+
+                            </option>
+
+
+                            <option value="SUSPENDED">
+
+                                Suspended
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         ADDRESS
+                         ================================================= -->
+
+                    <div
+                            class="form-group full-width">
+
+
+                        <label
+                                for="passengerAddress">
+
+                            Address
+
+                        </label>
+
+
+                        <textarea
+                                id="passengerAddress"
+                                rows="3"
+                                placeholder="Passenger address"></textarea>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORM MESSAGE
+                     ================================================= -->
+
+                <div
+                        id="passengerFormMessage"
+                        class="form-message">
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORM BUTTONS
+                     ================================================= -->
+
+                <div class="form-actions">
+
+
+                    <!-- CANCEL -->
+
+                    <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelPassengerButton">
+
+                        Cancel
+
+                    </button>
+
+
+                    <!-- UPDATE -->
+
+                    <button
+                            type="submit"
+                            class="primary-button"
+                            id="savePassengerButton">
+
+                        Update Passenger
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PASSENGER LIST
+             ================================================= -->
+
+        <div class="panel">
+
+
+            <!-- TABLE TOOLBAR -->
+
+            <div class="table-toolbar">
+
+
+                <div>
+
+
+                    <h3>
+
+                        Passenger List
+
+                    </h3>
+
+
+                    <p>
+
+                        Registered SmartMove passenger accounts
+
+                    </p>
+
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <span
+                        id="passengerTotal"
+                        class="record-count">
+
+                    0 passengers
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- PASSENGERS -->
+
+            <div
+                    id="passengersContent">
+
+
+                <div class="loading">
+
+                    Loading passengers...
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script
+        src="/js/api.js">
+</script>
+
+
+<script
+        src="/js/passenger-management.js?v=2">
+</script>
+
+
+</body>
+
+</html>

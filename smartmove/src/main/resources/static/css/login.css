@@ -1,0 +1,1101 @@
+/* =========================================================
+   SMARTMOVE LOGIN PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+    margin: 0;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    background: #eef2f7;
+
+    min-height: 100vh;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* =========================================================
+   LOGIN WRAPPER
+   ========================================================= */
+
+.login-wrapper {
+    width: 900px;
+
+    max-width: 100%;
+
+    min-height: 520px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+            0 15px 40px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   BRAND SECTION
+   ========================================================= */
+
+.login-brand {
+    background: #1d3557;
+
+    color: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 50px;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo-box {
+    width: 85px;
+
+    height: 85px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #ffffff;
+
+    color: #1d3557;
+
+    border-radius: 20px;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   BRAND TITLE
+   ========================================================= */
+
+.login-brand h1 {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+    font-weight: 700;
+}
+
+
+.login-brand p {
+    font-size: 17px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   BRAND DESCRIPTION
+   ========================================================= */
+
+.brand-text {
+    max-width: 300px;
+
+    margin-top: 30px;
+
+    line-height: 1.6;
+
+    opacity: 0.85;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LOGIN BOX
+   ========================================================= */
+
+.login-box {
+    padding: 60px 50px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   AUTH PANEL
+   ========================================================= */
+
+.auth-panel {
+    width: 100%;
+}
+
+
+/* =========================================================
+   LOGIN TITLE
+   ========================================================= */
+
+.login-box h2 {
+    font-size: 32px;
+
+    color: #1e293b;
+
+    margin-bottom: 10px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.subtitle {
+    color: #64748b;
+
+    margin-bottom: 35px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+#loginForm,
+#registerForm {
+    width: 100%;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   TEXT INPUT
+   ========================================================= */
+
+.form-group input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   INPUT PLACEHOLDER
+   ========================================================= */
+
+.form-group input::placeholder {
+    color: #94a3b8;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.form-group input:focus {
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px rgba(29, 53, 87, 0.08);
+}
+
+
+/* =========================================================
+   ROLE SELECT
+   ========================================================= */
+
+.form-group select {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 15px;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   ROLE SELECT HOVER
+   ========================================================= */
+
+.form-group select:hover {
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   ROLE SELECT FOCUS
+   ========================================================= */
+
+.form-group select:focus {
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px rgba(29, 53, 87, 0.08);
+}
+
+
+/* =========================================================
+   ROLE OPTIONS
+   ========================================================= */
+
+.form-group select option {
+    padding: 10px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   ROLE PLACEHOLDER
+   ========================================================= */
+
+.form-group select option:first-child {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
+
+#loginButton {
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 48px !important;
+
+    padding: 0 16px !important;
+
+    border: none !important;
+
+    border-radius: 8px !important;
+
+    background-color: #1d3557 !important;
+
+    color: #ffffff !important;
+
+    font-size: 16px !important;
+
+    font-weight: 700 !important;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif !important;
+
+    cursor: pointer !important;
+
+    text-align: center !important;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    outline: none !important;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease !important;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON HOVER
+   ========================================================= */
+
+#loginButton:hover {
+    background-color: #142840 !important;
+
+    box-shadow:
+            0 4px 10px rgba(29, 53, 87, 0.20) !important;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON ACTIVE
+   ========================================================= */
+
+#loginButton:active {
+    transform: scale(0.99) !important;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON FOCUS
+   ========================================================= */
+
+#loginButton:focus {
+    outline: none !important;
+
+    box-shadow:
+            0 0 0 3px rgba(29, 53, 87, 0.20) !important;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON DISABLED
+   ========================================================= */
+
+#loginButton:disabled {
+    opacity: 0.6 !important;
+
+    cursor: not-allowed !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   REGISTER LINK AREA
+   ========================================================= */
+
+.register-link {
+    margin-top: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 6px;
+
+    font-size: 14px;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   SHOW REGISTER BUTTON
+   ========================================================= */
+
+#showRegisterButton {
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    border: none !important;
+
+    background: transparent !important;
+
+    color: #1d3557 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif !important;
+
+    cursor: pointer !important;
+
+    padding: 2px 4px !important;
+
+    margin: 0 !important;
+
+    text-decoration: underline !important;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    outline: none !important;
+
+    transition:
+            color 0.2s ease,
+            transform 0.1s ease !important;
+}
+
+
+/* =========================================================
+   SHOW REGISTER BUTTON HOVER
+   ========================================================= */
+
+#showRegisterButton:hover {
+    background: transparent !important;
+
+    color: #142840 !important;
+
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   SHOW REGISTER BUTTON ACTIVE
+   ========================================================= */
+
+#showRegisterButton:active {
+    transform: scale(0.97) !important;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON
+   ========================================================= */
+
+#registerButton {
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 48px !important;
+
+    margin: 0 !important;
+
+    padding: 0 16px !important;
+
+    border: none !important;
+
+    border-radius: 8px !important;
+
+    background-color: #1d3557 !important;
+
+    color: #ffffff !important;
+
+    font-size: 16px !important;
+
+    font-weight: 700 !important;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif !important;
+
+    text-align: center !important;
+
+    line-height: 48px !important;
+
+    cursor: pointer !important;
+
+    outline: none !important;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    box-shadow: none !important;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease !important;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON HOVER
+   ========================================================= */
+
+#registerButton:hover {
+    background-color: #142840 !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+            0 4px 10px rgba(29, 53, 87, 0.20) !important;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON ACTIVE
+   ========================================================= */
+
+#registerButton:active {
+    background-color: #0f2033 !important;
+
+    color: #ffffff !important;
+
+    transform: scale(0.99) !important;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON FOCUS
+   ========================================================= */
+
+#registerButton:focus {
+    outline: none !important;
+
+    box-shadow:
+            0 0 0 3px rgba(29, 53, 87, 0.20) !important;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON DISABLED
+   ========================================================= */
+
+#registerButton:disabled {
+    background-color: #94a3b8 !important;
+
+    color: #ffffff !important;
+
+    opacity: 0.6 !important;
+
+    cursor: not-allowed !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   BACK TO LOGIN BUTTON
+   ========================================================= */
+
+#backToLoginButton,
+.back-login-button {
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 46px !important;
+
+    margin-top: 12px !important;
+
+    padding: 0 16px !important;
+
+    border: 1px solid #cbd5e1 !important;
+
+    border-radius: 8px !important;
+
+    background-color: #ffffff !important;
+
+    color: #1d3557 !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif !important;
+
+    text-align: center !important;
+
+    cursor: pointer !important;
+
+    outline: none !important;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            transform 0.1s ease !important;
+}
+
+
+/* =========================================================
+   BACK TO LOGIN HOVER
+   ========================================================= */
+
+#backToLoginButton:hover,
+.back-login-button:hover {
+    background-color: #f1f5f9 !important;
+
+    border-color: #1d3557 !important;
+
+    color: #142840 !important;
+}
+
+
+/* =========================================================
+   BACK TO LOGIN ACTIVE
+   ========================================================= */
+
+#backToLoginButton:active,
+.back-login-button:active {
+    transform: scale(0.99) !important;
+}
+
+
+/* =========================================================
+   BACK TO LOGIN FOCUS
+   ========================================================= */
+
+#backToLoginButton:focus,
+.back-login-button:focus {
+    outline: none !important;
+
+    box-shadow:
+            0 0 0 3px rgba(29, 53, 87, 0.12) !important;
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD BUTTON
+   ========================================================= */
+
+.back-dashboard-button {
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    gap: 8px;
+
+    min-width: 180px;
+
+    height: 44px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #1d3557;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD HOVER
+   ========================================================= */
+
+.back-dashboard-button:hover {
+    background-color: #142840;
+
+    color: #ffffff;
+
+    box-shadow:
+            0 4px 10px rgba(29, 53, 87, 0.20);
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD ACTIVE
+   ========================================================= */
+
+.back-dashboard-button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD FOCUS
+   ========================================================= */
+
+.back-dashboard-button:focus {
+    outline: none;
+
+    box-shadow:
+            0 0 0 3px rgba(29, 53, 87, 0.20);
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER MESSAGE
+   ========================================================= */
+
+#loginMessage,
+#registerMessage {
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    display: none;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER ERROR MESSAGE
+   ========================================================= */
+
+#loginMessage.error,
+#registerMessage.error {
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER SUCCESS MESSAGE
+   ========================================================= */
+
+#loginMessage.success,
+#registerMessage.success {
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   REGISTER PANEL SPACING
+   ========================================================= */
+
+#registerPanel .subtitle {
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   REGISTER PANEL
+   ========================================================= */
+
+#registerPanel {
+    width: 100%;
+}
+
+
+/* =========================================================
+   ADMIN REGISTER FIELDS
+   ========================================================= */
+
+#adminRegisterFields {
+    width: 100%;
+}
+
+
+/* =========================================================
+   PASSENGER REGISTER FIELDS
+   ========================================================= */
+
+#passengerRegisterFields {
+    width: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 750px) {
+
+    .login-wrapper {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+
+    .login-brand {
+        padding: 35px 25px;
+    }
+
+
+    .login-brand h1 {
+        font-size: 36px;
+    }
+
+
+    .brand-text {
+        margin-top: 20px;
+    }
+
+
+    .login-box {
+        padding: 40px 30px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE DEVICES
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .login-page {
+        padding: 15px;
+    }
+
+
+    .login-wrapper {
+        border-radius: 12px;
+    }
+
+
+    .login-brand {
+        padding: 30px 20px;
+    }
+
+
+    .logo-box {
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 24px;
+
+        border-radius: 16px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .login-brand h1 {
+        font-size: 30px;
+    }
+
+
+    .login-brand p {
+        font-size: 15px;
+    }
+
+
+    .brand-text {
+        font-size: 14px;
+
+        max-width: 270px;
+    }
+
+
+    .login-box {
+        padding: 35px 22px;
+    }
+
+
+    .login-box h2 {
+        font-size: 28px;
+    }
+
+
+    .subtitle {
+        font-size: 14px;
+
+        margin-bottom: 28px;
+    }
+
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+
+    .form-group input,
+    .form-group select,
+    #loginButton,
+    #registerButton {
+        height: 46px !important;
+    }
+
+
+    #registerButton {
+        line-height: 46px !important;
+    }
+
+
+    .back-login-button,
+    #backToLoginButton {
+        height: 44px !important;
+    }
+
+
+    .back-dashboard-button {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 44px;
+    }
+
+
+    .register-link {
+        font-size: 13px;
+    }
+
+
+    #showRegisterButton {
+        font-size: 13px !important;
+    }
+}

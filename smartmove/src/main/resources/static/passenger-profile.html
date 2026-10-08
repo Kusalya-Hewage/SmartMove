@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - My Profile
+    </title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-profile.css?v=1">
+
+</head>
+
+
+<body>
+
+
+<div class="profile-page">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="profile-header">
+
+        <div>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                View and manage your passenger account details
+            </p>
+
+        </div>
+
+
+        <button
+                type="button"
+                class="back-button"
+                id="backDashboardButton">
+
+            ← Back to Dashboard
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PROFILE CARD
+         ===================================================== -->
+
+    <section class="profile-card">
+
+
+        <!-- =================================================
+             PROFILE TOP
+             ================================================= -->
+
+        <div class="profile-card-top">
+
+
+            <div class="profile-avatar-large">
+
+                P
+
+            </div>
+
+
+            <div class="profile-title">
+
+                <h2 id="profileDisplayName">
+                    Passenger
+                </h2>
+
+                <p>
+                    Passenger Account
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROFILE FORM
+             ================================================= -->
+
+        <form id="profileForm">
+
+
+            <!-- Hidden ID -->
+
+            <input
+                    type="hidden"
+                    id="profilePassengerId">
+
+
+
+            <div class="profile-form-grid">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="profileFullName">
+                        Full Name
+                    </label>
+
+                    <input
+                            type="text"
+                            id="profileFullName"
+                            placeholder="Enter your full name"
+                            required>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="profileEmail">
+                        Email
+                    </label>
+
+                    <input
+                            type="email"
+                            id="profileEmail"
+                            placeholder="Enter your email"
+                            required>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="profilePhone">
+                        Phone
+                    </label>
+
+                    <input
+                            type="text"
+                            id="profilePhone"
+                            placeholder="Enter your phone number"
+                            required>
+
+                </div>
+
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+
+                    <label for="profileAddress">
+                        Address
+                    </label>
+
+                    <input
+                            type="text"
+                            id="profileAddress"
+                            placeholder="Enter your address">
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label for="profileStatus">
+                        Account Status
+                    </label>
+
+                    <input
+                            type="text"
+                            id="profileStatus"
+                            readonly>
+
+                </div>
+
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="profileUsername">
+                        Username / Email
+                    </label>
+
+                    <input
+                            type="text"
+                            id="profileUsername"
+                            readonly>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MESSAGE
+                 ================================================= -->
+
+            <div
+                    id="profileMessage"
+                    class="profile-message">
+            </div>
+
+
+
+            <!-- =================================================
+                 ACTIONS
+                 ================================================= -->
+
+            <div class="profile-actions">
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelProfileButton">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                        type="submit"
+                        class="primary-button"
+                        id="saveProfileButton">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ACCOUNT INFORMATION
+         ===================================================== -->
+
+    <section class="account-info-card">
+
+        <h3>
+            Account Information
+        </h3>
+
+
+        <div class="account-info-grid">
+
+
+            <div class="info-item">
+
+                <span>
+                    Passenger ID
+                </span>
+
+                <strong id="accountPassengerId">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Account Type
+                </span>
+
+                <strong>
+                    PASSENGER
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Status
+                </span>
+
+                <strong id="accountStatus">
+                    -
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<script
+        src="/js/passenger-profile.js?v=1">
+</script>
+
+
+</body>
+
+</html>

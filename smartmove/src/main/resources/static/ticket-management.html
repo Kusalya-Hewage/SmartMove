@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Tickets</title>
+
+    <!-- Ticket CSS -->
+    <link
+            rel="stylesheet"
+            href="/css/ticket.css?v=20">
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+
+            <!-- LEFT SIDE -->
+
+            <div>
+
+                <h2>
+                    Tickets
+                </h2>
+
+                <p>
+                    Manage passenger bookings and ticket records
+                </p>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="admin-info">
+
+                <span id="adminUsername">
+                    Admin
+                </span>
+
+
+                <button
+                        type="button"
+                        class="logout-button"
+                        id="logoutButton">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        <div class="page-content">
+
+
+            <!-- =================================================
+                 SECTION HEADER
+                 ================================================= -->
+
+            <div class="section-header">
+
+
+                <!-- TITLE -->
+
+                <div>
+
+                    <h2>
+                        Ticket Management
+                    </h2>
+
+                    <p>
+                        Book, update, cancel and manage passenger
+                        tickets.
+                    </p>
+
+                </div>
+
+
+                <!-- BOOK BUTTON -->
+
+                <button
+                        type="button"
+                        class="primary-button"
+                        id="showTicketFormButton">
+
+                    + Book Ticket
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TICKET FORM
+                 ================================================= -->
+
+            <div
+                    id="ticketFormPanel"
+                    class="form-panel"
+                    style="display: none;">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="form-panel-header">
+
+
+                    <div>
+
+                        <h3 id="ticketFormTitle">
+                            Book Ticket
+                        </h3>
+
+                        <p>
+                            Select a trip, passenger and seat
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            class="close-button"
+                            id="closeTicketFormButton">
+
+                        ×
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- FORM -->
+
+                <form id="ticketForm">
+
+
+                    <!-- Hidden Ticket ID -->
+
+                    <input
+                            type="hidden"
+                            id="ticketId">
+
+
+
+                    <!-- FORM GRID -->
+
+                    <div class="form-grid">
+
+
+                        <!-- ==============================
+                             TRIP
+                             ============================== -->
+
+                        <div class="form-group">
+
+                            <label for="ticketTripId">
+                                Trip
+                            </label>
+
+
+                            <select
+                                    id="ticketTripId"
+                                    required>
+
+                                <option value="">
+                                    Select Trip
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- ==============================
+                             PASSENGER
+                             ============================== -->
+
+                        <div class="form-group">
+
+                            <label for="ticketPassengerId">
+                                Passenger
+                            </label>
+
+
+                            <select
+                                    id="ticketPassengerId"
+                                    required>
+
+                                <option value="">
+                                    Select Passenger
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- ==============================
+                             SEAT NUMBER
+                             ============================== -->
+
+                        <div class="form-group">
+
+                            <label for="ticketSeatNumber">
+                                Seat Number
+                            </label>
+
+
+                            <input
+                                    type="text"
+                                    id="ticketSeatNumber"
+                                    placeholder="A1"
+                                    maxlength="10"
+                                    required>
+
+                        </div>
+
+
+
+                        <!-- ==============================
+                             TICKET PRICE
+                             ============================== -->
+
+                        <div class="form-group">
+
+                            <label for="ticketPrice">
+                                Ticket Price (Rs.)
+                            </label>
+
+
+                            <input
+                                    type="number"
+                                    id="ticketPrice"
+                                    readonly>
+
+                        </div>
+
+
+
+                        <!-- ==============================
+                             TICKET STATUS
+                             ============================== -->
+
+                        <div class="form-group">
+
+                            <label for="ticketStatus">
+                                Ticket Status
+                            </label>
+
+
+                            <select
+                                    id="ticketStatus">
+
+                                <option value="BOOKED">
+                                    Booked
+                                </option>
+
+                                <option value="CANCELLED">
+                                    Cancelled
+                                </option>
+
+                                <option value="COMPLETED">
+                                    Completed
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         BOOKING INFORMATION
+                         ================================================= -->
+
+                    <div class="ticket-info-box">
+
+
+                        <strong>
+                            Booking Information
+                        </strong>
+
+
+                        <span id="selectedTripInformation">
+
+                            Select a trip to view its details.
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         FORM MESSAGE
+                         ================================================= -->
+
+                    <div
+                            id="ticketFormMessage"
+                            class="form-message">
+                    </div>
+
+
+
+                    <!-- =================================================
+                         FORM ACTIONS
+                         ================================================= -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                                type="button"
+                                class="secondary-button"
+                                id="cancelTicketButton">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                                type="submit"
+                                class="primary-button"
+                                id="saveTicketButton">
+
+                            Book Ticket
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEARCH AND FILTER PANEL
+                 ================================================= -->
+
+            <div class="ticket-filter-panel">
+
+
+                <!-- ==============================
+                     SEARCH
+                     ============================== -->
+
+                <div class="form-group">
+
+                    <label for="ticketSearch">
+                        Search
+                    </label>
+
+
+                    <input
+                            type="text"
+                            id="ticketSearch"
+                            placeholder="Passenger, seat or ticket ID">
+
+                </div>
+
+
+
+                <!-- ==============================
+                     STATUS
+                     ============================== -->
+
+                <div class="form-group">
+
+                    <label for="ticketStatusFilter">
+                        Status
+                    </label>
+
+
+                    <select
+                            id="ticketStatusFilter">
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="BOOKED">
+                            Booked
+                        </option>
+
+                        <option value="CANCELLED">
+                            Cancelled
+                        </option>
+
+                        <option value="COMPLETED">
+                            Completed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ==============================
+                     CLEAR
+                     ============================== -->
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearTicketFiltersButton">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TICKET LIST PANEL
+                 ================================================= -->
+
+            <div class="panel">
+
+
+                <!-- =================================================
+                     TABLE TOOLBAR
+                     ================================================= -->
+
+                <div class="table-toolbar">
+
+
+                    <!-- LEFT -->
+
+                    <div>
+
+                        <h3>
+                            Ticket List
+                        </h3>
+
+                        <p>
+                            Registered passenger bookings
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- RIGHT -->
+
+                    <div class="toolbar-actions">
+
+
+                        <span
+                                id="ticketTotal"
+                                class="record-count">
+
+                            0 tickets
+
+                        </span>
+
+
+                        <button
+                                type="button"
+                                class="refresh-button"
+                                id="refreshTicketsButton">
+
+                            Refresh
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TICKETS CONTENT
+                     JS WILL INSERT TABLE HERE
+                     ================================================= -->
+
+                <div id="ticketsContent">
+
+                    <div class="loading">
+
+                        Loading tickets...
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     TICKET JAVASCRIPT
+     ========================================================= -->
+
+<script
+        src="/js/ticket.js?v=20">
+</script>
+
+
+</body>
+
+</html>

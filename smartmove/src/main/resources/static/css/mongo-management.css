@@ -1,0 +1,1086 @@
+/* =========================================================
+   SMARTMOVE - MONGODB MANAGEMENT
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fa;
+    color: #1e293b;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
+
+.mongo-page {
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mongo-header {
+    width: 100%;
+    min-height: 80px;
+    padding: 18px 30px;
+    background: #ffffff;
+    border-bottom: 1px solid #dbe3ec;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.mongo-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mongo-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 9px;
+
+    background: #1d3557;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.mongo-brand h1 {
+    margin: 0;
+    font-size: 21px;
+    color: #0f2744;
+}
+
+.mongo-brand p {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.mongo-admin {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.mongo-admin strong {
+    display: block;
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.mongo-admin small {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.mongo-tabs {
+    width: 100%;
+    padding: 0 30px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #dbe3ec;
+
+    display: flex;
+    align-items: stretch;
+    gap: 3px;
+}
+
+.mongo-tab {
+    border: none;
+    border-bottom: 3px solid transparent;
+
+    background: transparent;
+    color: #64748b;
+
+    padding: 15px 18px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+.mongo-tab:hover {
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+.mongo-tab.active {
+    background: #f8fafc;
+    color: #1d3557;
+    border-bottom-color: #1d3557;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.mongo-main {
+    width: 100%;
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+}
+
+.mongo-section {
+    display: none;
+}
+
+.mongo-section.active {
+    display: block;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #0f2744;
+}
+
+.section-header p {
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button {
+    border-radius: 7px;
+
+    padding: 10px 15px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+.primary-button {
+    border: none;
+
+    background: #1d3557;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background: #142640;
+}
+
+.secondary-button {
+    border: 1px solid #cbd5e1;
+
+    background: #ffffff;
+    color: #1d3557;
+}
+
+.secondary-button:hover {
+    background: #f1f5f9;
+}
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.form-panel {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    padding: 24px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+            0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+}
+
+.form-header h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    color: #0f2744;
+}
+
+.form-header p {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+.close-button {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-size: 20px;
+}
+
+.close-button:hover {
+    background: #e2e8f0;
+}
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group label {
+    color: #334155;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    outline: none;
+
+    font-size: 13px;
+
+    padding: 10px 12px;
+}
+
+.form-group input,
+.form-group select {
+    height: 42px;
+}
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 95px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(29, 53, 87, 0.08);
+}
+
+.form-group small {
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+/* =========================================================
+   FILTER BAR
+   ========================================================= */
+
+.filter-bar {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.filter-bar input,
+.filter-bar select {
+    height: 40px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    padding: 0 11px;
+
+    font-size: 12px;
+
+    outline: none;
+}
+
+.filter-bar input {
+    width: 320px;
+}
+
+.filter-bar select {
+    min-width: 150px;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(29, 53, 87, 0.08);
+}
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.summary-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: #ffffff;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-shadow:
+            0 2px 7px rgba(15, 23, 42, 0.04);
+}
+
+.summary-card span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+.summary-card strong {
+    display: block;
+
+    color: #0f2744;
+
+    font-size: 24px;
+}
+
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    box-shadow:
+            0 2px 8px rgba(15, 23, 42, 0.05);
+
+    -webkit-overflow-scrolling: touch;
+}
+
+/* =========================================================
+   ALL MONGODB TABLES
+   ========================================================= */
+
+.data-table {
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    background: #ffffff;
+
+    table-layout: auto;
+
+    font-size: 12px;
+}
+
+.data-table thead {
+    background: #e8edf4;
+}
+
+.data-table thead tr {
+    height: 48px;
+}
+
+.data-table th {
+    padding: 13px 14px;
+
+    text-align: left;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #172b4d;
+
+    background: #e8edf4;
+
+    border-bottom:
+            2px solid #cbd5e1;
+
+    border-right:
+            1px solid #d3dce7;
+
+    white-space: nowrap;
+
+    vertical-align: middle;
+}
+
+.data-table th:last-child {
+    border-right: none;
+}
+
+.data-table td {
+    padding: 13px 14px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    color: #334155;
+
+    background: #ffffff;
+
+    border-bottom:
+            1px solid #e2e8f0;
+
+    border-right:
+            1px solid #edf1f5;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+.data-table td:last-child {
+    border-right: none;
+}
+
+.data-table tbody tr:nth-child(even) td {
+    background: #f8fafc;
+}
+
+.data-table tbody tr:hover td {
+    background: #eef4fb;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================================================
+   VEHICLE DOCUMENT TABLE
+   ========================================================= */
+
+#documentsContent .table-container {
+    margin-top: 5px;
+}
+
+#documentsContent .data-table {
+    min-width: 1050px;
+}
+
+#documentsContent .data-table th:nth-child(1),
+#documentsContent .data-table td:nth-child(1) {
+    min-width: 145px;
+}
+
+#documentsContent .data-table th:nth-child(2),
+#documentsContent .data-table td:nth-child(2) {
+    min-width: 180px;
+}
+
+#documentsContent .data-table th:nth-child(3),
+#documentsContent .data-table td:nth-child(3) {
+    min-width: 260px;
+}
+
+#documentsContent .data-table th:nth-child(4),
+#documentsContent .data-table td:nth-child(4) {
+    min-width: 290px;
+
+    white-space: normal;
+
+    word-break: break-word;
+}
+
+#documentsContent .data-table th:nth-child(5),
+#documentsContent .data-table td:nth-child(5) {
+    min-width: 115px;
+
+    text-align: center;
+}
+
+#documentsContent .data-table th:nth-child(6),
+#documentsContent .data-table td:nth-child(6) {
+    min-width: 180px;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   REVIEWS TABLE
+   ========================================================= */
+
+#reviewsContent .table-container {
+    margin-top: 5px;
+}
+
+#reviewsContent .data-table {
+    min-width: 900px;
+}
+
+#reviewsContent .data-table th:nth-child(1),
+#reviewsContent .data-table td:nth-child(1) {
+    min-width: 145px;
+}
+
+#reviewsContent .data-table th:nth-child(2),
+#reviewsContent .data-table td:nth-child(2) {
+    min-width: 90px;
+}
+
+#reviewsContent .data-table th:nth-child(3),
+#reviewsContent .data-table td:nth-child(3) {
+    min-width: 135px;
+
+    text-align: center;
+}
+
+#reviewsContent .data-table th:nth-child(4),
+#reviewsContent .data-table td:nth-child(4) {
+    min-width: 400px;
+
+    max-width: 550px;
+
+    white-space: normal;
+
+    word-break: break-word;
+
+    line-height: 1.5;
+}
+
+#reviewsContent .data-table th:nth-child(5),
+#reviewsContent .data-table td:nth-child(5) {
+    min-width: 170px;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   ANNOUNCEMENTS TABLE
+   ========================================================= */
+
+#announcementsContent .table-container {
+    margin-top: 5px;
+}
+
+#announcementsContent .data-table {
+    min-width: 1200px;
+}
+
+#announcementsContent .data-table th:nth-child(1),
+#announcementsContent .data-table td:nth-child(1) {
+    min-width: 170px;
+}
+
+#announcementsContent .data-table th:nth-child(2),
+#announcementsContent .data-table td:nth-child(2) {
+    min-width: 350px;
+
+    max-width: 500px;
+
+    white-space: normal;
+
+    word-break: break-word;
+
+    line-height: 1.5;
+}
+
+#announcementsContent .data-table th:nth-child(3),
+#announcementsContent .data-table td:nth-child(3) {
+    min-width: 125px;
+}
+
+#announcementsContent .data-table th:nth-child(4),
+#announcementsContent .data-table td:nth-child(4) {
+    min-width: 120px;
+
+    text-align: center;
+}
+
+#announcementsContent .data-table th:nth-child(5),
+#announcementsContent .data-table td:nth-child(5),
+#announcementsContent .data-table th:nth-child(6),
+#announcementsContent .data-table td:nth-child(6) {
+    min-width: 175px;
+
+    white-space: nowrap;
+}
+
+#announcementsContent .data-table th:nth-child(7),
+#announcementsContent .data-table td:nth-child(7) {
+    min-width: 110px;
+
+    text-align: center;
+}
+
+#announcementsContent .data-table th:nth-child(8),
+#announcementsContent .data-table td:nth-child(8) {
+    min-width: 100px;
+
+    text-align: center;
+}
+
+/* =========================================================
+   FILE LINK
+   ========================================================= */
+
+.file-link {
+    color: #2563eb;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    max-width: 240px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.file-link:hover {
+    color: #1d4ed8;
+
+    text-decoration: underline;
+}
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 75px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.status-badge.status-inactive {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+/* =========================================================
+   PRIORITY BADGES
+   ========================================================= */
+
+.priority-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 72px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+.priority-high {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+.priority-medium {
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+.priority-low {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+/* =========================================================
+   RATING
+   ========================================================= */
+
+.rating-cell {
+    text-align: center;
+
+    white-space: nowrap;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+.rating-stars {
+    color: #f59e0b;
+
+    font-size: 17px;
+
+    letter-spacing: 1px;
+
+    vertical-align: middle;
+}
+
+/* =========================================================
+   TEXT CELLS
+   ========================================================= */
+
+.description-cell,
+.message-cell {
+    white-space: normal !important;
+
+    word-break: break-word;
+
+    line-height: 1.5;
+}
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.action-button {
+    border: none;
+
+    padding: 7px 11px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.action-button.edit-button {
+    background: #e0e7ff;
+
+    color: #3730a3;
+}
+
+.action-button.edit-button:hover {
+    background: #c7d2fe;
+}
+
+/* =========================================================
+   LOADING / EMPTY
+   ========================================================= */
+
+.loading,
+.empty-state {
+    width: 100%;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.loading {
+    font-weight: 600;
+}
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.form-message {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.form-message.success {
+    color: #15803d;
+}
+
+.form-message.error {
+    color: #b91c1c;
+}
+
+/* =========================================================
+   RESPONSIVE - 900
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+}
+
+/* =========================================================
+   RESPONSIVE - 700
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .mongo-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 18px;
+    }
+
+    .mongo-admin {
+        width: 100%;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+    .mongo-tabs {
+        padding: 0 10px;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+    .mongo-tab {
+        flex-shrink: 0;
+
+        padding:
+                14px 12px;
+    }
+
+    .mongo-main {
+        padding: 18px 12px;
+    }
+
+    .section-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .filter-bar input,
+    .filter-bar select,
+    .filter-bar button {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Announcements
+    </title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-announcements.css?v=7">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="passenger-sidebar">
+
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="passenger-menu">
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="dashboardButton">
+
+                <span>⌂</span>
+                Dashboard
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="searchTripsButton">
+
+                <span>⌕</span>
+                Search Trips
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="availableTripsButton">
+
+                <span>▶</span>
+                Available Trips
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="myTicketsButton">
+
+                <span>▤</span>
+                My Tickets
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="paymentsButton">
+
+                <span>Rs</span>
+                Payments
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="travelHistoryButton">
+
+                <span>↺</span>
+                Travel History
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="myReviewsButton">
+
+                <span>★</span>
+                My Reviews
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item active"
+                    id="announcementsButton">
+
+                <span>!</span>
+                Announcements
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="vehicleInfoButton">
+
+                <span>▣</span>
+                Vehicle Information
+
+            </button>
+
+
+            <button
+                    class="passenger-menu-item"
+                    id="profileButton">
+
+                <span>●</span>
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+        <button
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="passenger-main">
+
+
+        <header class="passenger-topbar">
+
+            <div>
+
+                <h1>
+                    Announcements
+                </h1>
+
+                <p>
+                    Latest SmartMove travel announcements
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="announcement-content">
+
+
+            <div class="page-heading">
+
+
+                <div>
+
+                    <h2>
+                        Travel Announcements
+                    </h2>
+
+                    <p>
+                        Stay updated with important SmartMove information.
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="refreshAnnouncementsButton"
+                        class="primary-button">
+
+                    ↻ Refresh
+
+                </button>
+
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="announcement-summary">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Total Announcements
+                    </span>
+
+                    <strong id="announcementCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        High Priority
+                    </span>
+
+                    <strong id="highPriorityCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Active
+                    </span>
+
+                    <strong id="activeAnnouncementCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FILTER -->
+
+            <div class="announcement-filter-card">
+
+
+                <div class="filter-group">
+
+                    <label for="announcementSearch">
+                        Search
+                    </label>
+
+                    <input
+                            type="text"
+                            id="announcementSearch"
+                            placeholder="Search announcements">
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="announcementTypeFilter">
+                        Type
+                    </label>
+
+                    <select id="announcementTypeFilter">
+
+                        <option value="">
+                            All Types
+                        </option>
+
+                        <option value="GENERAL">
+                            General
+                        </option>
+
+                        <option value="DELAY">
+                            Delay
+                        </option>
+
+                        <option value="CANCELLATION">
+                            Cancellation
+                        </option>
+
+                        <option value="NOTICE">
+                            Notice
+                        </option>
+
+                        <option value="PROMOTION">
+                            Promotion
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="clearAnnouncementFilterButton"
+                        class="secondary-button">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                    id="announcementMessage"
+                    class="announcement-message">
+
+            </div>
+
+
+            <div
+                    id="announcementsLoading"
+                    class="announcements-loading">
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Loading announcements...
+                </p>
+
+            </div>
+
+
+            <div
+                    id="noAnnouncementsMessage"
+                    class="no-announcements"
+                    style="display:none;">
+
+                <div class="empty-icon">
+                    !
+                </div>
+
+                <h3>
+                    No Announcements
+                </h3>
+
+                <p>
+                    There are currently no active announcements.
+                </p>
+
+            </div>
+
+
+            <div
+                    id="announcementsContainer"
+                    class="announcements-container">
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script src="/js/passenger-announcements.js?v=7"></script>
+
+</body>
+
+</html>

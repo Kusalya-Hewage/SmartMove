@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - My Tickets
+    </title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-tickets.css?v=7">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="passenger-menu">
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="dashboardButton">
+
+                <span>⌂</span>
+
+                Dashboard
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="searchTripsButton">
+
+                <span>⌕</span>
+
+                Search Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="availableTripsButton">
+
+                <span>▶</span>
+
+                Available Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item active"
+                    id="myTicketsButton">
+
+                <span>▤</span>
+
+                My Tickets
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="paymentsButton">
+
+                <span>Rs</span>
+
+                Payments
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="travelHistoryButton">
+
+                <span>↺</span>
+
+                Travel History
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myReviewsButton">
+
+                <span>★</span>
+
+                My Reviews
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="announcementsButton">
+
+                <span>!</span>
+
+                Announcements
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="vehicleInfoButton">
+
+                <span>▣</span>
+
+                Vehicle Information
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="profileButton">
+
+                <span>●</span>
+
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <button
+                type="button"
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+
+            <div>
+
+                <h1>
+                    My Tickets
+                </h1>
+
+                <p>
+                    View and manage your booked tickets
+                </p>
+
+            </div>
+
+
+            <!-- PASSENGER PROFILE -->
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             TICKET CONTENT
+             ================================================= -->
+
+        <section class="ticket-content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+                 ================================================= -->
+
+            <div class="page-heading">
+
+
+                <div>
+
+                    <h2>
+                        My Booked Tickets
+                    </h2>
+
+                    <p>
+                        View your current and previous bookings.
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="refreshTicketsButton"
+                        class="primary-button">
+
+                    ↻ Refresh
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+                 ================================================= -->
+
+            <div class="ticket-summary">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Total Tickets
+                    </span>
+
+                    <strong id="ticketCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Booked Tickets
+                    </span>
+
+                    <strong id="bookedTicketCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Cancelled Tickets
+                    </span>
+
+                    <strong id="cancelledTicketCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong id="ticketTotalAmount">
+                        Rs. 0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SEARCH / FILTER
+                 ================================================= -->
+
+            <div class="ticket-filter-card">
+
+
+                <div class="filter-group">
+
+
+                    <label for="ticketSearch">
+                        Search Ticket
+                    </label>
+
+
+                    <input
+                            type="text"
+                            id="ticketSearch"
+                            placeholder="Search by ticket ID, trip ID or seat number">
+
+
+                </div>
+
+
+                <div class="filter-group">
+
+
+                    <label for="ticketStatusFilter">
+                        Status
+                    </label>
+
+
+                    <select
+                            id="ticketStatusFilter">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="BOOKED">
+                            Booked
+                        </option>
+
+                        <option value="CANCELLED">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="clearTicketFilterButton"
+                        class="secondary-button">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MESSAGE
+                 ================================================= -->
+
+            <div
+                    id="ticketMessage"
+                    class="ticket-message">
+
+            </div>
+
+
+            <!-- =================================================
+                 LOADING
+                 ================================================= -->
+
+            <div
+                    id="ticketsLoading"
+                    class="tickets-loading">
+
+                <div class="loading-spinner">
+                </div>
+
+                <p>
+                    Loading your tickets...
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+                 ================================================= -->
+
+            <div
+                    id="noTicketsMessage"
+                    class="no-tickets"
+                    style="display: none;">
+
+                <div class="empty-icon">
+                    ▤
+                </div>
+
+                <h3>
+                    No Tickets Found
+                </h3>
+
+                <p>
+                    You do not have any booked tickets yet.
+                </p>
+
+                <button
+                        type="button"
+                        id="searchForTripsButton"
+                        class="primary-button">
+
+                    Search Trips
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 TICKETS CONTAINER
+                 ================================================= -->
+
+            <div
+                    id="ticketsContainer"
+                    class="tickets-container">
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script src="/js/passenger-tickets.js?v=7"></script>
+
+</body>
+
+</html>

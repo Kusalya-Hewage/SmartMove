@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Book Ticket
+    </title>
+
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+
+    <link
+            rel="stylesheet"
+            href="css/passenger-booking.css?v=6">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <!-- =================================================
+             BRAND
+             ================================================= -->
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+
+            <div>
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MENU
+             ================================================= -->
+
+        <nav class="passenger-menu">
+
+
+            <!-- DASHBOARD -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="dashboardButton">
+
+                <span>⌂</span>
+
+                Dashboard
+
+            </button>
+
+
+            <!-- SEARCH TRIPS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="searchTripsButton">
+
+                <span>⌕</span>
+
+                Search Trips
+
+            </button>
+
+
+            <!-- AVAILABLE TRIPS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="availableTripsButton">
+
+                <span>▶</span>
+
+                Available Trips
+
+            </button>
+
+
+            <!-- MY TICKETS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myTicketsButton">
+
+                <span>▤</span>
+
+                My Tickets
+
+            </button>
+
+
+            <!-- PAYMENTS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="paymentsButton">
+
+                <span>Rs</span>
+
+                Payments
+
+            </button>
+
+
+            <!-- TRAVEL HISTORY -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="travelHistoryButton">
+
+                <span>↺</span>
+
+                Travel History
+
+            </button>
+
+
+            <!-- MY REVIEWS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myReviewsButton">
+
+                <span>★</span>
+
+                My Reviews
+
+            </button>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="announcementsButton">
+
+                <span>!</span>
+
+                Announcements
+
+            </button>
+
+
+            <!-- VEHICLE INFORMATION -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="vehicleInfoButton">
+
+                <span>▣</span>
+
+                Vehicle Information
+
+            </button>
+
+
+            <!-- PROFILE -->
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="profileButton">
+
+                <span>●</span>
+
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             LOGOUT
+             ================================================= -->
+
+        <button
+                type="button"
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+
+            <div>
+
+                <h1>
+                    Book Ticket
+                </h1>
+
+                <p>
+                    Confirm your trip and seat
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+             ================================================= -->
+
+        <section class="booking-content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+                 ================================================= -->
+
+            <div class="page-heading">
+
+                <h2>
+                    Confirm Your Booking
+                </h2>
+
+                <p>
+                    Review the trip details and select your seat.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOOKING LAYOUT
+                 ================================================= -->
+
+            <div class="booking-layout">
+
+
+                <!-- =================================================
+                     TRIP SUMMARY
+                     ================================================= -->
+
+                <div class="trip-summary-card">
+
+
+                    <div class="card-header">
+
+
+                        <div>
+
+                            <h3>
+                                Trip Details
+                            </h3>
+
+                            <p>
+                                Selected journey
+                            </p>
+
+                        </div>
+
+
+                        <span
+                                id="tripStatus"
+                                class="status-badge">
+
+                            SCHEDULED
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div
+                            id="tripDetails"
+                            class="trip-details">
+
+                        <div class="loading">
+
+                            Loading trip details...
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     BOOKING FORM
+                     ================================================= -->
+
+                <div class="booking-card">
+
+
+                    <div class="card-header">
+
+
+                        <div>
+
+                            <h3>
+                                Booking Information
+                            </h3>
+
+                            <p>
+                                Enter the required details
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <form id="bookingForm">
+
+
+                        <!-- =================================================
+                             PASSENGER
+                             ================================================= -->
+
+                        <div class="form-group">
+
+
+                            <label for="passengerDisplay">
+
+                                Passenger
+
+                            </label>
+
+
+                            <input
+                                    type="text"
+                                    id="passengerDisplay"
+                                    readonly
+                                    value="Loading...">
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SEAT NUMBER
+                             ================================================= -->
+
+                        <div class="form-group">
+
+
+                            <label for="seatNumber">
+
+                                Seat Number
+
+                            </label>
+
+
+                            <input
+                                    type="text"
+                                    id="seatNumber"
+                                    maxlength="10"
+                                    placeholder="Example: A3"
+                                    autocomplete="off"
+                                    required>
+
+
+                            <small class="input-help">
+
+                                Enter an available seat number.
+
+                            </small>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             TICKET PRICE
+                             ================================================= -->
+
+                        <div class="form-group">
+
+
+                            <label for="ticketPrice">
+
+                                Ticket Price
+
+                            </label>
+
+
+                            <input
+                                    type="text"
+                                    id="ticketPrice"
+                                    readonly
+                                    value="Loading...">
+
+                        </div>
+
+
+                        <!-- =================================================
+                             MESSAGE
+                             ================================================= -->
+
+                        <div
+                                id="bookingMessage"
+                                class="booking-message">
+
+                        </div>
+
+
+                        <!-- =================================================
+                             FORM ACTIONS
+                             ================================================= -->
+
+                        <div class="booking-actions">
+
+
+                            <button
+                                    type="button"
+                                    id="backToTripsButton"
+                                    class="secondary-button">
+
+                                Back to Trips
+
+                            </button>
+
+
+                            <button
+                                    type="submit"
+                                    id="confirmBookingButton"
+                                    class="primary-button">
+
+                                Confirm Booking
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                    <!-- =================================================
+                         BOOKING SUCCESS CARD
+                         ================================================= -->
+
+                    <div
+                            id="bookingSuccessCard"
+                            class="success-card"
+                            style="display: none;">
+
+
+                        <div class="success-icon">
+
+                            ✓
+
+                        </div>
+
+
+                        <div class="success-content">
+
+
+                            <h3>
+                                Ticket Booked Successfully
+                            </h3>
+
+
+                            <p id="successMessage">
+
+                                Your ticket has been created.
+
+                            </p>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             BOOKING SUMMARY AFTER SUCCESS
+                             ================================================= -->
+
+                        <div class="success-summary">
+
+
+                            <div class="success-summary-item">
+
+                                <span>
+                                    Ticket ID
+                                </span>
+
+                                <strong id="successTicketId">
+                                    -
+                                </strong>
+
+                            </div>
+
+
+                            <div class="success-summary-item">
+
+                                <span>
+                                    Seat
+                                </span>
+
+                                <strong id="successSeat">
+                                    -
+                                </strong>
+
+                            </div>
+
+
+                            <div class="success-summary-item">
+
+                                <span>
+                                    Amount
+                                </span>
+
+                                <strong id="successAmount">
+                                    Rs. 0.00
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SUCCESS ACTIONS
+                             ================================================= -->
+
+                        <div class="success-actions">
+
+
+                            <button
+                                    type="button"
+                                    id="payTicketButton"
+                                    class="primary-button">
+
+                                Proceed to Payment
+
+                            </button>
+
+
+                            <button
+                                    type="button"
+                                    id="viewTicketsButton"
+                                    class="secondary-button">
+
+                                View My Tickets
+
+                            </button>
+
+
+                            <button
+                                    type="button"
+                                    id="returnDashboardButton"
+                                    class="secondary-button">
+
+                                Passenger Dashboard
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="js/passenger-booking.js?v=6"></script>
+
+
+</body>
+
+</html>

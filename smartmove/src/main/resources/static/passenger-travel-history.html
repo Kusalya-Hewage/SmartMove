@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Travel History</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-travel-history.css?v=9">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h2>SmartMove</h2>
+
+                <span>Passenger Portal</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="passenger-menu">
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-dashboard.html'">
+
+                <span>⌂</span>
+                Dashboard
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html'">
+
+                <span>⌕</span>
+                Search Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html'">
+
+                <span>▶</span>
+                Available Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-tickets.html'">
+
+                <span>▤</span>
+                My Tickets
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-payment.html'">
+
+                <span>Rs</span>
+                Payments
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item active">
+
+                <span>↺</span>
+                Travel History
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-reviews.html'">
+
+                <span>★</span>
+                My Reviews
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-announcements.html'">
+
+                <span>!</span>
+                Announcements
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-vehicle-information.html'">
+
+                <span>▣</span>
+                Vehicle Information
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-profile.html'">
+
+                <span>●</span>
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+        <button
+                type="button"
+                class="passenger-logout"
+                onclick="logoutPassenger()">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <header class="passenger-topbar">
+
+            <div>
+
+                <h1>
+                    Travel History
+                </h1>
+
+                <p>
+                    View your previous and upcoming journeys
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="history-content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+                 ================================================= -->
+
+            <div class="page-heading">
+
+                <div>
+
+                    <h2>
+                        Your Travel History
+                    </h2>
+
+                    <p>
+                        View your completed, upcoming and cancelled journeys.
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="refreshHistoryButton"
+                        class="primary-button">
+
+                    ↻ Refresh
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+                 ================================================= -->
+
+            <div class="history-summary">
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Total Journeys
+                    </span>
+
+                    <strong id="totalJourneyCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedJourneyCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Upcoming
+                    </span>
+
+                    <strong id="upcomingJourneyCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <span>
+                        Total Travel Amount
+                    </span>
+
+                    <strong id="totalTravelAmount">
+                        Rs. 0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER
+                 ================================================= -->
+
+            <div class="history-filter-card">
+
+
+                <div class="filter-group">
+
+                    <label for="historySearch">
+                        Search
+                    </label>
+
+                    <input
+                            type="text"
+                            id="historySearch"
+                            placeholder="Search ticket, trip or seat">
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="historyStatusFilter">
+                        Status
+                    </label>
+
+                    <select id="historyStatusFilter">
+
+                        <option value="">
+                            All Journeys
+                        </option>
+
+                        <option value="COMPLETED">
+                            Completed
+                        </option>
+
+                        <option value="UPCOMING">
+                            Upcoming
+                        </option>
+
+                        <option value="CANCELLED">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="clearHistoryFilterButton"
+                        class="secondary-button">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MESSAGE
+                 ================================================= -->
+
+            <div
+                    id="historyMessage"
+                    class="history-message">
+
+            </div>
+
+
+            <!-- =================================================
+                 LOADING
+                 ================================================= -->
+
+            <div
+                    id="historyLoading"
+                    class="history-loading">
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Loading travel history...
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 EMPTY
+                 ================================================= -->
+
+            <div
+                    id="noHistoryMessage"
+                    class="no-history"
+                    style="display: none;">
+
+                <div class="empty-icon">
+                    ↺
+                </div>
+
+                <h3>
+                    No Travel History
+                </h3>
+
+                <p>
+                    Your travel records will appear here.
+                </p>
+
+                <button
+                        type="button"
+                        class="primary-button"
+                        onclick="window.location.href='/passenger-trips.html'">
+
+                    Search Trips
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 HISTORY CONTAINER
+                 ================================================= -->
+
+            <div
+                    id="historyContainer"
+                    class="history-container">
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script src="/js/passenger-travel-history.js?v=9"></script>
+
+
+<script>
+
+    async function logoutPassenger() {
+
+        try {
+
+            await fetch(
+                "/api/users/logout",
+                {
+                    method: "POST",
+                    credentials: "include"
+                }
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+        }
+
+
+        sessionStorage.clear();
+
+        window.location.href =
+            "/index.html";
+    }
+
+</script>
+
+
+</body>
+
+</html>

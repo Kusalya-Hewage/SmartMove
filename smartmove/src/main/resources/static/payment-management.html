@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Payment Management</title>
+
+    <link rel="stylesheet"
+          href="css/payment-management.css">
+
+</head>
+
+
+<body>
+
+
+<div class="payment-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <header class="page-header">
+
+        <div>
+
+            <h1>Payment Management</h1>
+
+            <p>
+                Manage passenger payment records
+            </p>
+
+        </div>
+
+
+        <button
+                type="button"
+                class="primary-button"
+                id="showPaymentFormButton">
+
+            + Record Payment
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PAYMENT SUMMARY
+         ===================================================== -->
+
+    <section class="payment-summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Total Payments
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="paymentTotal">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Paid Amount
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="paymentPaidAmount">
+
+                Rs. 0.00
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Pending Amount
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="paymentPendingAmount">
+
+                Rs. 0.00
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PAYMENT FORM
+         ===================================================== -->
+
+    <section
+            id="paymentFormPanel"
+            class="form-panel"
+            style="display: none;">
+
+
+        <div class="form-panel-header">
+
+            <div>
+
+                <h2 id="paymentFormTitle">
+                    Record Payment
+                </h2>
+
+                <p>
+                    Enter payment information
+                </p>
+
+            </div>
+
+
+            <button
+                    type="button"
+                    class="close-button"
+                    id="closePaymentFormButton">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <form id="paymentForm">
+
+
+            <input
+                    type="hidden"
+                    id="editPaymentId">
+
+
+
+            <div class="form-grid">
+
+
+                <!-- Ticket -->
+
+                <div class="form-group">
+
+                    <label for="paymentTicket">
+                        Ticket
+                    </label>
+
+                    <select
+                            id="paymentTicket"
+                            required>
+
+                        <option value="">
+                            Select Ticket
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Amount -->
+
+                <div class="form-group">
+
+                    <label for="paymentAmount">
+                        Amount
+                    </label>
+
+                    <input
+                            type="number"
+                            id="paymentAmount"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter amount"
+                            required>
+
+                </div>
+
+
+
+                <!-- Payment Method -->
+
+                <div class="form-group">
+
+                    <label for="paymentMethod">
+                        Payment Method
+                    </label>
+
+                    <select
+                            id="paymentMethod"
+                            required>
+
+                        <option value="">
+                            Select Method
+                        </option>
+
+                        <option value="CASH">
+                            CASH
+                        </option>
+
+                        <option value="CARD">
+                            CARD
+                        </option>
+
+                        <option value="ONLINE">
+                            ONLINE
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Payment Status -->
+
+                <div class="form-group">
+
+                    <label for="paymentStatus">
+                        Payment Status
+                    </label>
+
+                    <select
+                            id="paymentStatus"
+                            required>
+
+                        <option value="PENDING">
+                            PENDING
+                        </option>
+
+                        <option value="PAID">
+                            PAID
+                        </option>
+
+                        <option value="FAILED">
+                            FAILED
+                        </option>
+
+                        <option value="REFUNDED">
+                            REFUNDED
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Transaction Reference -->
+
+                <div class="form-group">
+
+                    <label for="transactionReference">
+                        Transaction Reference
+                    </label>
+
+                    <input
+                            type="text"
+                            id="transactionReference"
+                            placeholder="e.g. TXN-10001">
+
+                </div>
+
+
+
+                <!-- Payment Date -->
+
+                <div class="form-group">
+
+                    <label for="paymentDate">
+                        Payment Date
+                    </label>
+
+                    <input
+                            type="datetime-local"
+                            id="paymentDate">
+
+                </div>
+
+
+            </div>
+
+
+
+            <div
+                    id="paymentFormMessage"
+                    class="form-message">
+            </div>
+
+
+
+            <div class="form-actions">
+
+                <button
+                        type="submit"
+                        class="primary-button"
+                        id="savePaymentButton">
+
+                    Record Payment
+
+                </button>
+
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelPaymentButton">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SEARCH / FILTER
+         ===================================================== -->
+
+    <section class="filter-bar">
+
+
+        <input
+                type="text"
+                id="paymentSearch"
+                class="search-input"
+                placeholder="Search transaction reference or method...">
+
+
+        <select
+                id="paymentStatusFilter"
+                class="filter-select">
+
+            <option value="">
+                All Statuses
+            </option>
+
+            <option value="PENDING">
+                Pending
+            </option>
+
+            <option value="PAID">
+                Paid
+            </option>
+
+            <option value="FAILED">
+                Failed
+            </option>
+
+            <option value="REFUNDED">
+                Refunded
+            </option>
+
+        </select>
+
+
+        <button
+                type="button"
+                class="secondary-button"
+                id="clearPaymentFilterButton">
+
+            Clear
+
+        </button>
+
+
+        <button
+                type="button"
+                class="secondary-button"
+                id="refreshPaymentsButton">
+
+            Refresh
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PAYMENT CONTENT
+         ===================================================== -->
+
+    <section id="paymentsContent">
+
+        <div class="loading">
+            Loading payments...
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<script src="js/payment-management.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Feedback Management</title>
+
+    <link rel="stylesheet"
+          href="css/admin-dashboard.css">
+
+    <link rel="stylesheet"
+          href="css/feedback-management.css">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                SM
+            </div>
+
+            <div class="brand-text">
+
+                <h2>SmartMove</h2>
+
+                <span>Admin Panel</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR MENU
+             ================================================= -->
+
+        <div class="sidebar-menu">
+
+
+            <p class="menu-title">
+                MAIN MENU
+            </p>
+
+
+            <!-- DASHBOARD -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/admin-dashboard.html'">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <!-- VEHICLES -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/vehicle-management.html'">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Vehicles</span>
+
+            </button>
+
+
+            <!-- DRIVERS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/driver-management.html'">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Drivers</span>
+
+            </button>
+
+
+            <!-- ROUTES -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/route-management.html'">
+
+                <span class="menu-icon">↔</span>
+
+                <span>Routes</span>
+
+            </button>
+
+
+            <!-- ROUTE STOPS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/route-stop-management.html'">
+
+                <span class="menu-icon">●</span>
+
+                <span>Route Stops</span>
+
+            </button>
+
+
+            <!-- PASSENGERS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/passenger-management.html'">
+
+                <span class="menu-icon">♟</span>
+
+                <span>Passengers</span>
+
+            </button>
+
+
+            <!-- TRIPS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/trip-management.html'">
+
+                <span class="menu-icon">▶</span>
+
+                <span>Trips</span>
+
+            </button>
+
+
+            <!-- TICKETS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/ticket-management.html'">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Tickets</span>
+
+            </button>
+
+
+            <!-- PAYMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/payment-management.html'">
+
+                <span class="menu-icon">Rs</span>
+
+                <span>Payments</span>
+
+            </button>
+
+
+            <!-- MAINTENANCE -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/maintenance-management.html'">
+
+                <span class="menu-icon">⚙</span>
+
+                <span>Maintenance</span>
+
+            </button>
+
+
+            <!-- FEEDBACK -->
+
+            <button
+                    type="button"
+                    class="menu-item active">
+
+                <span class="menu-icon">☷</span>
+
+                <span>Feedback</span>
+
+            </button>
+
+
+            <!-- =================================================
+                 MONGODB
+                 ================================================= -->
+
+            <p class="menu-title second-title">
+                MONGODB
+            </p>
+
+
+            <!-- VEHICLE DOCUMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/admin-dashboard.html'">
+
+                <span class="menu-icon">▧</span>
+
+                <span>Vehicle Documents</span>
+
+            </button>
+
+
+            <!-- PASSENGER REVIEWS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/admin-dashboard.html'">
+
+                <span class="menu-icon">★</span>
+
+                <span>Passenger Reviews</span>
+
+            </button>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/admin-dashboard.html'">
+
+                <span class="menu-icon">!</span>
+
+                <span>Announcements</span>
+
+            </button>
+
+
+            <!-- =================================================
+                 ANALYSIS
+                 ================================================= -->
+
+            <p class="menu-title second-title">
+                ANALYSIS
+            </p>
+
+
+            <!-- REPORTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    onclick="window.location.href='/admin-dashboard.html'">
+
+                <span class="menu-icon">▥</span>
+
+                <span>Reports</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             LOGOUT
+             ===================================================== -->
+
+        <button
+                type="button"
+                id="logoutButton"
+                class="logout-button">
+
+            <span>↪</span>
+
+            <span>Logout</span>
+
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h1>
+                    Feedback
+                </h1>
+
+                <p>
+                    View and manage passenger feedback
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             FEEDBACK SECTION
+             ================================================= -->
+
+        <section id="feedback"
+                 class="content-section active">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Feedback
+                    </h2>
+
+                    <p>
+                        View and manage passenger feedback
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="refreshFeedbackButton">
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEEDBACK SUMMARY
+                 ================================================= -->
+
+            <div class="feedback-summary">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-title">
+                        Total Feedback
+                    </div>
+
+                    <div
+                            class="summary-value"
+                            id="feedbackTotal">
+
+                        0
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-title">
+                        Average Rating
+                    </div>
+
+                    <div
+                            class="summary-value"
+                            id="feedbackAverageRating">
+
+                        0.0 / 5
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-title">
+                        5 Star Feedback
+                    </div>
+
+                    <div
+                            class="summary-value"
+                            id="feedbackFiveStar">
+
+                        0
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 EDIT FEEDBACK FORM
+                 ================================================= -->
+
+            <div
+                    id="feedbackFormPanel"
+                    class="form-panel"
+                    style="display: none;">
+
+                <div class="form-panel-header">
+
+                    <div>
+
+                        <h3>
+                            Edit Feedback
+                        </h3>
+
+                        <p>
+                            Update passenger feedback information
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            class="close-button"
+                            id="closeFeedbackFormButton">
+
+                        ×
+
+                    </button>
+
+                </div>
+
+
+                <form id="feedbackForm">
+
+                    <input
+                            type="hidden"
+                            id="editFeedbackId">
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="feedbackRating">
+                                Rating
+                            </label>
+
+                            <select
+                                    id="feedbackRating"
+                                    required>
+
+                                <option value="1">
+                                    1 - Very Poor
+                                </option>
+
+                                <option value="2">
+                                    2 - Poor
+                                </option>
+
+                                <option value="3">
+                                    3 - Average
+                                </option>
+
+                                <option value="4">
+                                    4 - Good
+                                </option>
+
+                                <option value="5">
+                                    5 - Excellent
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group form-group-full">
+
+                            <label for="feedbackComment">
+                                Comment
+                            </label>
+
+                            <textarea
+                                    id="feedbackComment"
+                                    rows="5"
+                                    placeholder="Enter feedback comment"
+                                    required></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                            id="feedbackFormMessage"
+                            class="form-message">
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                                type="submit"
+                                class="primary-button"
+                                id="saveFeedbackButton">
+
+                            Update Feedback
+
+                        </button>
+
+
+                        <button
+                                type="button"
+                                class="secondary-button"
+                                id="cancelFeedbackButton">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER BAR
+                 ================================================= -->
+
+            <div class="filter-bar">
+
+                <input
+                        type="text"
+                        id="feedbackSearch"
+                        class="search-input"
+                        placeholder="Search passenger or comment...">
+
+
+                <select
+                        id="feedbackRatingFilter"
+                        class="filter-select">
+
+                    <option value="">
+                        All Ratings
+                    </option>
+
+                    <option value="5">
+                        5 Stars
+                    </option>
+
+                    <option value="4">
+                        4 Stars
+                    </option>
+
+                    <option value="3">
+                        3 Stars
+                    </option>
+
+                    <option value="2">
+                        2 Stars
+                    </option>
+
+                    <option value="1">
+                        1 Star
+                    </option>
+
+                </select>
+
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearFeedbackFilterButton">
+
+                    Clear
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEEDBACK CONTENT
+                 ================================================= -->
+
+            <div id="feedbackContent">
+
+                <div class="loading">
+                    Loading feedback...
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="js/api.js"></script>
+
+<script src="js/feedback-management.js"></script>
+
+
+</body>
+
+</html>

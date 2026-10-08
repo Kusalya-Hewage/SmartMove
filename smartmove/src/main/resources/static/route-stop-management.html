@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Route Stops</title>
+
+    <link rel="stylesheet" href="css/route-stop-management.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- HEADER -->
+    <header class="page-header">
+
+        <div>
+            <h1>Route Stops</h1>
+            <p>Manage stops for each route</p>
+        </div>
+
+        <button class="back-button" id="backButton">
+            ← Back to Dashboard
+        </button>
+
+    </header>
+
+
+    <!-- ROUTE SELECTION -->
+    <section class="panel">
+
+        <div class="section-title">
+            <h2>Select Route</h2>
+        </div>
+
+        <div class="route-selection">
+
+            <label for="routeSelect">
+                Route
+            </label>
+
+            <select id="routeSelect">
+                <option value="">-- Select Route --</option>
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <!-- STOPS -->
+    <section class="panel">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Route Stops</h2>
+                <p id="selectedRouteText">
+                    Select a route to view its stops
+                </p>
+            </div>
+
+            <button
+                    class="primary-button"
+                    id="addStopButton">
+                + Add Stop
+            </button>
+
+        </div>
+
+
+        <!-- MESSAGE -->
+        <div id="message"></div>
+
+
+        <!-- TABLE -->
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>Sequence</th>
+                    <th>Stop ID</th>
+                    <th>Stop Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="stopsTableBody">
+
+                <tr>
+                    <td colspan="4" class="empty-message">
+                        Select a route
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADD / EDIT FORM -->
+    <div
+            class="modal"
+            id="stopModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">
+                    Add Route Stop
+                </h2>
+
+                <button
+                        class="close-button"
+                        id="closeModalButton">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="stopForm">
+
+                <input
+                        type="hidden"
+                        id="stopId">
+
+
+                <div class="form-group">
+
+                    <label for="formRoute">
+                        Route
+                    </label>
+
+                    <select
+                            id="formRoute"
+                            required>
+
+                        <option value="">
+                            -- Select Route --
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="stopName">
+                        Stop Name
+                    </label>
+
+                    <input
+                            type="text"
+                            id="stopName"
+                            placeholder="Enter stop name"
+                            required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="stopSequence">
+                        Stop Sequence
+                    </label>
+
+                    <input
+                            type="number"
+                            id="stopSequence"
+                            min="1"
+                            placeholder="Example: 1"
+                            required>
+
+                </div>
+
+
+                <div
+                        id="formMessage"
+                        class="form-message">
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelButton">
+                        Cancel
+                    </button>
+
+                    <button
+                            type="submit"
+                            class="primary-button">
+                        Save Stop
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/route-stop-management.js"></script>
+
+</body>
+</html>

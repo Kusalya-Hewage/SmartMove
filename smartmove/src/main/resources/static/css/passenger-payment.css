@@ -1,0 +1,982 @@
+/* =========================================================
+   SMARTMOVE - PASSENGER PAYMENT PAGE
+   ========================================================= */
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.passenger-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.passenger-sidebar {
+    width: 260px;
+    min-width: 260px;
+    min-height: 100vh;
+
+    background: #111827;
+    color: #ffffff;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.passenger-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 22px 20px;
+
+    border-bottom: 1px solid #273244;
+}
+
+.passenger-logo {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+}
+
+.passenger-brand h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+.passenger-brand span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.passenger-menu {
+    padding: 18px 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    overflow-y: auto;
+}
+
+
+/* MENU BUTTON */
+
+.passenger-menu-item {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #d1d5db;
+
+    text-align: left;
+
+    padding: 12px 14px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            transform 0.2s ease;
+}
+
+
+/* MENU ICON */
+
+.passenger-menu-item span {
+    width: 24px;
+    min-width: 24px;
+
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    color: #94a3b8;
+}
+
+
+/* HOVER */
+
+.passenger-menu-item:hover {
+    background: #1f2937;
+    color: #ffffff;
+}
+
+.passenger-menu-item:hover span {
+    color: #60a5fa;
+}
+
+
+/* ACTIVE */
+
+.passenger-menu-item.active {
+    background: #2563eb;
+    color: #ffffff;
+
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.22);
+}
+
+.passenger-menu-item.active span {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.passenger-logout {
+    margin: auto 10px 18px;
+
+    width: calc(100% - 20px);
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 13px 15px;
+
+    background: #1f2937;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-align: left;
+
+    transition: background 0.2s ease;
+}
+
+.passenger-logout:hover {
+    background: #dc2626;
+}
+
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.passenger-main {
+    margin-left: 260px;
+
+    width: calc(100% - 260px);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.passenger-topbar {
+    width: 100%;
+
+    background: #ffffff;
+
+    padding: 21px 32px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* TITLE */
+
+.passenger-topbar h1 {
+    margin: 0;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.passenger-topbar p {
+    margin: 5px 0 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.passenger-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    white-space: nowrap;
+}
+
+.passenger-profile strong {
+    display: block;
+
+    font-size: 14px;
+
+    color: #172033;
+}
+
+.passenger-profile small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+/* PROFILE AVATAR */
+
+.profile-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    font-size: 15px;
+
+    border: 2px solid #bfdbfe;
+}
+
+
+/* =========================================================
+   PAYMENT CONTENT
+   ========================================================= */
+
+.payment-content {
+    padding: 32px;
+}
+
+
+/* PAGE HEADING */
+
+.page-heading {
+    margin-bottom: 24px;
+}
+
+.page-heading h2 {
+    margin: 0 0 7px;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.page-heading p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   PAYMENT TWO COLUMN LAYOUT
+   ========================================================= */
+
+.payment-layout {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    gap: 24px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   PAYMENT CARD
+   ========================================================= */
+
+.payment-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+
+/* CARD HEADER */
+
+.card-header {
+    padding: 22px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    background: #ffffff;
+}
+
+.card-header h3 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   TICKET DETAILS
+   ========================================================= */
+
+.ticket-details {
+    padding: 22px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+
+/* DETAIL ITEM */
+
+.detail-item {
+    min-height: 72px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 6px;
+}
+
+.detail-item span {
+    display: block;
+
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+.detail-item strong {
+    display: block;
+
+    font-size: 16px;
+
+    color: #172033;
+
+    word-break: break-word;
+}
+
+
+/* AMOUNT */
+
+.detail-item:last-child {
+    background: #eff6ff;
+
+    border-color: #bfdbfe;
+}
+
+.detail-item:last-child strong {
+    color: #2563eb;
+
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   PAYMENT FORM
+   ========================================================= */
+
+#paymentForm {
+    padding: 22px;
+}
+
+
+/* FORM GROUP */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* INPUT + SELECT */
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* INPUT FOCUS */
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* READONLY PAYMENT AMOUNT */
+
+.form-group input[readonly] {
+    background: #f8fafc;
+
+    color: #2563eb;
+
+    font-weight: 700;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PAYMENT MESSAGE
+   ========================================================= */
+
+.payment-message {
+    width: 100%;
+
+    min-height: 20px;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ERROR */
+
+.payment-message.error {
+    padding: 11px 13px;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+}
+
+
+/* SUCCESS */
+
+.payment-message.success {
+    padding: 11px 13px;
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+
+    color: #166534;
+}
+
+
+/* =========================================================
+   BUTTON AREA
+   ========================================================= */
+
+.payment-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+
+/* COMMON BUTTON */
+
+.primary-button,
+.secondary-button {
+    min-height: 44px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 11px 19px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            opacity 0.2s ease;
+}
+
+
+/* PRIMARY */
+
+.primary-button {
+    background: #2563eb;
+
+    color: #ffffff;
+
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.20);
+}
+
+.primary-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 16px rgba(37, 99, 235, 0.25);
+}
+
+
+/* SECONDARY */
+
+.secondary-button {
+    background: #e2e8f0;
+
+    color: #334155;
+}
+
+.secondary-button:hover {
+    background: #cbd5e1;
+
+    transform: translateY(-1px);
+}
+
+
+/* DISABLED */
+
+.primary-button:disabled,
+.secondary-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   PAYMENT SUCCESS
+   ========================================================= */
+
+.payment-success {
+    text-align: center;
+
+    padding: 40px 25px;
+}
+
+
+/* SUCCESS ICON */
+
+.success-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 16px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dcfce7;
+
+    border: 1px solid #bbf7d0;
+
+    color: #15803d;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    box-shadow: 0 5px 15px rgba(22, 101, 52, 0.08);
+}
+
+
+/* SUCCESS TITLE */
+
+.payment-success h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+
+    color: #166534;
+}
+
+
+/* SUCCESS TEXT */
+
+.payment-success p {
+    margin: 0 auto 22px;
+
+    max-width: 420px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.passenger-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.passenger-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.passenger-menu::-webkit-scrollbar-thumb {
+    background: #374151;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .payment-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-card {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .passenger-sidebar {
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .passenger-main {
+        margin-left: 230px;
+
+        width: calc(100% - 230px);
+    }
+
+    .payment-content {
+        padding: 24px;
+    }
+
+    .passenger-topbar {
+        padding: 20px 24px;
+    }
+
+    .ticket-details {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .passenger-layout {
+        display: block;
+    }
+
+    .passenger-sidebar {
+        position: relative;
+
+        width: 100%;
+        min-width: 100%;
+
+        min-height: auto;
+    }
+
+    .passenger-main {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    .passenger-menu {
+        max-height: 330px;
+    }
+
+    .passenger-logout {
+        margin-top: 10px;
+    }
+
+    .passenger-topbar {
+        position: relative;
+
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .passenger-profile {
+        width: 100%;
+    }
+
+    .payment-content {
+        padding: 20px 15px;
+    }
+
+    .page-heading h2 {
+        font-size: 20px;
+    }
+
+    .ticket-details {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-item {
+        min-height: 65px;
+    }
+
+    .payment-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .passenger-brand {
+        padding: 18px 15px;
+    }
+
+    .passenger-topbar {
+        padding: 17px 15px;
+    }
+
+    .passenger-topbar h1 {
+        font-size: 22px;
+    }
+
+    .payment-content {
+        padding: 16px 12px;
+    }
+
+    .card-header,
+    #paymentForm,
+    .ticket-details {
+        padding: 18px;
+    }
+}

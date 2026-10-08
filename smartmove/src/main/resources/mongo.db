@@ -1,0 +1,54 @@
+use smartmove
+
+db.createCollection("vehicle_documents")
+db.createCollection("passenger_reviews")
+db.createCollection("travel_announcements")
+
+{
+    vehicleId: 1,
+    registrationNo: "NB-5678",
+    documentType: "VEHICLE_IMAGE",
+    fileName: "NB-5678-front.jpg",
+    fileType: "image/jpeg",
+    fileUrl: "/documents/vehicles/NB-5678-front.jpg",
+    description: "Front view of vehicle",
+    uploadedDate: new Date(),
+    status: "ACTIVE"
+}
+
+{
+  "vehicleId": 1,
+  "registrationNo": "NB-5678",
+  "documentType": "INSURANCE",
+  "fileName": "NB-5678-insurance.pdf",
+  "fileType": "application/pdf",
+  "fileUrl": "/documents/vehicles/NB-5678-insurance.pdf",
+  "description": "Vehicle insurance certificate",
+  "status": "ACTIVE"
+}
+
+{
+  "passengerId": 1,
+  "tripId": 1,
+  "rating": 5,
+  "comment": "The journey was comfortable and the driver was punctual.",
+  "status": "VISIBLE"
+}
+
+{
+  "passengerId": 2,
+  "tripId": 2,
+  "rating": 4,
+  "comment": "Good service but the bus was slightly late.",
+  "status": "VISIBLE"
+}
+
+{
+  "title": "Kandy to Colombo Service Update",
+  "message": "The evening service will depart at 6:30 PM.",
+  "announcementType": "TRIP_UPDATE",
+  "routeId": 1,
+  "tripId": 1,
+  "priority": "HIGH",
+  "status": "ACTIVE"
+}

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Payment</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-payment.css?v=7">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="passenger-menu">
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="dashboardButton">
+
+                <span>⌂</span>
+                Dashboard
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="searchTripsButton">
+
+                <span>⌕</span>
+                Search Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="availableTripsButton">
+
+                <span>▶</span>
+                Available Trips
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myTicketsButton">
+
+                <span>▤</span>
+                My Tickets
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item active"
+                    id="paymentsButton">
+
+                <span>Rs</span>
+                Payments
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="travelHistoryButton">
+
+                <span>↺</span>
+                Travel History
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="myReviewsButton">
+
+                <span>★</span>
+                My Reviews
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="announcementsButton">
+
+                <span>!</span>
+                Announcements
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="vehicleInfoButton">
+
+                <span>▣</span>
+                Vehicle Information
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    id="profileButton">
+
+                <span>●</span>
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <button
+                type="button"
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            ↪ Logout
+
+        </button>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+
+            <div>
+
+                <h1>
+                    Payment
+                </h1>
+
+                <p>
+                    Complete payment for your booked ticket
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+             ================================================= -->
+
+        <section class="payment-content">
+
+
+            <div class="page-heading">
+
+                <h2>
+                    Complete Your Payment
+                </h2>
+
+                <p>
+                    Your ticket details are loaded automatically.
+                    Select a payment method to continue.
+                </p>
+
+            </div>
+
+
+            <div class="payment-layout">
+
+
+                <!-- =================================================
+                     TICKET DETAILS
+                     ================================================= -->
+
+                <div class="payment-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Ticket Details
+                            </h3>
+
+                            <p>
+                                Your booked ticket
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ticket-details">
+
+
+                        <div class="detail-item">
+
+                            <span>
+                                Ticket ID
+                            </span>
+
+                            <strong id="ticketIdDisplay">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span>
+                                Trip ID
+                            </span>
+
+                            <strong id="tripIdDisplay">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span>
+                                Seat Number
+                            </span>
+
+                            <strong id="seatDisplay">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span>
+                                Amount
+                            </span>
+
+                            <strong id="amountDisplay">
+                                Rs. 0.00
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PAYMENT INFORMATION
+                     ================================================= -->
+
+                <div class="payment-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Payment Information
+                            </h3>
+
+                            <p>
+                                Select your payment method
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="paymentForm">
+
+
+                        <!-- PAYMENT METHOD -->
+
+                        <div class="form-group">
+
+                            <label for="paymentMethod">
+                                Payment Method
+                            </label>
+
+                            <select
+                                    id="paymentMethod"
+                                    required>
+
+                                <option value="">
+                                    Select Payment Method
+                                </option>
+
+                                <option value="CARD">
+                                    Card
+                                </option>
+
+                                <option value="ONLINE">
+                                    Online Payment
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- PAYMENT AMOUNT -->
+
+                        <div class="form-group">
+
+                            <label for="paymentAmount">
+                                Payment Amount
+                            </label>
+
+                            <input
+                                    type="text"
+                                    id="paymentAmount"
+                                    readonly>
+
+                        </div>
+
+
+                        <!-- MESSAGE -->
+
+                        <div
+                                id="paymentMessage"
+                                class="payment-message">
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="payment-actions">
+
+
+                            <button
+                                    type="button"
+                                    id="backToBookingButton"
+                                    class="secondary-button">
+
+                                Back
+
+                            </button>
+
+
+                            <button
+                                    type="submit"
+                                    id="payNowButton"
+                                    class="primary-button">
+
+                                Pay Now
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                    <!-- =================================================
+                         PAYMENT SUCCESS
+                         ================================================= -->
+
+                    <div
+                            id="paymentSuccessCard"
+                            class="payment-success"
+                            style="display: none;">
+
+
+                        <div class="success-icon">
+                            ✓
+                        </div>
+
+
+                        <h3>
+                            Payment Successful
+                        </h3>
+
+
+                        <p id="paymentSuccessMessage">
+                            Your payment has been completed.
+                        </p>
+
+
+                        <button
+                                type="button"
+                                id="viewTicketButton"
+                                class="primary-button">
+
+                            View My Ticket
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<script src="/js/passenger-payment.js?v=7"></script>
+
+</body>
+
+</html>

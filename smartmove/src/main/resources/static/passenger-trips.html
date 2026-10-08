@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - Search Trips
+    </title>
+
+    <link rel="stylesheet"
+          href="css/passenger-trips.css">
+
+
+</head>
+
+<body>
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+            <div>
+
+                <h1>
+                    Search Trips
+                </h1>
+
+                <p>
+                    Find available SmartMove trips
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div>
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+             ================================================= -->
+
+        <section class="passenger-content">
+
+
+            <!-- =================================================
+                 SEARCH CARD
+                 ================================================= -->
+
+            <div class="search-card">
+
+
+                <div class="search-header">
+
+                    <div>
+
+                        <h2>
+                            Find Your Trip
+                        </h2>
+
+                        <p>
+                            Search by route or travel date
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SEARCH FORM -->
+
+                <div class="search-grid">
+
+
+                    <!-- FROM -->
+
+                    <div class="form-group">
+
+                        <label for="sourceSearch">
+                            From
+                        </label>
+
+                        <input
+                                type="text"
+                                id="sourceSearch"
+                                placeholder="Example: Colombo">
+
+                    </div>
+
+
+
+                    <!-- TO -->
+
+                    <div class="form-group">
+
+                        <label for="destinationSearch">
+                            To
+                        </label>
+
+                        <input
+                                type="text"
+                                id="destinationSearch"
+                                placeholder="Example: Kandy">
+
+                    </div>
+
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="tripDateSearch">
+                            Travel Date
+                        </label>
+
+                        <input
+                                type="date"
+                                id="tripDateSearch">
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="tripStatusFilter">
+                            Status
+                        </label>
+
+                        <select id="tripStatusFilter">
+
+                            <option value="SCHEDULED">
+                                Scheduled
+                            </option>
+
+                            <option value="">
+                                All
+                            </option>
+
+                            <option value="COMPLETED">
+                                Completed
+                            </option>
+
+                            <option value="CANCELLED">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="search-actions">
+
+
+                    <button
+                            type="button"
+                            id="searchButton"
+                            class="primary-button">
+
+                        Search Trips
+
+                    </button>
+
+
+                    <button
+                            type="button"
+                            id="clearSearchButton"
+                            class="secondary-button">
+
+                        Clear
+
+                    </button>
+
+
+                    <button
+                            type="button"
+                            id="refreshTripsButton"
+                            class="secondary-button">
+
+                        Refresh
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+                 ================================================= -->
+
+            <div class="trip-summary">
+
+
+                <div>
+
+                <span>
+                    Trips Found
+                </span>
+
+                    <strong id="tripCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                <span>
+                    Available Seats
+                </span>
+
+                    <strong id="seatCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RESULTS
+                 ================================================= -->
+
+            <div class="results-header">
+
+                <div>
+
+                    <h2>
+                        Available Trips
+                    </h2>
+
+                    <p>
+                        Select a trip to continue booking
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div id="tripsContainer">
+
+                <div class="loading">
+
+                    Loading available trips...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+    ```
+
+</div>
+
+<script src="js/passenger-trips.js?v=4"></script>
+
+</body>
+
+</html>

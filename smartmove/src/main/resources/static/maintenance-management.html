@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Maintenance Management</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/maintenance-management.css?v=10">
+
+</head>
+
+
+<body>
+
+
+<div class="maintenance-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <header class="page-header">
+
+        <div>
+
+            <h1>
+                Maintenance Management
+            </h1>
+
+            <p>
+                Manage vehicle maintenance records
+            </p>
+
+        </div>
+
+
+        <button
+                type="button"
+                class="primary-button"
+                id="showMaintenanceFormButton">
+
+            + Add Maintenance
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+         ===================================================== -->
+
+    <section class="maintenance-summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Total Records
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="maintenanceTotal">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Completed
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="maintenanceCompleted">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Total Cost
+            </div>
+
+            <div
+                    class="summary-value"
+                    id="maintenanceTotalCost">
+
+                Rs. 0.00
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAINTENANCE FORM
+         ===================================================== -->
+
+    <section
+            id="maintenanceFormPanel"
+            class="form-panel"
+            style="display: none;">
+
+
+        <div class="form-panel-header">
+
+            <div>
+
+                <h2 id="maintenanceFormTitle">
+                    Add Maintenance
+                </h2>
+
+                <p>
+                    Enter vehicle maintenance information
+                </p>
+
+            </div>
+
+
+            <button
+                    type="button"
+                    class="close-button"
+                    id="closeMaintenanceFormButton">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <form id="maintenanceForm">
+
+
+            <input
+                    type="hidden"
+                    id="editMaintenanceId">
+
+
+            <div class="form-grid">
+
+
+                <!-- VEHICLE -->
+
+                <div class="form-group">
+
+                    <label for="maintenanceVehicle">
+                        Vehicle
+                    </label>
+
+                    <select
+                            id="maintenanceVehicle"
+                            required>
+
+                        <option value="">
+                            Select Vehicle
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="maintenanceDate">
+                        Maintenance Date
+                    </label>
+
+                    <input
+                            type="date"
+                            id="maintenanceDate"
+                            required>
+
+                </div>
+
+
+
+                <!-- TYPE -->
+
+                <div class="form-group">
+
+                    <label for="maintenanceType">
+                        Maintenance Type
+                    </label>
+
+                    <input
+                            type="text"
+                            id="maintenanceType"
+                            placeholder="e.g. Service, Repair, Inspection"
+                            required>
+
+                </div>
+
+
+
+                <!-- COST -->
+
+                <div class="form-group">
+
+                    <label for="maintenanceCost">
+                        Cost
+                    </label>
+
+                    <input
+                            type="number"
+                            id="maintenanceCost"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter maintenance cost"
+                            required>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label for="maintenanceStatus">
+                        Status
+                    </label>
+
+                    <select
+                            id="maintenanceStatus"
+                            required>
+
+                        <option value="SCHEDULED">
+                            SCHEDULED
+                        </option>
+
+                        <option value="IN_PROGRESS">
+                            IN PROGRESS
+                        </option>
+
+                        <option value="COMPLETED">
+                            COMPLETED
+                        </option>
+
+                        <option value="CANCELLED">
+                            CANCELLED
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group form-group-full">
+
+                    <label for="maintenanceDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                            id="maintenanceDescription"
+                            rows="4"
+                            placeholder="Enter maintenance details"></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                    id="maintenanceFormMessage"
+                    class="form-message">
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+
+                <button
+                        type="submit"
+                        class="primary-button"
+                        id="saveMaintenanceButton">
+
+                    Save Maintenance
+
+                </button>
+
+
+                <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelMaintenanceButton">
+
+                    Cancel
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FILTER BAR
+         ===================================================== -->
+
+    <section class="filter-bar">
+
+
+        <input
+                type="text"
+                id="maintenanceSearch"
+                class="search-input"
+                placeholder="Search maintenance type or description...">
+
+
+        <select
+                id="maintenanceVehicleFilter"
+                class="filter-select">
+
+            <option value="">
+                All Vehicles
+            </option>
+
+        </select>
+
+
+        <select
+                id="maintenanceStatusFilter"
+                class="filter-select">
+
+            <option value="">
+                All Statuses
+            </option>
+
+            <option value="SCHEDULED">
+                Scheduled
+            </option>
+
+            <option value="IN_PROGRESS">
+                In Progress
+            </option>
+
+            <option value="COMPLETED">
+                Completed
+            </option>
+
+            <option value="CANCELLED">
+                Cancelled
+            </option>
+
+        </select>
+
+
+        <button
+                type="button"
+                class="secondary-button"
+                id="clearMaintenanceFilterButton">
+
+            Clear
+
+        </button>
+
+
+        <button
+                type="button"
+                class="secondary-button"
+                id="refreshMaintenanceButton">
+
+            Refresh
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTENT
+         ===================================================== -->
+
+    <section id="maintenanceContent">
+
+        <div class="loading">
+
+            Loading maintenance records...
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     MAINTENANCE JAVASCRIPT
+     ===================================================== -->
+
+<script
+        src="/js/maintenance-management.js?v=10">
+</script>
+
+
+</body>
+
+</html>

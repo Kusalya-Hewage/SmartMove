@@ -1,0 +1,687 @@
+/* =========================================================
+   SMARTMOVE - PASSENGER TRIPS
+   SIDEBAR REMOVED
+   ========================================================= */
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.passenger-layout {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.passenger-main {
+    width: 100%;
+    min-height: 100vh;
+    margin-left: 0;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.passenger-topbar {
+    width: 100%;
+    height: 72px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.passenger-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.passenger-topbar-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.passenger-topbar-left p {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   TOPBAR RIGHT
+   ========================================================= */
+
+.passenger-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.passenger-welcome {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.passenger-welcome strong {
+    color: #111827;
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
+.topbar-logout {
+    border: none;
+    background: #ef4444;
+    color: #ffffff;
+
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.topbar-logout:hover {
+    background: #dc2626;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.passenger-content {
+    width: 100%;
+    padding: 30px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    font-size: 15px;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   SEARCH / FILTER SECTION
+   ========================================================= */
+
+.search-section {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    padding: 22px;
+
+    margin-bottom: 25px;
+}
+
+.search-section h3 {
+    font-size: 18px;
+    color: #111827;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   FILTER GRID
+   ========================================================= */
+
+.filter-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(180px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 42px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    padding: 0 12px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+   ========================================================= */
+
+.search-button {
+    height: 42px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 0 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    margin-top: 24px;
+}
+
+.search-button:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   TRIPS SECTION
+   ========================================================= */
+
+.trips-section {
+    width: 100%;
+}
+
+.trips-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.trips-section-header h3 {
+    font-size: 20px;
+    color: #111827;
+}
+
+.trip-count {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   TRIPS CONTAINER
+   ========================================================= */
+
+.trips-container {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   TRIP CARD
+   ========================================================= */
+
+.trip-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    padding: 20px;
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
+}
+
+.trip-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+            0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   TRIP CARD HEADER
+   ========================================================= */
+
+.trip-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.trip-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.trip-status,
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* =========================================================
+   ROUTE
+   ========================================================= */
+
+.route-display,
+.trip-route {
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #1f2937;
+
+    margin-bottom: 18px;
+}
+
+.trip-route span {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   TRIP DETAILS
+   ========================================================= */
+
+.trip-info,
+.trip-details {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+}
+
+.trip-info-item,
+.trip-detail {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    font-size: 13px;
+}
+
+.trip-detail-label {
+    color: #6b7280;
+}
+
+.trip-detail-value {
+    color: #111827;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FARE
+   ========================================================= */
+
+.trip-fare {
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   AVAILABLE SEATS
+   ========================================================= */
+
+.available-seats {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+   ========================================================= */
+
+.trip-card-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #f0f0f0;
+}
+
+
+/* =========================================================
+   SELECT TRIP BUTTON
+   ========================================================= */
+
+.select-trip-button {
+    width: 100%;
+
+    height: 40px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.select-trip-button:hover {
+    background: #1d4ed8;
+}
+
+.select-trip-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.no-trips,
+.empty-state {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+.empty-state h3 {
+    color: #374151;
+
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.error-message,
+.error-state {
+    width: 100%;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+
+    padding: 15px;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading {
+    width: 100%;
+
+    padding: 40px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .filter-grid {
+        grid-template-columns:
+            repeat(2, minmax(200px, 1fr));
+    }
+
+    .trips-container {
+        grid-template-columns:
+            repeat(2, minmax(280px, 1fr));
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .passenger-topbar {
+        height: auto;
+
+        min-height: 70px;
+
+        padding: 15px 20px;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+    .passenger-topbar-left h1 {
+        font-size: 20px;
+    }
+
+    .passenger-topbar-right {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .passenger-content {
+        padding: 20px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trips-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .passenger-content {
+        padding: 15px;
+    }
+
+    .passenger-topbar {
+        padding: 14px 15px;
+    }
+
+    .page-header h2 {
+        font-size: 23px;
+    }
+
+    .search-section {
+        padding: 16px;
+    }
+
+    .trip-card {
+        padding: 16px;
+    }
+
+    .passenger-welcome {
+        font-size: 13px;
+    }
+
+    .topbar-logout {
+        padding: 8px 13px;
+        font-size: 13px;
+    }
+}

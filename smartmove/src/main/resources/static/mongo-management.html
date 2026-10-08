@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - MongoDB Management</title>
+
+    <!-- =====================================================
+         MONGODB MANAGEMENT CSS
+         ===================================================== -->
+
+    <link
+            rel="stylesheet"
+            href="/css/mongo-management.css?v=12">
+
+</head>
+
+
+<body>
+
+
+<div class="mongo-page">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="mongo-header">
+
+
+        <!-- BRAND -->
+
+        <div class="mongo-brand">
+
+            <div class="mongo-logo">
+                SM
+            </div>
+
+            <div class="mongo-brand-text">
+
+                <h1>
+                    SmartMove
+                </h1>
+
+                <p>
+                    MongoDB Management
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADMIN AREA -->
+
+        <div class="mongo-admin">
+
+            <div class="admin-info">
+
+                <strong id="adminUsername">
+                    Admin
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+
+            <button
+                    type="button"
+                    id="backToAdminButton"
+                    class="secondary-button">
+
+                Back to Admin Dashboard
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MONGODB TABS
+         ===================================================== -->
+
+    <nav class="mongo-tabs">
+
+
+        <button
+                type="button"
+                class="mongo-tab active"
+                data-target="documents">
+
+            <span class="tab-icon">
+                ▧
+            </span>
+
+            Vehicle Documents
+
+        </button>
+
+
+        <button
+                type="button"
+                class="mongo-tab"
+                data-target="reviews">
+
+            <span class="tab-icon">
+                ★
+            </span>
+
+            Passenger Reviews
+
+        </button>
+
+
+        <button
+                type="button"
+                class="mongo-tab"
+                data-target="announcements">
+
+            <span class="tab-icon">
+                !
+            </span>
+
+            Announcements
+
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="mongo-main">
+
+
+
+        <!-- =================================================
+             VEHICLE DOCUMENTS
+             ================================================= -->
+
+        <section
+                id="documents"
+                class="mongo-section active">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-header">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Vehicle Documents
+                    </h2>
+
+                    <p>
+                        Upload and manage vehicle images and
+                        important documents.
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <button
+                            type="button"
+                            id="showDocumentFormButton"
+                            class="primary-button">
+
+                        + Upload Document
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DOCUMENT UPLOAD FORM
+                 ================================================= -->
+
+            <div
+                    id="documentFormPanel"
+                    class="form-panel"
+                    style="display: none;">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="form-header">
+
+                    <div>
+
+                        <h3>
+                            Upload Vehicle Document
+                        </h3>
+
+                        <p>
+                            Upload a vehicle image,
+                            insurance document,
+                            revenue license or another
+                            supported document.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            id="closeDocumentFormButton"
+                            class="close-button"
+                            aria-label="Close document form">
+
+                        ×
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- FORM -->
+
+                <form
+                        id="documentForm"
+                        enctype="multipart/form-data">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- VEHICLE -->
+
+                        <div class="form-group">
+
+                            <label for="documentVehicle">
+
+                                Vehicle
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                    id="documentVehicle"
+                                    name="vehicleId"
+                                    required>
+
+                                <option value="">
+                                    Select Vehicle
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- DOCUMENT TYPE -->
+
+                        <div class="form-group">
+
+                            <label for="documentType">
+
+                                Document Type
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                    id="documentType"
+                                    name="documentType"
+                                    required>
+
+                                <option value="">
+                                    Select Type
+                                </option>
+
+                                <option value="VEHICLE_IMAGE">
+                                    Vehicle Image
+                                </option>
+
+                                <option value="INSURANCE">
+                                    Insurance
+                                </option>
+
+                                <option value="REVENUE_LICENSE">
+                                    Revenue License
+                                </option>
+
+                                <option value="OTHER">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- FILE -->
+
+                        <div class="form-group full-width">
+
+                            <label for="documentFile">
+
+                                File
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                    type="file"
+                                    id="documentFile"
+                                    name="file"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required>
+
+
+                            <small class="input-help">
+
+                                Supported formats:
+                                JPG, JPEG, PNG and PDF.
+                                Maximum file size: 10MB.
+
+                            </small>
+
+                        </div>
+
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="form-group full-width">
+
+                            <label for="documentDescription">
+
+                                Description
+
+                            </label>
+
+
+                            <textarea
+                                    id="documentDescription"
+                                    name="description"
+                                    rows="4"
+                                    placeholder="Enter a description for this document"></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                            id="documentMessage"
+                            class="form-message"
+                            role="alert">
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                                type="submit"
+                                id="uploadDocumentButton"
+                                class="primary-button">
+
+                            Upload Document
+
+                        </button>
+
+
+                        <button
+                                type="button"
+                                id="cancelDocumentButton"
+                                class="secondary-button">
+
+                            Cancel
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DOCUMENT FILTERS
+                 ================================================= -->
+
+            <div class="filter-bar">
+
+
+                <div class="filter-group">
+
+                    <label
+                            for="documentSearch"
+                            class="sr-only">
+
+                        Search Documents
+
+                    </label>
+
+
+                    <input
+                            type="text"
+                            id="documentSearch"
+                            placeholder="Search file or registration number...">
+
+                </div>
+
+
+
+                <div class="filter-group">
+
+                    <label
+                            for="documentTypeFilter"
+                            class="sr-only">
+
+                        Document Type
+
+                    </label>
+
+
+                    <select
+                            id="documentTypeFilter">
+
+                        <option value="">
+                            All Types
+                        </option>
+
+                        <option value="VEHICLE_IMAGE">
+                            Vehicle Image
+                        </option>
+
+                        <option value="INSURANCE">
+                            Insurance
+                        </option>
+
+                        <option value="REVENUE_LICENSE">
+                            Revenue License
+                        </option>
+
+                        <option value="OTHER">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="filter-actions">
+
+                    <button
+                            type="button"
+                            id="clearDocumentFilterButton"
+                            class="secondary-button">
+
+                        Clear
+
+                    </button>
+
+
+                    <button
+                            type="button"
+                            id="refreshDocumentsButton"
+                            class="secondary-button">
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DOCUMENT TABLE
+                 ================================================= -->
+
+            <div
+                    id="documentsContent"
+                    class="table-section">
+
+                <div class="loading">
+                    Loading vehicle documents...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PASSENGER REVIEWS
+             ================================================= -->
+
+        <section
+                id="reviews"
+                class="mongo-section">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-header">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Passenger Reviews
+                    </h2>
+
+                    <p>
+                        View passenger reviews stored in
+                        MongoDB.
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <button
+                            type="button"
+                            id="refreshReviewsButton"
+                            class="secondary-button">
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REVIEW SUMMARY
+                 ================================================= -->
+
+            <div class="summary-grid">
+
+
+                <!-- TOTAL -->
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Total Reviews
+                    </div>
+
+                    <div
+                            id="reviewTotal"
+                            class="summary-value">
+
+                        0
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVERAGE -->
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Average Rating
+                    </div>
+
+                    <div
+                            id="reviewAverage"
+                            class="summary-value">
+
+                        0.0 / 5
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FIVE STAR -->
+
+                <div class="summary-card">
+
+                    <div class="summary-label">
+                        Five Star Reviews
+                    </div>
+
+                    <div
+                            id="reviewFiveStar"
+                            class="summary-value">
+
+                        0
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REVIEW FILTERS
+                 ================================================= -->
+
+            <div class="filter-bar">
+
+
+                <div class="filter-group">
+
+                    <label
+                            for="reviewSearch"
+                            class="sr-only">
+
+                        Search Reviews
+
+                    </label>
+
+
+                    <input
+                            type="text"
+                            id="reviewSearch"
+                            placeholder="Search comments...">
+
+                </div>
+
+
+
+                <div class="filter-group">
+
+                    <label
+                            for="reviewRatingFilter"
+                            class="sr-only">
+
+                        Rating
+
+                    </label>
+
+
+                    <select
+                            id="reviewRatingFilter">
+
+                        <option value="">
+                            All Ratings
+                        </option>
+
+                        <option value="5">
+                            5 Stars
+                        </option>
+
+                        <option value="4">
+                            4 Stars
+                        </option>
+
+                        <option value="3">
+                            3 Stars
+                        </option>
+
+                        <option value="2">
+                            2 Stars
+                        </option>
+
+                        <option value="1">
+                            1 Star
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="filter-actions">
+
+                    <button
+                            type="button"
+                            id="clearReviewFilterButton"
+                            class="secondary-button">
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REVIEW TABLE
+                 ================================================= -->
+
+            <div
+                    id="reviewsContent"
+                    class="table-section">
+
+                <div class="loading">
+                    Loading passenger reviews...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ANNOUNCEMENTS
+             ================================================= -->
+
+        <section
+                id="announcements"
+                class="mongo-section">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-header">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Announcements
+                    </h2>
+
+                    <p>
+                        Create and manage travel announcements
+                        for passengers.
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <button
+                            type="button"
+                            id="showAnnouncementFormButton"
+                            class="primary-button">
+
+                        + Add Announcement
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT FORM
+                 ================================================= -->
+
+            <div
+                    id="announcementFormPanel"
+                    class="form-panel"
+                    style="display: none;">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="form-header">
+
+                    <div>
+
+                        <h3 id="announcementFormTitle">
+
+                            Add Announcement
+
+                        </h3>
+
+                        <p>
+                            Create a notification for
+                            passengers.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            id="closeAnnouncementFormButton"
+                            class="close-button"
+                            aria-label="Close announcement form">
+
+                        ×
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- FORM -->
+
+                <form id="announcementForm">
+
+
+                    <input
+                            type="hidden"
+                            id="announcementId">
+
+
+
+                    <div class="form-grid">
+
+
+                        <!-- TITLE -->
+
+                        <div class="form-group full-width">
+
+                            <label for="announcementTitle">
+
+                                Title
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                    type="text"
+                                    id="announcementTitle"
+                                    placeholder="Enter announcement title"
+                                    required>
+
+                        </div>
+
+
+
+                        <!-- MESSAGE -->
+
+                        <div class="form-group full-width">
+
+                            <label for="announcementMessage">
+
+                                Message
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <textarea
+                                    id="announcementMessage"
+                                    rows="5"
+                                    placeholder="Enter announcement message"
+                                    required></textarea>
+
+                        </div>
+
+
+
+                        <!-- TYPE -->
+
+                        <div class="form-group">
+
+                            <label for="announcementType">
+                                Announcement Type
+                            </label>
+
+
+                            <select
+                                    id="announcementType">
+
+                                <option value="GENERAL">
+                                    GENERAL
+                                </option>
+
+                                <option value="DELAY">
+                                    DELAY
+                                </option>
+
+                                <option value="CANCELLATION">
+                                    CANCELLATION
+                                </option>
+
+                                <option value="SPECIAL">
+                                    SPECIAL
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- PRIORITY -->
+
+                        <div class="form-group">
+
+                            <label for="announcementPriority">
+                                Priority
+                            </label>
+
+
+                            <select
+                                    id="announcementPriority">
+
+                                <option value="LOW">
+                                    LOW
+                                </option>
+
+                                <option value="MEDIUM">
+                                    MEDIUM
+                                </option>
+
+                                <option value="HIGH">
+                                    HIGH
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- PUBLISH DATE -->
+
+                        <div class="form-group">
+
+                            <label for="announcementPublishDate">
+
+                                Publish Date
+
+                            </label>
+
+
+                            <input
+                                    type="datetime-local"
+                                    id="announcementPublishDate">
+
+                        </div>
+
+
+
+                        <!-- EXPIRY DATE -->
+
+                        <div class="form-group">
+
+                            <label for="announcementExpiryDate">
+
+                                Expiry Date
+
+                            </label>
+
+
+                            <input
+                                    type="datetime-local"
+                                    id="announcementExpiryDate">
+
+                        </div>
+
+
+
+                        <!-- ROUTE ID -->
+
+                        <div class="form-group">
+
+                            <label for="announcementRouteId">
+
+                                Route ID
+
+                            </label>
+
+
+                            <input
+                                    type="number"
+                                    id="announcementRouteId"
+                                    min="1"
+                                    placeholder="Optional">
+
+                        </div>
+
+
+
+                        <!-- TRIP ID -->
+
+                        <div class="form-group">
+
+                            <label for="announcementTripId">
+
+                                Trip ID
+
+                            </label>
+
+
+                            <input
+                                    type="number"
+                                    id="announcementTripId"
+                                    min="1"
+                                    placeholder="Optional">
+
+                        </div>
+
+
+
+                        <!-- STATUS -->
+
+                        <div class="form-group">
+
+                            <label for="announcementStatus">
+
+                                Status
+
+                            </label>
+
+
+                            <select
+                                    id="announcementStatus">
+
+                                <option value="ACTIVE">
+                                    ACTIVE
+                                </option>
+
+                                <option value="INACTIVE">
+                                    INACTIVE
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                            id="announcementMessageBox"
+                            class="form-message"
+                            role="alert">
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                                type="submit"
+                                id="saveAnnouncementButton"
+                                class="primary-button">
+
+                            Save Announcement
+
+                        </button>
+
+
+                        <button
+                                type="button"
+                                id="cancelAnnouncementButton"
+                                class="secondary-button">
+
+                            Cancel
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT FILTERS
+                 ================================================= -->
+
+            <div class="filter-bar">
+
+
+                <!-- SEARCH -->
+
+                <div class="filter-group">
+
+                    <label
+                            for="announcementSearch"
+                            class="sr-only">
+
+                        Search Announcements
+
+                    </label>
+
+
+                    <input
+                            type="text"
+                            id="announcementSearch"
+                            placeholder="Search title or message...">
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="filter-group">
+
+                    <label
+                            for="announcementStatusFilter"
+                            class="sr-only">
+
+                        Status
+
+                    </label>
+
+
+                    <select
+                            id="announcementStatusFilter">
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="ACTIVE">
+                            ACTIVE
+                        </option>
+
+                        <option value="INACTIVE">
+                            INACTIVE
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PRIORITY -->
+
+                <div class="filter-group">
+
+                    <label
+                            for="announcementPriorityFilter"
+                            class="sr-only">
+
+                        Priority
+
+                    </label>
+
+
+                    <select
+                            id="announcementPriorityFilter">
+
+                        <option value="">
+                            All Priorities
+                        </option>
+
+                        <option value="HIGH">
+                            HIGH
+                        </option>
+
+                        <option value="MEDIUM">
+                            MEDIUM
+                        </option>
+
+                        <option value="LOW">
+                            LOW
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="filter-actions">
+
+                    <button
+                            type="button"
+                            id="clearAnnouncementFilterButton"
+                            class="secondary-button">
+
+                        Clear
+
+                    </button>
+
+
+                    <button
+                            type="button"
+                            id="refreshAnnouncementsButton"
+                            class="secondary-button">
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT TABLE
+                 ================================================= -->
+
+            <div
+                    id="announcementsContent"
+                    class="table-section">
+
+                <div class="loading">
+                    Loading announcements...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script
+        src="/js/mongo-management.js?v=12">
+</script>
+
+
+</body>
+
+</html>

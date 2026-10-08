@@ -1,0 +1,938 @@
+/* =========================================================
+   SMARTMOVE - ROUTE MANAGEMENT
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+body {
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    background: #f5f7fb;
+
+    color: #1e293b;
+}
+
+
+button,
+input,
+select {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page-container {
+
+    width: 100%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding: 30px 32px;
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h1 {
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    color: #0f2744;
+
+    margin-bottom: 5px;
+
+}
+
+
+.page-header p {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.back-button,
+.primary-button,
+.secondary-button,
+.edit-button,
+.delete-button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition:
+            background 0.2s ease,
+            opacity 0.2s ease,
+            transform 0.1s ease;
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-button {
+
+    background: #f1f5f9;
+
+    color: #1d3557;
+
+    padding: 9px 13px;
+
+    font-size: 12px;
+
+}
+
+
+.back-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.primary-button {
+
+    background: #1d3557;
+
+    color: #ffffff;
+
+    padding: 10px 15px;
+
+    font-size: 12px;
+
+}
+
+
+.primary-button:hover {
+
+    background: #16304f;
+
+}
+
+
+.primary-button:active {
+
+    transform: translateY(1px);
+
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.secondary-button {
+
+    background: #ffffff;
+
+    color: #334155;
+
+    border:
+            1px solid #cbd5e1;
+
+    padding: 10px 15px;
+
+    font-size: 12px;
+
+}
+
+
+.secondary-button:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+   ========================================================= */
+
+.edit-button {
+
+    background: #e2e8f0;
+
+    color: #1e293b;
+
+    padding: 6px 9px;
+
+    font-size: 11px;
+
+    margin-right: 5px;
+
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+.delete-button {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    padding: 6px 9px;
+
+    font-size: 11px;
+
+}
+
+
+.edit-button:hover,
+.delete-button:hover {
+
+    opacity: 0.8;
+
+}
+
+
+.edit-button:active,
+.delete-button:active {
+
+    transform: translateY(1px);
+
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+
+    background: #ffffff;
+
+    border:
+            1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #0f2744;
+
+    margin-bottom: 5px;
+
+}
+
+
+.section-title p {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   ROUTE SELECTION
+   ========================================================= */
+
+.route-selection {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    max-width: 500px;
+
+}
+
+
+.route-selection label {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+}
+
+
+/* =========================================================
+   INPUTS / SELECT
+   ========================================================= */
+
+select,
+input {
+
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+            0 12px;
+
+    border:
+            1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    color: #1e293b;
+
+    background: #ffffff;
+
+    outline: none;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+
+}
+
+
+select:focus,
+input:focus {
+
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(29, 53, 87, 0.08);
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+}
+
+
+.section-header h2 {
+
+    font-size: 16px;
+
+    color: #0f2744;
+
+    margin-bottom: 4px;
+
+}
+
+
+.section-header p {
+
+    color: #64748b;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+   ========================================================= */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+table {
+
+    width: 100%;
+
+    border-collapse:
+            collapse;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+thead {
+
+    background: #f8fafc;
+
+}
+
+
+th,
+td {
+
+    padding: 12px;
+
+    text-align: left;
+
+    border-bottom:
+            1px solid #e2e8f0;
+
+    white-space: nowrap;
+
+}
+
+
+th {
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+td {
+
+    color: #1e293b;
+
+    font-size: 12px;
+
+    height: 50px;
+
+}
+
+
+/* =========================================================
+   TABLE HOVER
+   ========================================================= */
+
+tbody tr:hover td {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   SEQUENCE BADGE
+   ========================================================= */
+
+.sequence {
+
+    display: inline-block;
+
+    min-width: 28px;
+
+    text-align: center;
+
+    background: #1d3557;
+
+    color: #ffffff;
+
+    padding:
+            5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+   ========================================================= */
+
+.empty-message {
+
+    text-align: center;
+
+    color: #64748b;
+
+    padding: 30px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+#message {
+
+    margin-bottom: 15px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.success-message {
+
+    padding:
+            10px 12px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border:
+            1px solid #bbf7d0;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.error-message {
+
+    padding:
+            10px 12px;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border:
+            1px solid #fecaca;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background:
+            rgba(15, 23, 42, 0.45);
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+.modal.show {
+
+    display: flex;
+
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+   ========================================================= */
+
+.modal-content {
+
+    background: #ffffff;
+
+    width: 450px;
+
+    max-width: 100%;
+
+    border:
+            1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    padding: 22px;
+
+    box-shadow:
+            0 10px 30px
+            rgba(15, 23, 42, 0.15);
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.modal-header {
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.modal-header h2 {
+
+    font-size: 17px;
+
+    color: #0f2744;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-button {
+
+    width: 30px;
+
+    height: 30px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.close-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+}
+
+
+/* =========================================================
+   FORM MESSAGE
+   ========================================================= */
+
+.form-message {
+
+    margin-bottom: 15px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content:
+            flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .page-container {
+
+        padding:
+                25px 20px;
+
+    }
+
+
+    .page-header {
+
+        gap: 15px;
+
+    }
+
+
+    .section-header {
+
+        gap: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .page-container {
+
+        padding:
+                20px 15px;
+
+    }
+
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+
+    .page-header .primary-button {
+
+        width: 100%;
+
+    }
+
+
+    .section-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+
+    .section-header .primary-button {
+
+        width: 100%;
+
+    }
+
+
+    .panel {
+
+        padding: 17px;
+
+    }
+
+
+    .modal-content {
+
+        padding: 20px;
+
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .form-actions button {
+
+        width: 100%;
+
+    }
+
+
+    table {
+
+        min-width: 650px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .modal {
+
+        padding: 15px;
+
+    }
+
+
+    .modal-content {
+
+        width: 100%;
+
+    }
+
+}

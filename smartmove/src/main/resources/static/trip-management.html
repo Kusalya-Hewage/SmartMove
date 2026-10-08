@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Trip Management</title>
+
+    <link rel="stylesheet"
+          href="css/trip-management.css">
+
+</head>
+
+<body>
+
+<div class="trip-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                    type="button"
+                    class="back-button"
+                    id="backToDashboardButton">
+
+                ← Back to Dashboard
+
+            </button>
+
+            <div class="page-heading">
+
+                <h1>
+                    Trip Management
+                </h1>
+
+                <p>
+                    Schedule and manage SmartMove transport trips
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+
+                <strong id="adminUsername">
+                    Admin
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TRIP HEADER
+             ================================================= -->
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Trips
+                </h2>
+
+                <p>
+                    Schedule and manage transport trips
+                </p>
+
+            </div>
+
+
+            <button
+                    type="button"
+                    class="primary-button"
+                    id="showTripFormButton">
+
+                + Schedule Trip
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TRIP FORM
+             ================================================= -->
+
+        <div
+                id="tripFormPanel"
+                class="form-panel"
+                style="display: none;">
+
+            <div class="form-panel-header">
+
+                <div>
+
+                    <h3 id="tripFormTitle">
+                        Schedule Trip
+                    </h3>
+
+                    <p>
+                        Select route, vehicle and driver
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="close-button"
+                        id="closeTripFormButton">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <form id="tripForm">
+
+                <input
+                        type="hidden"
+                        id="tripId">
+
+
+                <div class="form-grid">
+
+
+                    <!-- ROUTE -->
+
+                    <div class="form-group">
+
+                        <label for="tripRouteId">
+                            Route
+                        </label>
+
+                        <select
+                                id="tripRouteId"
+                                required>
+
+                            <option value="">
+                                Select Route
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- VEHICLE -->
+
+                    <div class="form-group">
+
+                        <label for="tripVehicleId">
+                            Vehicle
+                        </label>
+
+                        <select
+                                id="tripVehicleId"
+                                required>
+
+                            <option value="">
+                                Select Vehicle
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DRIVER -->
+
+                    <div class="form-group">
+
+                        <label for="tripDriverId">
+                            Driver
+                        </label>
+
+                        <select
+                                id="tripDriverId"
+                                required>
+
+                            <option value="">
+                                Select Driver
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TRIP DATE -->
+
+                    <div class="form-group">
+
+                        <label for="tripDate">
+                            Trip Date
+                        </label>
+
+                        <input
+                                type="date"
+                                id="tripDate"
+                                required>
+
+                    </div>
+
+
+                    <!-- DEPARTURE -->
+
+                    <div class="form-group">
+
+                        <label for="departureTime">
+                            Departure Time
+                        </label>
+
+                        <input
+                                type="time"
+                                id="departureTime"
+                                required>
+
+                    </div>
+
+
+                    <!-- ARRIVAL -->
+
+                    <div class="form-group">
+
+                        <label for="arrivalTime">
+                            Arrival Time
+                        </label>
+
+                        <input
+                                type="time"
+                                id="arrivalTime">
+
+                    </div>
+
+
+                    <!-- FARE -->
+
+                    <div class="form-group">
+
+                        <label for="tripFare">
+                            Fare (Rs.)
+                        </label>
+
+                        <input
+                                type="number"
+                                id="tripFare"
+                                min="0"
+                                step="0.01"
+                                placeholder="1500"
+                                required>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="tripStatus">
+                            Trip Status
+                        </label>
+
+                        <select
+                                id="tripStatus"
+                                required>
+
+                            <option value="SCHEDULED">
+                                Scheduled
+                            </option>
+
+                            <option value="ONGOING">
+                                Ongoing
+                            </option>
+
+                            <option value="COMPLETED">
+                                Completed
+                            </option>
+
+                            <option value="CANCELLED">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="trip-capacity-note">
+
+                    Available seats are determined from the
+                    selected vehicle when a trip is created.
+
+                </div>
+
+
+                <div
+                        id="tripFormMessage"
+                        class="form-message">
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelTripButton">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                            type="submit"
+                            class="primary-button"
+                            id="saveTripButton">
+
+                        Schedule Trip
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================================
+             TRIP LIST
+             ================================================= -->
+
+        <div class="panel">
+
+            <div class="table-toolbar">
+
+                <h3>
+                    Trip List
+                </h3>
+
+
+                <button
+                        type="button"
+                        class="refresh-button"
+                        id="refreshTripsButton">
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+
+            <div
+                    id="tripsContent">
+
+                <div class="loading">
+                    Loading trips...
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="js/api.js"></script>
+
+<script src="js/trip-management.js"></script>
+
+</body>
+
+</html>

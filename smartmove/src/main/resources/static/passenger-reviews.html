@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SmartMove - My Reviews
+    </title>
+
+    <link
+            rel="stylesheet"
+            href="/css/passenger-reviews.css?v=10">
+
+</head>
+
+
+<body>
+
+
+<div class="passenger-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="passenger-sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="passenger-brand">
+
+            <div class="passenger-logo">
+                SM
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    SmartMove
+                </h2>
+
+                <span>
+                    Passenger Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="passenger-menu">
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-dashboard.html'">
+
+                <span class="menu-icon">⌂</span>
+
+                <span class="menu-text">
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html'">
+
+                <span class="menu-icon">⌕</span>
+
+                <span class="menu-text">
+                    Search Trips
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-trips.html'">
+
+                <span class="menu-icon">▶</span>
+
+                <span class="menu-text">
+                    Available Trips
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-tickets.html'">
+
+                <span class="menu-icon">▤</span>
+
+                <span class="menu-text">
+                    My Tickets
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-payment.html'">
+
+                <span class="menu-icon">Rs</span>
+
+                <span class="menu-text">
+                    Payments
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-travel-history.html'">
+
+                <span class="menu-icon">↺</span>
+
+                <span class="menu-text">
+                    Travel History
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item active">
+
+                <span class="menu-icon">★</span>
+
+                <span class="menu-text">
+                    My Reviews
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-announcements.html'">
+
+                <span class="menu-icon">!</span>
+
+                <span class="menu-text">
+                    Announcements
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-vehicle-information.html'">
+
+                <span class="menu-icon">▣</span>
+
+                <span class="menu-text">
+                    Vehicle Information
+                </span>
+
+            </button>
+
+
+            <button
+                    type="button"
+                    class="passenger-menu-item"
+                    onclick="window.location.href='/passenger-profile.html'">
+
+                <span class="menu-icon">●</span>
+
+                <span class="menu-text">
+                    Profile
+                </span>
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <button
+                type="button"
+                id="passengerLogoutButton"
+                class="passenger-logout">
+
+            <span>
+                ↪
+            </span>
+
+            Logout
+
+        </button>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="passenger-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="passenger-topbar">
+
+
+            <div class="topbar-title">
+
+                <h1>
+                    My Reviews
+                </h1>
+
+                <p>
+                    View your reviews and review completed trips
+                </p>
+
+            </div>
+
+
+            <div class="passenger-profile">
+
+                <div class="profile-avatar">
+                    P
+                </div>
+
+                <div class="profile-text">
+
+                    <strong id="passengerName">
+                        Passenger
+                    </strong>
+
+                    <small>
+                        Passenger
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        <section class="review-content">
+
+
+            <!-- =================================================
+                 PAGE INTRO
+                 ================================================= -->
+
+            <div class="page-intro">
+
+                <div>
+
+                    <h2>
+                        Customer Reviews
+                    </h2>
+
+                    <p>
+                        Share your experience and view the reviews
+                        you have submitted.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+                 ================================================= -->
+
+            <div class="review-summary">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ★
+                    </div>
+
+                    <div class="summary-info">
+
+                        <span>
+                            My Reviews
+                        </span>
+
+                        <strong id="reviewCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ★
+                    </div>
+
+                    <div class="summary-info">
+
+                        <span>
+                            Average Rating
+                        </span>
+
+                        <strong id="averageRating">
+                            0.0 / 5
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                    <div class="summary-info">
+
+                        <span>
+                            Completed Trips
+                        </span>
+
+                        <strong id="completedTripCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADD REVIEW CARD
+                 ================================================= -->
+
+            <div class="review-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Add New Review
+                        </h2>
+
+                        <p>
+                            Share your experience after completing
+                            a trip.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                        id="reviewForm"
+                        class="review-form">
+
+
+                    <!-- TRIP -->
+
+                    <div class="form-group">
+
+                        <label for="reviewTrip">
+
+                            Completed Trip
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <select
+                                id="reviewTrip"
+                                required>
+
+                            <option value="">
+                                Select a completed trip
+                            </option>
+
+                        </select>
+
+
+                        <small id="tripHelp"
+                               class="field-help">
+
+                            Only completed trips that you have booked
+                            can be reviewed.
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- RATING -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Rating
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="rating-container">
+
+
+                            <label class="star-option">
+
+                                <input
+                                        type="radio"
+                                        name="rating"
+                                        value="1">
+
+                                <span class="stars">
+                                    ★
+                                </span>
+
+                                <small>
+                                    1
+                                </small>
+
+                            </label>
+
+
+                            <label class="star-option">
+
+                                <input
+                                        type="radio"
+                                        name="rating"
+                                        value="2">
+
+                                <span class="stars">
+                                    ★★
+                                </span>
+
+                                <small>
+                                    2
+                                </small>
+
+                            </label>
+
+
+                            <label class="star-option">
+
+                                <input
+                                        type="radio"
+                                        name="rating"
+                                        value="3">
+
+                                <span class="stars">
+                                    ★★★
+                                </span>
+
+                                <small>
+                                    3
+                                </small>
+
+                            </label>
+
+
+                            <label class="star-option">
+
+                                <input
+                                        type="radio"
+                                        name="rating"
+                                        value="4">
+
+                                <span class="stars">
+                                    ★★★★
+                                </span>
+
+                                <small>
+                                    4
+                                </small>
+
+                            </label>
+
+
+                            <label class="star-option">
+
+                                <input
+                                        type="radio"
+                                        name="rating"
+                                        value="5">
+
+                                <span class="stars">
+                                    ★★★★★
+                                </span>
+
+                                <small>
+                                    5
+                                </small>
+
+                            </label>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- COMMENT -->
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="reviewComment">
+
+                                Comment
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+                            <span class="character-limit">
+                                Maximum 500 characters
+                            </span>
+
+                        </div>
+
+
+                        <textarea
+                                id="reviewComment"
+                                rows="5"
+                                maxlength="500"
+                                placeholder="Write your experience..."
+                                required></textarea>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                            id="reviewMessage"
+                            class="message-box">
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                                type="submit"
+                                class="primary-button"
+                                id="submitReviewButton">
+
+                            Submit Review
+
+                        </button>
+
+
+                        <button
+                                type="button"
+                                class="secondary-button"
+                                id="clearReviewButton">
+
+                            Clear
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MY REVIEWS CARD
+                 ================================================= -->
+
+            <div class="review-card">
+
+
+                <div class="card-header review-list-header">
+
+                    <div>
+
+                        <h2>
+                            My Reviews
+                        </h2>
+
+                        <p>
+                            Reviews you have already submitted.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            type="button"
+                            class="secondary-button"
+                            id="refreshReviewsButton">
+
+                        ↻ Refresh
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- LOADING -->
+
+                <div
+                        id="reviewsLoading"
+                        class="loading">
+
+                    <div class="loading-spinner">
+                    </div>
+
+                    <span>
+                        Loading reviews...
+                    </span>
+
+                </div>
+
+
+
+                <!-- EMPTY -->
+
+                <div
+                        id="noReviewsMessage"
+                        class="empty-state"
+                        style="display: none;">
+
+                    <div class="empty-icon">
+                        ★
+                    </div>
+
+                    <h3>
+                        No Reviews Yet
+                    </h3>
+
+                    <p>
+                        Complete a trip and share your experience.
+                    </p>
+
+                </div>
+
+
+
+                <!-- REVIEWS -->
+
+                <div
+                        id="reviewsContainer"
+                        class="reviews-container">
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script src="/js/passenger-reviews.js?v=10"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="css/admin-dashboard.css">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                SM
+            </div>
+
+            <div class="brand-text">
+
+                <h2>SmartMove</h2>
+
+                <span>Admin Panel</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR MENU
+             ================================================= -->
+
+        <div class="sidebar-menu">
+
+
+            <!-- MAIN MENU -->
+
+            <p class="menu-title">
+                MAIN MENU
+            </p>
+
+
+            <!-- DASHBOARD -->
+
+            <button
+                    type="button"
+                    class="menu-item active"
+                    data-section="dashboard">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <!-- VEHICLES -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="vehiclesMenuButton">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Vehicles</span>
+
+            </button>
+
+
+            <!-- DRIVERS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="driversMenuButton">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Drivers</span>
+
+            </button>
+
+
+            <!-- ROUTES -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="routesMenuButton">
+
+                <span class="menu-icon">↔</span>
+
+                <span>Routes</span>
+
+            </button>
+
+
+            <!-- ROUTE STOPS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="routeStopsMenuButton">
+
+                <span class="menu-icon">●</span>
+
+                <span>Route Stops</span>
+
+            </button>
+
+
+            <!-- PASSENGERS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="passengersMenuButton">
+
+                <span class="menu-icon">♟</span>
+
+                <span>Passengers</span>
+
+            </button>
+
+
+            <!-- TRIPS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="tripsMenuButton">
+
+                <span class="menu-icon">▶</span>
+
+                <span>Trips</span>
+
+            </button>
+
+
+            <!-- TICKETS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="ticketsMenuButton">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Tickets</span>
+
+            </button>
+
+
+            <!-- PAYMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="paymentsMenuButton">
+
+                <span class="menu-icon">Rs</span>
+
+                <span>Payments</span>
+
+            </button>
+
+
+            <!-- MAINTENANCE -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="maintenanceMenuButton">
+
+                <span class="menu-icon">⚙</span>
+
+                <span>Maintenance</span>
+
+            </button>
+
+
+            <!-- FEEDBACK -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="feedbackMenuButton">
+
+                <span class="menu-icon">☷</span>
+
+                <span>Feedback</span>
+
+            </button>
+
+
+            <!-- =================================================
+                 MONGODB
+                 ================================================= -->
+
+            <p class="menu-title second-title">
+                MONGODB
+            </p>
+
+
+            <!-- VEHICLE DOCUMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="documentsMenuButton">
+
+                <span class="menu-icon">▧</span>
+
+                <span>Vehicle Documents</span>
+
+            </button>
+
+
+            <!-- PASSENGER REVIEWS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="reviewsMenuButton">
+
+                <span class="menu-icon">★</span>
+
+                <span>Passenger Reviews</span>
+
+            </button>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="announcementsMenuButton">
+
+                <span class="menu-icon">!</span>
+
+                <span>Announcements</span>
+
+            </button>
+
+
+            <!-- =================================================
+                 ANALYSIS
+                 ================================================= -->
+
+            <p class="menu-title second-title">
+                ANALYSIS
+            </p>
+
+
+            <!-- REPORTS -->
+
+            <button
+                    type="button"
+                    class="menu-item"
+                    id="reportsMenuButton">
+
+                <span class="menu-icon">▥</span>
+
+                <span>Reports</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             LOGOUT
+             ===================================================== -->
+
+        <button
+                type="button"
+                id="logoutButton"
+                class="logout-button">
+
+            <span>↪</span>
+
+            <span>Logout</span>
+
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    SmartMove Transport Management System
+                </p>
+
+            </div>
+
+
+            <!-- ADMIN PROFILE -->
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong id="adminUsername">
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD SECTION
+             ================================================= -->
+
+        <section
+                id="dashboard"
+                class="content-section active">
+
+
+            <!-- WELCOME CARD -->
+
+            <div class="welcome-card">
+
+                <div>
+
+                    <h2>
+                        Welcome to SmartMove
+                    </h2>
+
+                    <p>
+                        Manage your transport operations
+                        from one place.
+                    </p>
+
+                </div>
+
+                <div
+                        class="welcome-date"
+                        id="currentDate">
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STAT CARDS
+                 ================================================= -->
+
+            <div class="stat-grid">
+
+
+                <!-- VEHICLES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Vehicles
+                        </span>
+
+                        <strong id="vehicleCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        V
+                    </div>
+
+                </div>
+
+
+                <!-- DRIVERS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Drivers
+                        </span>
+
+                        <strong id="driverCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        D
+                    </div>
+
+                </div>
+
+
+                <!-- ROUTES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Routes
+                        </span>
+
+                        <strong id="routeCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        R
+                    </div>
+
+                </div>
+
+
+                <!-- PASSENGERS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Passengers
+                        </span>
+
+                        <strong id="passengerCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        P
+                    </div>
+
+                </div>
+
+
+                <!-- TRIPS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Trips
+                        </span>
+
+                        <strong id="tripCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        T
+                    </div>
+
+                </div>
+
+
+                <!-- TICKETS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Tickets
+                        </span>
+
+                        <strong id="ticketCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        #
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 QUICK ACTIONS
+                 ================================================= -->
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Frequently used administration functions
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <!-- VEHICLES -->
+
+                <button
+                        type="button"
+                        data-open="vehicles">
+
+                    <span>+</span>
+
+                    Add / Manage Vehicle
+
+                </button>
+
+
+                <!-- DRIVERS -->
+
+                <button
+                        type="button"
+                        id="manageDriversButton">
+
+                    <span>+</span>
+
+                    Manage Drivers
+
+                </button>
+
+
+                <!-- ROUTES -->
+
+                <button
+                        type="button"
+                        id="manageRoutesButton">
+
+                    <span>+</span>
+
+                    Manage Routes
+
+                </button>
+
+
+                <!-- ROUTE STOPS -->
+
+                <button
+                        type="button"
+                        id="manageRouteStopsButton">
+
+                    <span>+</span>
+
+                    Manage Route Stops
+
+                </button>
+
+
+                <!-- MAINTENANCE -->
+
+                <button
+                        type="button"
+                        id="maintenanceButton">
+
+                    <span>+</span>
+
+                    Manage Maintenance
+
+                </button>
+
+
+                <!-- TRIPS -->
+
+                <button
+                        type="button"
+                        data-open="trips">
+
+                    <span>+</span>
+
+                    Manage Trips
+
+                </button>
+
+
+                <!-- FEEDBACK -->
+
+                <button
+                        type="button"
+                        id="FeedbackButton">
+
+                    <span>+</span>
+
+                    Manage Feedback
+
+                </button>
+
+                <!-- VEHICLE DOCUMENTS -->
+
+                <button
+                        type="button"
+                        id="mongoDocumentsQuickAction">
+
+                    <span>↑</span>
+
+                    Vehicle Documents
+
+                </button>
+
+
+                <!-- PASSENGER REVIEWS -->
+
+                <button
+                        type="button"
+                        id="mongoReviewsQuickAction">
+
+                    <span>★</span>
+
+                    Passenger Reviews
+
+                </button>
+
+
+                <!-- ANNOUNCEMENTS -->
+
+                <button
+                        type="button"
+                        id="mongoAnnouncementsQuickAction">
+
+                    <span>!</span>
+
+                    Announcements
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 RECENT INFORMATION
+                 ================================================= -->
+
+            <div class="dashboard-columns">
+
+
+                <!-- RECENT ANNOUNCEMENTS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Recent Announcements
+                            </h3>
+
+                            <p>
+                                Latest travel updates
+                            </p>
+
+                        </div>
+
+                        <button
+                                type="button"
+                                data-open="announcements">
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                            id="recentAnnouncements"
+                            class="panel-body">
+
+                        <div class="loading">
+                            Loading...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT REVIEWS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Passenger Reviews
+                            </h3>
+
+                            <p>
+                                Latest customer reviews
+                            </p>
+
+                        </div>
+
+                        <button
+                                type="button"
+                                data-open="reviews">
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                            id="recentReviews"
+                            class="panel-body">
+
+                        <div class="loading">
+                            Loading...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DOCUMENTS SECTION
+             ================================================= -->
+
+        <section
+                id="documents"
+                class="content-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Vehicle Documents
+                    </h2>
+
+                    <p>
+                        Manage vehicle documents
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="empty-section">
+
+                    Vehicle documents will appear here.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REVIEWS SECTION
+             ================================================= -->
+
+        <section
+                id="reviews"
+                class="content-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Passenger Reviews
+                    </h2>
+
+                    <p>
+                        View customer ratings and comments
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div id="reviewsContent">
+
+                    <div class="empty-section">
+
+                        Passenger reviews will appear here.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ANNOUNCEMENTS SECTION
+             ================================================= -->
+
+        <section
+                id="announcements"
+                class="content-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Announcements
+                    </h2>
+
+                    <p>
+                        Manage travel announcements
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="primary-button">
+
+                    + New Announcement
+
+                </button>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div id="announcementsContent">
+
+                    <div class="empty-section">
+
+                        Announcements will appear here.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REPORTS SECTION
+             ================================================= -->
+
+
+
+
+
+
+
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="js/api.js"></script>
+
+<script src="js/admin-dashboard.js"></script>
+
+
+</body>
+
+</html>

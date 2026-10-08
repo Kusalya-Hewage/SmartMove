@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartMove - Vehicle Management</title>
+
+    <link rel="stylesheet"
+          href="css/vehicle-management.css">
+
+</head>
+
+
+<body>
+
+
+<div class="vehicle-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+
+    <header class="vehicle-topbar">
+
+        <div class="topbar-left">
+
+            <div class="brand-logo">
+                SM
+            </div>
+
+            <div>
+
+                <h1>
+                    SmartMove
+                </h1>
+
+                <p>
+                    Vehicle Management
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong id="adminUsername">
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                    id="backDashboardButton"
+                    class="back-button">
+
+                ← Dashboard
+
+            </button>
+
+
+            <button
+                    id="logoutButton"
+                    class="logout-button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="vehicle-main">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h2>
+                    Vehicles
+                </h2>
+
+                <p>
+                    View, add, edit and delete registered vehicles
+                </p>
+
+            </div>
+
+
+            <button
+                    id="showVehicleFormButton"
+                    class="primary-button">
+
+                + Add Vehicle
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             VEHICLE FORM
+             ================================================= -->
+
+        <section
+                id="vehicleFormPanel"
+                class="form-panel"
+                style="display: none;">
+
+
+            <div class="form-panel-header">
+
+                <div>
+
+                    <h3 id="vehicleFormTitle">
+                        Add Vehicle
+                    </h3>
+
+                    <p>
+                        Enter vehicle information
+                    </p>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        id="closeVehicleFormButton"
+                        class="close-button">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <form id="vehicleForm">
+
+
+                <input
+                        type="hidden"
+                        id="vehicleId">
+
+
+                <div class="form-grid">
+
+
+                    <!-- REGISTRATION NUMBER -->
+
+                    <div class="form-group">
+
+                        <label for="registrationNo">
+                            Registration Number
+                        </label>
+
+                        <input
+                                type="text"
+                                id="registrationNo"
+                                placeholder="NB-5678"
+                                required>
+
+                    </div>
+
+
+                    <!-- VEHICLE TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="vehicleType">
+                            Vehicle Type
+                        </label>
+
+                        <select
+                                id="vehicleType"
+                                required>
+
+                            <option value="">
+                                Select Vehicle Type
+                            </option>
+
+                            <option value="BUS">
+                                Bus
+                            </option>
+
+                            <option value="VAN">
+                                Van
+                            </option>
+
+                            <option value="MINI_BUS">
+                                Mini Bus
+                            </option>
+
+                            <option value="CAR">
+                                Car
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BRAND -->
+
+                    <div class="form-group">
+
+                        <label for="brand">
+                            Brand
+                        </label>
+
+                        <input
+                                type="text"
+                                id="brand"
+                                placeholder="Toyota"
+                                required>
+
+                    </div>
+
+
+                    <!-- MODEL -->
+
+                    <div class="form-group">
+
+                        <label for="model">
+                            Model
+                        </label>
+
+                        <input
+                                type="text"
+                                id="model"
+                                placeholder="Hiace"
+                                required>
+
+                    </div>
+
+
+                    <!-- MANUFACTURE YEAR -->
+
+                    <div class="form-group">
+
+                        <label for="manufactureYear">
+                            Manufacture Year
+                        </label>
+
+                        <input
+                                type="number"
+                                id="manufactureYear"
+                                placeholder="2023"
+                                min="1900"
+                                max="2100"
+                                required>
+
+                    </div>
+
+
+                    <!-- SEATING CAPACITY -->
+
+                    <div class="form-group">
+
+                        <label for="seatingCapacity">
+                            Seating Capacity
+                        </label>
+
+                        <input
+                                type="number"
+                                id="seatingCapacity"
+                                placeholder="15"
+                                min="1"
+                                required>
+
+                    </div>
+
+
+                    <!-- INSURANCE -->
+
+                    <div class="form-group">
+
+                        <label for="insuranceExpiry">
+                            Insurance Expiry
+                        </label>
+
+                        <input
+                                type="date"
+                                id="insuranceExpiry"
+                                required>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="vehicleStatus">
+                            Status
+                        </label>
+
+                        <select
+                                id="vehicleStatus"
+                                required>
+
+                            <option value="ACTIVE">
+                                Active
+                            </option>
+
+                            <option value="MAINTENANCE">
+                                Maintenance
+                            </option>
+
+                            <option value="INACTIVE">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                        id="vehicleFormMessage"
+                        class="form-message">
+                </div>
+
+
+
+                <div class="form-actions">
+
+
+                    <button
+                            type="button"
+                            id="cancelVehicleButton"
+                            class="secondary-button">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                            type="submit"
+                            id="saveVehicleButton"
+                            class="primary-button">
+
+                        Save Vehicle
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REGISTERED VEHICLES
+             ================================================= -->
+
+        <section class="vehicle-list-panel">
+
+
+            <div class="table-toolbar">
+
+                <div>
+
+                    <h3>
+                        Registered Vehicles
+                    </h3>
+
+                    <p>
+                        All vehicles currently registered
+                        in SmartMove
+                    </p>
+
+                </div>
+
+
+                <button
+                        id="refreshVehiclesButton"
+                        class="refresh-button">
+
+                    ↻ Refresh
+
+                </button>
+
+            </div>
+
+
+
+            <div id="vehiclesContent">
+
+                <div class="loading">
+                    Loading vehicles...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script src="js/vehicle-management.js"></script>
+
+</body>
+
+</html>

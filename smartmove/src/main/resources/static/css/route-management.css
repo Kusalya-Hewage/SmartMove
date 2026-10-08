@@ -1,0 +1,1312 @@
+/* =========================================================
+   SMARTMOVE - ROUTE MANAGEMENT
+   ========================================================= */
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html,
+body {
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    background: #f5f7fb;
+
+    color: #1e293b;
+
+}
+
+
+button,
+input,
+select,
+textarea {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================================
+   APP LAYOUT
+   ========================================================= */
+
+.app-layout {
+
+    min-height: 100vh;
+
+    display: flex;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+
+    width: 255px;
+
+    height: 100vh;
+
+    background: #1d3557;
+
+    color: #ffffff;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    bottom: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    z-index: 1000;
+
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+
+    height: 80px;
+
+    min-height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    border-bottom:
+            1px solid
+            rgba(255, 255, 255, 0.08);
+
+}
+
+
+.brand-logo {
+
+    width: 44px;
+
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #1d3557;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+}
+
+
+.brand-text h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.brand-text span {
+
+    font-size: 11px;
+
+    opacity: 0.7;
+
+}
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.sidebar-menu {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 12px;
+
+}
+
+
+.sidebar-menu::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+
+    background:
+            rgba(255, 255, 255, 0.2);
+
+    border-radius: 10px;
+
+}
+
+
+.menu-title {
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.55;
+
+    padding: 9px 10px;
+
+    font-weight: bold;
+
+}
+
+
+.second-title {
+
+    margin-top: 10px;
+
+}
+
+
+.menu-item {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 2px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-size: 13px;
+
+    opacity: 0.84;
+
+    text-decoration: none;
+
+    transition:
+            background 0.2s ease,
+            opacity 0.2s ease;
+
+}
+
+
+.menu-item:hover,
+.menu-item.active {
+
+    background:
+            rgba(255, 255, 255, 0.11);
+
+    opacity: 1;
+
+}
+
+
+.menu-icon {
+
+    width: 20px;
+
+    min-width: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+
+    padding: 10px 15px 15px;
+
+}
+
+
+.logout-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #1d3557;
+
+    padding: 11px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+}
+
+
+.logout-button:hover {
+
+    background: #e8edf4;
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+
+    margin-left: 255px;
+
+    width: calc(100% - 255px);
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+
+    height: 78px;
+
+    min-height: 78px;
+
+    background: #ffffff;
+
+    border-bottom:
+            1px solid #e2e8f0;
+
+    padding: 0 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.topbar-left h1 {
+
+    font-size: 22px;
+
+    margin-bottom: 5px;
+
+    color: #0f2744;
+
+}
+
+
+.topbar-left p {
+
+    font-size: 12px;
+
+    color: #64748b;
+
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+/* =========================================================
+   DASHBOARD BUTTON
+   ========================================================= */
+
+.dashboard-button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 9px 13px;
+
+    background: #f1f5f9;
+
+    color: #19385f;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+
+.dashboard-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   ADMIN PROFILE
+   ========================================================= */
+
+.admin-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.admin-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+
+    color: #19385f;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+}
+
+
+.admin-profile strong {
+
+    display: block;
+
+    font-size: 13px;
+
+}
+
+
+.admin-profile small {
+
+    color: #64748b;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+   ========================================================= */
+
+.page-content {
+
+    padding: 30px;
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-header h2 {
+
+    font-size: 21px;
+
+    color: #0f2744;
+
+    margin-bottom: 5px;
+
+}
+
+
+.section-header p {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.primary-button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #19385f;
+
+    color: #ffffff;
+
+    padding: 10px 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.primary-button:hover {
+
+    background: #102d50;
+
+}
+
+
+.primary-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.secondary-button {
+
+    border:
+            1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    padding: 10px 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.secondary-button:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.form-panel {
+
+    background: #ffffff;
+
+    border:
+            1px solid #dfe5ee;
+
+    border-radius: 11px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-panel-header h3 {
+
+    font-size: 17px;
+
+    color: #0f2744;
+
+    margin-bottom: 5px;
+
+}
+
+
+.form-panel-header p {
+
+    font-size: 11px;
+
+    color: #64748b;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-button {
+
+    border: none;
+
+    background: #f1f5f9;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 6px;
+
+    font-size: 20px;
+
+    color: #334155;
+
+    cursor: pointer;
+
+}
+
+
+.close-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.form-group label {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+}
+
+
+/* =========================================================
+   FORM INPUTS
+   ========================================================= */
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    height: 42px;
+
+    border:
+            1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    padding: 0 12px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    color: #1e293b;
+
+    background: #ffffff;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: #19385f;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(25, 56, 95, 0.08);
+
+}
+
+
+/* =========================================================
+   FORM MESSAGE
+   ========================================================= */
+
+.form-message {
+
+    margin-top: 15px;
+
+    min-height: 0;
+
+    font-size: 12px;
+
+}
+
+
+.form-message.success {
+
+    padding: 10px 12px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border:
+            1px solid #bbf7d0;
+
+    border-radius: 7px;
+
+}
+
+
+.form-message.error {
+
+    padding: 10px 12px;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border:
+            1px solid #fecaca;
+
+    border-radius: 7px;
+
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.panel {
+
+    background: #ffffff;
+
+    border:
+            1px solid #dfe5ee;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   TABLE TOOLBAR
+   ========================================================= */
+
+.table-toolbar {
+
+    min-height: 75px;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.table-toolbar h3 {
+
+    margin: 0;
+
+    font-size: 17px;
+
+    color: #0f2744;
+
+}
+
+
+.table-toolbar p {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+.refresh-button {
+
+    border:
+            1px solid #ccd6e3;
+
+    background: #ffffff;
+
+    color: #19385f;
+
+    padding: 9px 13px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.refresh-button:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+   ========================================================= */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 0 20px 20px;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+table {
+
+    width: 100%;
+
+    min-width: 1050px;
+
+    border-collapse: collapse;
+
+}
+
+
+thead {
+
+    background: #f6f8fb;
+
+}
+
+
+th {
+
+    padding: 13px 12px;
+
+    text-align: left;
+
+    font-size: 11px;
+
+    color: #334155;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+}
+
+
+td {
+
+    padding: 13px 12px;
+
+    border-top:
+            1px solid #e2e8f0;
+
+    font-size: 12px;
+
+    color: #1e293b;
+
+    white-space: nowrap;
+
+}
+
+
+tbody tr:hover {
+
+    background: #fafcff;
+
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+.status-active {
+
+    background: #d9fbe6;
+
+    color: #087443;
+
+}
+
+
+.status-inactive {
+
+    background: #fde0e0;
+
+    color: #b91c1c;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.edit-button {
+
+    border: none;
+
+    background: #e8edf4;
+
+    color: #19385f;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-right: 5px;
+
+}
+
+
+.delete-button {
+
+    border: none;
+
+    background: #fde0e0;
+
+    color: #b91c1c;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.edit-button:hover,
+.delete-button:hover {
+
+    opacity: 0.8;
+
+}
+
+
+/* =========================================================
+   LOADING / EMPTY / ERROR
+   ========================================================= */
+
+.loading,
+.empty-message,
+.error-message {
+
+    text-align: center;
+
+    padding: 35px;
+
+}
+
+
+.loading {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+.empty-message {
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+.error-message {
+
+    color: #b91c1c;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 210px;
+
+    }
+
+
+    .main-content {
+
+        margin-left: 210px;
+
+        width: calc(100% - 210px);
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+
+        width: 65px;
+
+    }
+
+
+    .brand {
+
+        justify-content: center;
+
+        padding: 10px;
+
+    }
+
+
+    .brand-text,
+    .menu-title,
+    .menu-item span:last-child,
+    .logout-button span:last-child {
+
+        display: none;
+
+    }
+
+
+    .menu-item {
+
+        justify-content: center;
+
+    }
+
+
+    .main-content {
+
+        margin-left: 65px;
+
+        width: calc(100% - 65px);
+
+    }
+
+
+    .topbar {
+
+        height: auto;
+
+        min-height: 78px;
+
+        padding: 12px 15px;
+
+    }
+
+
+    .topbar-left h1 {
+
+        font-size: 18px;
+
+    }
+
+
+    .topbar-right {
+
+        gap: 8px;
+
+    }
+
+
+    .admin-profile > div:not(.admin-avatar) {
+
+        display: none;
+
+    }
+
+
+    .page-content {
+
+        padding: 20px 15px;
+
+    }
+
+
+    .section-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+    .section-header .primary-button {
+
+        width: 100%;
+
+    }
+
+
+    .table-toolbar {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+    }
+
+
+    .refresh-button {
+
+        width: 100%;
+
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .form-actions button {
+
+        width: 100%;
+
+    }
+
+}

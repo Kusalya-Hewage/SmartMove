@@ -1,0 +1,887 @@
+/* =========================================================
+   SMARTMOVE - VEHICLE MANAGEMENT
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+    background: #f5f7fb;
+
+    color: #1e293b;
+}
+
+
+button,
+input,
+select {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.vehicle-page {
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.vehicle-topbar {
+
+    min-height: 78px;
+
+    background: white;
+
+    border-bottom:
+            1px solid #e2e8f0;
+
+    padding:
+            0 30px;
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+}
+
+
+.topbar-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.brand-logo {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 10px;
+
+    background: #1d3557;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+}
+
+
+.topbar-left h1 {
+
+    font-size: 20px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.topbar-left p {
+
+    font-size: 11px;
+
+    color: #64748b;
+
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+/* =========================================================
+   ADMIN PROFILE
+   ========================================================= */
+
+.admin-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.admin-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+
+    color: #1d3557;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+}
+
+
+.admin-profile strong {
+
+    display: block;
+
+    font-size: 13px;
+
+}
+
+
+.admin-profile small {
+
+    color: #64748b;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button {
+
+    border: none;
+
+    background: #1d3557;
+
+    color: white;
+
+    border-radius: 7px;
+
+    padding:
+            10px 15px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.primary-button:hover {
+
+    opacity: 0.9;
+
+}
+
+
+.secondary-button {
+
+    border:
+            1px solid #cbd5e1;
+
+    background: white;
+
+    color: #334155;
+
+    padding:
+            10px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.secondary-button:hover {
+
+    background: #f8fafc;
+
+}
+
+
+.back-button,
+.logout-button {
+
+    border: none;
+
+    background: #f1f5f9;
+
+    color: #1d3557;
+
+    border-radius: 7px;
+
+    padding:
+            9px 13px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.back-button:hover,
+.logout-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.vehicle-main {
+
+    padding: 30px;
+
+    max-width: 1600px;
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h2 {
+
+    font-size: 23px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.page-header p {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.form-panel {
+
+    background: white;
+
+    border:
+            1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-panel-header {
+
+    display: flex;
+
+    align-items:
+            flex-start;
+
+    justify-content:
+            space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-panel-header h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.form-panel-header p {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+.close-button {
+
+    width: 30px;
+
+    height: 30px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.close-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.form-group label {
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+}
+
+
+.form-group input,
+.form-group select {
+
+    height: 42px;
+
+    width: 100%;
+
+    border:
+            1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    padding:
+            0 12px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    background: white;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: #1d3557;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(29,53,87,0.08);
+
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content:
+            flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+}
+
+
+.form-message {
+
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    min-height: 16px;
+
+}
+
+
+/* =========================================================
+   VEHICLE LIST
+   ========================================================= */
+
+.vehicle-list-panel {
+
+    background: white;
+
+    border:
+            1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    padding: 20px;
+
+    overflow-x: auto;
+
+}
+
+
+.table-toolbar {
+
+    display: flex;
+
+    justify-content:
+            space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+}
+
+
+.table-toolbar h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.table-toolbar p {
+
+    color: #64748b;
+
+    font-size: 11px;
+
+}
+
+
+.refresh-button {
+
+    border:
+            1px solid #cbd5e1;
+
+    background: white;
+
+    color: #1d3557;
+
+    border-radius: 7px;
+
+    padding:
+            9px 13px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+.refresh-button:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.vehicle-table {
+
+    width: 100%;
+
+    border-collapse:
+            collapse;
+
+    font-size: 12px;
+
+}
+
+
+.vehicle-table th,
+.vehicle-table td {
+
+    padding: 12px;
+
+    text-align: left;
+
+    border-bottom:
+            1px solid #e2e8f0;
+
+    white-space: nowrap;
+
+}
+
+
+.vehicle-table th {
+
+    background: #f8fafc;
+
+    color: #475569;
+
+    font-weight: bold;
+
+}
+
+
+.vehicle-table tr:hover td {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding:
+            5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+.status-active {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.status-maintenance {
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+}
+
+
+.status-inactive {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.action-buttons {
+
+    display: flex;
+
+    gap: 6px;
+
+}
+
+
+.edit-button,
+.delete-button {
+
+    border: none;
+
+    padding:
+            6px 9px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+
+.edit-button {
+
+    background: #e2e8f0;
+
+    color: #1e293b;
+
+}
+
+
+.delete-button {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.edit-button:hover,
+.delete-button:hover {
+
+    opacity: 0.8;
+
+}
+
+
+/* =========================================================
+   LOADING / EMPTY
+   ========================================================= */
+
+.loading {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    padding: 30px;
+
+    text-align: center;
+
+}
+
+
+.empty-section {
+
+    min-height: 150px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .vehicle-topbar {
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+
+    .topbar-right {
+
+        justify-content:
+                space-between;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .vehicle-main {
+
+        padding: 20px 15px;
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+
+    .page-header .primary-button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .admin-profile div:not(.admin-avatar) {
+
+        display: none;
+
+    }
+
+
+    .back-button,
+    .logout-button {
+
+        padding:
+                8px 10px;
+
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .form-actions button {
+
+        width: 100%;
+
+    }
+
+}

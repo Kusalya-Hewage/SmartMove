@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
 
-    <title>
-        SmartMove - Search Trips
-    </title>
+    <title>SmartMove - Search Trips</title>
 
-    <link rel="stylesheet"
-          href="css/passenger-trips.css">
-
+    <!-- Passenger Trips CSS -->
+    <link
+            rel="stylesheet"
+            href="/css/passenger-trips.css?v=11">
 
 </head>
 
@@ -24,25 +22,17 @@
 
 <div class="passenger-layout">
 
-
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
-
     <main class="passenger-main">
 
-
-        <!-- =================================================
+        <!-- ================================================
              TOP BAR
-             ================================================= -->
+             ================================================ -->
 
         <header class="passenger-topbar">
 
             <div>
 
-                <h1>
-                    Search Trips
-                </h1>
+                <h1>Search Trips</h1>
 
                 <p>
                     Find available SmartMove trips
@@ -50,10 +40,9 @@
 
             </div>
 
-
             <div class="passenger-profile">
 
-                <div class="profile-avatar">
+                <div class="profile-avatar" id="passengerAvatar">
                     P
                 </div>
 
@@ -74,43 +63,31 @@
         </header>
 
 
-
-        <!-- =================================================
-             CONTENT
-             ================================================= -->
+        <!-- ================================================
+             MAIN CONTENT
+             ================================================ -->
 
         <section class="passenger-content">
 
-
-            <!-- =================================================
+            <!-- ============================================
                  SEARCH CARD
-                 ================================================= -->
+                 ============================================ -->
 
             <div class="search-card">
 
-
                 <div class="search-header">
 
-                    <div>
+                    <h2>Find Your Trip</h2>
 
-                        <h2>
-                            Find Your Trip
-                        </h2>
-
-                        <p>
-                            Search by route or travel date
-                        </p>
-
-                    </div>
+                    <p>
+                        Search by departure location, destination,
+                        and travel date.
+                    </p>
 
                 </div>
 
 
-
-                <!-- SEARCH FORM -->
-
                 <div class="search-grid">
-
 
                     <!-- FROM -->
 
@@ -123,10 +100,10 @@
                         <input
                                 type="text"
                                 id="sourceSearch"
-                                placeholder="Example: Colombo">
+                                placeholder="Example: Colombo"
+                                autocomplete="off">
 
                     </div>
-
 
 
                     <!-- TO -->
@@ -140,13 +117,13 @@
                         <input
                                 type="text"
                                 id="destinationSearch"
-                                placeholder="Example: Kandy">
+                                placeholder="Example: Kandy"
+                                autocomplete="off">
 
                     </div>
 
 
-
-                    <!-- DATE -->
+                    <!-- TRAVEL DATE -->
 
                     <div class="form-group">
 
@@ -161,7 +138,6 @@
                     </div>
 
 
-
                     <!-- STATUS -->
 
                     <div class="form-group">
@@ -172,12 +148,12 @@
 
                         <select id="tripStatusFilter">
 
-                            <option value="SCHEDULED">
+                            <option value="SCHEDULED" selected>
                                 Scheduled
                             </option>
 
                             <option value="">
-                                All
+                                All Statuses
                             </option>
 
                             <option value="COMPLETED">
@@ -192,15 +168,12 @@
 
                     </div>
 
-
                 </div>
 
 
-
-                <!-- ACTIONS -->
+                <!-- SEARCH ACTIONS -->
 
                 <div class="search-actions">
-
 
                     <button
                             type="button"
@@ -211,7 +184,6 @@
 
                     </button>
 
-
                     <button
                             type="button"
                             id="clearSearchButton"
@@ -220,7 +192,6 @@
                         Clear
 
                     </button>
-
 
                     <button
                             type="button"
@@ -231,65 +202,49 @@
 
                     </button>
 
-
                 </div>
-
 
             </div>
 
 
-
-            <!-- =================================================
-                 SUMMARY
-                 ================================================= -->
+            <!-- ============================================
+                 TRIP SUMMARY
+                 ============================================ -->
 
             <div class="trip-summary">
 
-
                 <div>
 
-                <span>
-                    Trips Found
-                </span>
+                    <span>Trips Found</span>
 
-                    <strong id="tripCount">
-                        0
-                    </strong>
+                    <strong id="tripCount">0</strong>
 
                 </div>
 
-
                 <div>
 
-                <span>
-                    Available Seats
-                </span>
+                    <span>Available Seats</span>
 
-                    <strong id="seatCount">
-                        0
-                    </strong>
+                    <strong id="seatCount">—</strong>
 
                 </div>
-
 
             </div>
 
 
-
-            <!-- =================================================
-                 RESULTS
-                 ================================================= -->
+            <!-- ============================================
+                 RESULTS HEADER
+                 ============================================ -->
 
             <div class="results-header">
 
                 <div>
 
-                    <h2>
-                        Available Trips
-                    </h2>
+                    <h2>Available Trips</h2>
 
                     <p>
-                        Select a trip to continue booking
+                        Review trip details and select a trip
+                        to continue booking.
                     </p>
 
                 </div>
@@ -297,27 +252,31 @@
             </div>
 
 
+            <!-- ============================================
+                 TRIP RESULTS
+                 JavaScript inserts trip cards here.
+                 ============================================ -->
 
             <div id="tripsContainer">
 
                 <div class="loading">
-
                     Loading available trips...
-
                 </div>
 
             </div>
 
-
         </section>
 
-
     </main>
-    ```
 
 </div>
 
-<script src="js/passenger-trips.js?v=4"></script>
+
+<!-- ================================================
+     PASSENGER TRIPS JAVASCRIPT
+     ================================================ -->
+
+<script src="/js/passenger-trips.js?v=11"></script>
 
 </body>
 

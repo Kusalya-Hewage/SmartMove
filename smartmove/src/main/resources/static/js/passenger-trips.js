@@ -1,157 +1,94 @@
+"use strict";
+
 /* =========================================================
    SMARTMOVE - PASSENGER TRIPS
-   SIDEBAR REMOVED
    ========================================================= */
-
 
 let tripData = [];
 let routeData = [];
 let vehicleData = [];
-
 let passengerData = null;
 
 
 /* =========================================================
-   PAGE INITIALIZATION
+   INITIALIZATION
    ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
+document.addEventListener("DOMContentLoaded", async function () {
 
-        const isPassenger =
-            await checkPassenger();
+    const authenticated = await checkPassenger();
 
-        if (!isPassenger) {
-            return;
-        }
-
-        setupSearchEvents();
-
-        setupLogout();
-
-        await loadPassenger();
-
-        await loadTripData();
-    }
-);
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-function setupLogout() {
-
-    const logoutButton =
-        document.getElementById(
-            "passengerLogoutButton"
-        );
-
-    if (!logoutButton) {
+    if (!authenticated) {
         return;
     }
 
-    logoutButton.addEventListener(
-        "click",
-        async function () {
+    setupSearchEvents();
 
-            try {
+    await loadPassenger();
 
-                await fetch(
-                    "/api/users/logout",
-                    {
-                        method: "POST",
-                        credentials: "include"
-                    }
-                );
+    await loadTripData();
 
-            } catch (error) {
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-            }
-
-            sessionStorage.clear();
-
-            window.location.href =
-                "/index.html";
-        }
-    );
-}
+});
 
 
 /* =========================================================
-   CHECK PASSENGER
+   AUTHENTICATION
    ========================================================= */
 
 async function checkPassenger() {
 
     try {
 
-        const response =
-            await fetch(
-                "/api/users/current-user",
-                {
-                    method: "GET",
-                    credentials: "include"
-                }
-            );
+        const response = await fetch(
+            "/api/users/current-user",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
         if (!response.ok) {
-
-            window.location.href =
-                "/index.html";
-
+            window.location.href = "/index.html";
             return false;
         }
 
-        const user =
-            await response.json();
+        const user = await response.json();
 
         if (
             !user ||
-            user.role !== "PASSENGER"
+            String(user.role || "").toUpperCase() !== "PASSENGER"
         ) {
-
-            alert(
-                "Passenger access required."
-            );
-
-            window.location.href =
-                "/index.html";
-
+            window.location.href = "/index.html";
             return false;
         }
 
-        sessionStorage.setItem(
-            "role",
-            user.role
-        );
+        sessionStorage.setItem("role", "PASSENGER");
 
-        if (user.id != null) {
+        /*
+         * In this application's current login response,
+         * userId represents the passenger ID for PASSENGER.
+         */
+        const passengerId =
+            user.passengerId ?? user.userId ?? user.id;
 
+        if (passengerId !== undefined && passengerId !== null) {
+            sessionStorage.setItem(
+                "passengerId",
+                String(passengerId)
+            );
+        }
+
+        if (user.userId !== undefined && user.userId !== null) {
             sessionStorage.setItem(
                 "userId",
-                user.id
+                String(user.userId)
             );
         }
 
         if (user.username) {
-
             sessionStorage.setItem(
                 "username",
                 user.username
-            );
-        }
-
-        if (user.passengerId != null) {
-
-            sessionStorage.setItem(
-                "passengerId",
-                user.passengerId
             );
         }
 
@@ -159,13 +96,8 @@ async function checkPassenger() {
 
     } catch (error) {
 
-        console.error(
-            "Passenger check error:",
-            error
-        );
-
-        window.location.href =
-            "/index.html";
+        console.error("Passenger authentication error:", error);
+        showError("Unable to verify your login. Please log in again.");
 
         return false;
     }
@@ -173,102 +105,85 @@ async function checkPassenger() {
 
 
 /* =========================================================
-   LOAD PASSENGER
+   LOAD PASSENGER NAME
    ========================================================= */
 
 async function loadPassenger() {
 
+    const nameElement = document.getElementById("passengerName");
+
+    const username =
+        sessionStorage.getItem("username") || "Passenger";
+
+    if (nameElement) {
+        nameElement.textContent = username;
+    }
+
+    const passengerId =
+        sessionStorage.getItem("passengerId");
+
+    if (!passengerId) {
+        return;
+    }
+
     try {
 
-        const passengerId =
-            sessionStorage.getItem(
-                "passengerId"
-            );
-
-        const username =
-            sessionStorage.getItem(
-                "username"
-            );
-
-        const passengerNameElement =
-            document.getElementById(
-                "passengerName"
-            );
-
-        if (!passengerId) {
-
-            if (
-                passengerNameElement &&
-                username
-            ) {
-
-                passengerNameElement.textContent =
-                    username;
+        const response = await fetch(
+            `/api/passengers/${encodeURIComponent(passengerId)}`,
+            {
+                method: "GET",
+                credentials: "include"
             }
+        );
 
+        if (!response.ok) {
             return;
         }
 
-        const response =
-            await fetch(
-                `/api/passengers/${passengerId}`,
-                {
-                    method: "GET",
-                    credentials: "include"
-                }
-            );
+        passengerData = await response.json();
 
-        if (!response.ok) {
-            throw new Error(
-                "Failed to load passenger."
-            );
+        const name =
+            passengerData.fullName ||
+            passengerData.name ||
+            `${passengerData.firstName || ""} ${passengerData.lastName || ""}`.trim() ||
+            username;
+
+        if (nameElement) {
+            nameElement.textContent = name;
         }
 
-        passengerData =
-            await response.json();
+        const avatar = document.querySelector(".profile-avatar");
 
-        if (passengerNameElement) {
-
-            passengerNameElement.textContent =
-                passengerData.fullName ||
-                passengerData.name ||
-                passengerData.username ||
-                username ||
-                "Passenger";
+        if (avatar) {
+            avatar.textContent =
+                name.charAt(0).toUpperCase() || "P";
         }
 
     } catch (error) {
 
-        console.error(
-            "Passenger loading error:",
-            error
-        );
+        console.error("Passenger information loading error:", error);
 
-        const passengerNameElement =
-            document.getElementById(
-                "passengerName"
-            );
-
-        if (passengerNameElement) {
-
-            passengerNameElement.textContent =
-                sessionStorage.getItem(
-                    "username"
-                ) || "Passenger";
-        }
     }
 }
 
 
 /* =========================================================
-   LOAD TRIP DATA
+   LOAD TRIPS, ROUTES AND VEHICLES
    ========================================================= */
 
 async function loadTripData() {
 
-    try {
+    showLoading();
 
-        showLoading();
+    const refreshButton =
+        document.getElementById("refreshTripsButton");
+
+    if (refreshButton) {
+        refreshButton.disabled = true;
+        refreshButton.textContent = "Loading...";
+    }
+
+    try {
 
         const [
             tripsResponse,
@@ -276,76 +191,95 @@ async function loadTripData() {
             vehiclesResponse
         ] = await Promise.all([
 
-            fetch(
-                "/api/trips",
-                {
-                    credentials: "include"
-                }
-            ),
+            fetch("/api/trips", {
+                method: "GET",
+                credentials: "include"
+            }),
 
-            fetch(
-                "/api/routes",
-                {
-                    credentials: "include"
-                }
-            ),
+            fetch("/api/routes", {
+                method: "GET",
+                credentials: "include"
+            }),
 
-            fetch(
-                "/api/vehicles",
-                {
-                    credentials: "include"
-                }
-            )
+            fetch("/api/vehicles", {
+                method: "GET",
+                credentials: "include"
+            })
+
         ]);
 
-
         if (!tripsResponse.ok) {
-
             throw new Error(
-                "Failed to load trips."
+                `Unable to load trips. Server returned ${tripsResponse.status}.`
             );
         }
 
-
-        tripData =
-            await tripsResponse.json();
-
+        const tripsResult = await tripsResponse.json();
+        tripData = getArrayFromResponse(tripsResult);
 
         if (routesResponse.ok) {
-
-            routeData =
-                await routesResponse.json();
-
+            routeData = getArrayFromResponse(
+                await routesResponse.json()
+            );
         } else {
-
             routeData = [];
+            console.warn("Routes could not be loaded.");
         }
-
 
         if (vehiclesResponse.ok) {
-
-            vehicleData =
-                await vehiclesResponse.json();
-
+            vehicleData = getArrayFromResponse(
+                await vehiclesResponse.json()
+            );
         } else {
-
             vehicleData = [];
+            console.warn("Vehicles could not be loaded.");
         }
 
-
+        /*
+         * Empty API result is different from an API failure.
+         */
         applyFilters();
 
     } catch (error) {
 
-        console.error(
-            "Trip loading error:",
-            error
-        );
+        console.error("Trip loading error:", error);
 
-        showError(
-            "Unable to load trips. Please try again."
-        );
+        showError(error.message || "Unable to load available trips.");
+
+    } finally {
+
+        if (refreshButton) {
+            refreshButton.disabled = false;
+            refreshButton.textContent = "Refresh";
+        }
     }
+}
+
+
+/* =========================================================
+   HANDLE API RESPONSE ARRAYS
+   Supports an array or a paginated response.
+   ========================================================= */
+
+function getArrayFromResponse(data) {
+
+    if (Array.isArray(data)) {
+        return data;
+    }
+
+    if (data && Array.isArray(data.content)) {
+        return data.content;
+    }
+
+    if (data && Array.isArray(data.data)) {
+        return data.data;
+    }
+
+    if (data && Array.isArray(data.items)) {
+        return data.items;
+    }
+
+    return [];
 }
 
 
@@ -356,88 +290,56 @@ async function loadTripData() {
 function setupSearchEvents() {
 
     const searchButton =
-        document.getElementById(
-            "searchTripsButton"
-        );
+        document.getElementById("searchButton");
 
-    const searchInput =
-        document.getElementById(
-            "tripSearch"
-        );
+    const clearButton =
+        document.getElementById("clearSearchButton");
+
+    const refreshButton =
+        document.getElementById("refreshTripsButton");
+
+    const sourceInput =
+        document.getElementById("sourceSearch");
+
+    const destinationInput =
+        document.getElementById("destinationSearch");
 
     const dateInput =
-        document.getElementById(
-            "tripDate"
-        );
+        document.getElementById("tripDateSearch");
 
-    const routeFilter =
-        document.getElementById(
-            "routeFilter"
-        );
-
-    const statusFilter =
-        document.getElementById(
-            "statusFilter"
-        );
+    const statusInput =
+        document.getElementById("tripStatusFilter");
 
 
     if (searchButton) {
+        searchButton.addEventListener("click", applyFilters);
+    }
 
-        searchButton.addEventListener(
+    if (clearButton) {
+        clearButton.addEventListener("click", clearSearch);
+    }
+
+    if (refreshButton) {
+        refreshButton.addEventListener(
             "click",
-            function () {
-
-                applyFilters();
-            }
+            loadTripData
         );
     }
 
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-                applyFilters();
-            }
-        );
+    if (sourceInput) {
+        sourceInput.addEventListener("input", applyFilters);
     }
 
+    if (destinationInput) {
+        destinationInput.addEventListener("input", applyFilters);
+    }
 
     if (dateInput) {
-
-        dateInput.addEventListener(
-            "change",
-            function () {
-
-                applyFilters();
-            }
-        );
+        dateInput.addEventListener("change", applyFilters);
     }
 
-
-    if (routeFilter) {
-
-        routeFilter.addEventListener(
-            "change",
-            function () {
-
-                applyFilters();
-            }
-        );
-    }
-
-
-    if (statusFilter) {
-
-        statusFilter.addEventListener(
-            "change",
-            function () {
-
-                applyFilters();
-            }
-        );
+    if (statusInput) {
+        statusInput.addEventListener("change", applyFilters);
     }
 }
 
@@ -448,138 +350,470 @@ function setupSearchEvents() {
 
 function applyFilters() {
 
-    if (!Array.isArray(tripData)) {
+    const source =
+        getElementValue("sourceSearch").toLowerCase();
 
-        renderTrips([]);
-
-        return;
-    }
-
-
-    const searchInput =
-        document.getElementById(
-            "tripSearch"
-        );
-
-    const dateInput =
-        document.getElementById(
-            "tripDate"
-        );
-
-    const routeFilter =
-        document.getElementById(
-            "routeFilter"
-        );
-
-    const statusFilter =
-        document.getElementById(
-            "statusFilter"
-        );
-
-
-    const searchValue =
-        searchInput
-            ? searchInput.value
-                .trim()
-                .toLowerCase()
-            : "";
-
+    const destination =
+        getElementValue("destinationSearch").toLowerCase();
 
     const selectedDate =
-        dateInput
-            ? dateInput.value
-            : "";
-
-
-    const selectedRoute =
-        routeFilter
-            ? routeFilter.value
-            : "";
-
+        getElementValue("tripDateSearch");
 
     const selectedStatus =
-        statusFilter
-            ? statusFilter.value
-            : "";
+        getElementValue("tripStatusFilter").toUpperCase();
 
 
-    const filteredTrips =
-        tripData.filter(
-            function (trip) {
+    const filteredTrips = tripData.filter(function (trip) {
 
-                const route =
-                    getRoute(trip.routeId);
+        const route = getTripRoute(trip);
 
+        const origin =
+            getRouteSource(route).toLowerCase();
 
-                const routeText =
-                    route
-                        ? (
-                            route.routeName ||
-                            route.name ||
-                            ""
-                        ).toLowerCase()
-                        : "";
+        const destinationName =
+            getRouteDestination(route).toLowerCase();
+
+        const routeName =
+            getRouteName(route).toLowerCase();
 
 
-                const tripText =
-                    JSON.stringify(trip)
-                        .toLowerCase();
+        const matchesSource =
+            !source ||
+            origin.includes(source) ||
+            routeName.includes(source);
+
+        const matchesDestination =
+            !destination ||
+            destinationName.includes(destination) ||
+            routeName.includes(destination);
+
+        const matchesDate =
+            !selectedDate ||
+            getTripDate(trip) === selectedDate;
+
+        const status =
+            String(trip.status || "SCHEDULED").toUpperCase();
+
+        const matchesStatus =
+            !selectedStatus ||
+            status === selectedStatus;
+
+        return (
+            matchesSource &&
+            matchesDestination &&
+            matchesDate &&
+            matchesStatus
+        );
+    });
+
+    renderTrips(filteredTrips);
+}
 
 
-                const matchesSearch =
-                    !searchValue ||
-                    tripText.includes(
-                        searchValue
-                    ) ||
-                    routeText.includes(
-                        searchValue
-                    );
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+function clearSearch() {
+
+    setElementValue("sourceSearch", "");
+    setElementValue("destinationSearch", "");
+    setElementValue("tripDateSearch", "");
+
+    /*
+     * Return to the default Scheduled filter.
+     */
+    setElementValue("tripStatusFilter", "SCHEDULED");
+
+    applyFilters();
+}
 
 
-                const tripDate =
-                    getTripDate(trip);
+/* =========================================================
+   TRIP IDENTIFIER
+   Supports Java entity IDs and older id fields.
+   ========================================================= */
+
+function getTripId(trip) {
+
+    return (
+        trip.tripId ??
+        trip.id ??
+        trip.trip_id ??
+        ""
+    );
+}
 
 
-                const matchesDate =
-                    !selectedDate ||
-                    tripDate === selectedDate;
+/* =========================================================
+   ROUTE LOOKUP
+   ========================================================= */
+
+function getTripRoute(trip) {
+
+    if (trip.route && typeof trip.route === "object") {
+        return trip.route;
+    }
+
+    const routeId =
+        trip.routeId ??
+        trip.route_id;
+
+    return routeData.find(function (route) {
+
+        const id =
+            route.routeId ??
+            route.id ??
+            route.route_id;
+
+        return String(id) === String(routeId);
+
+    }) || {};
+}
 
 
-                const matchesRoute =
-                    !selectedRoute ||
-                    String(
-                        trip.routeId
-                    ) === String(
-                        selectedRoute
-                    );
+/* =========================================================
+   VEHICLE LOOKUP
+   ========================================================= */
+
+function getTripVehicle(trip) {
+
+    if (trip.vehicle && typeof trip.vehicle === "object") {
+        return trip.vehicle;
+    }
+
+    const vehicleId =
+        trip.vehicleId ??
+        trip.vehicle_id;
+
+    return vehicleData.find(function (vehicle) {
+
+        const id =
+            vehicle.vehicleId ??
+            vehicle.id ??
+            vehicle.vehicle_id;
+
+        return String(id) === String(vehicleId);
+
+    }) || {};
+}
 
 
-                const tripStatus =
-                    String(
-                        trip.status ||
-                        ""
-                    ).toUpperCase();
+/* =========================================================
+   ROUTE NAME
+   ========================================================= */
+
+function getRouteName(route) {
+
+    if (!route) {
+        return "Route information unavailable";
+    }
+
+    const name =
+        route.routeName ??
+        route.name ??
+        route.route ??
+        "";
+
+    if (name) {
+        return String(name);
+    }
+
+    const source = getRouteSource(route);
+    const destination = getRouteDestination(route);
+
+    if (source && destination) {
+        return `${source} - ${destination}`;
+    }
+
+    return "Route information unavailable";
+}
 
 
-                const matchesStatus =
-                    !selectedStatus ||
-                    tripStatus ===
-                    selectedStatus.toUpperCase();
+/* =========================================================
+   ROUTE SOURCE
+   ========================================================= */
+
+function getRouteSource(route) {
+
+    if (!route) {
+        return "";
+    }
+
+    const directSource =
+        route.sourceLocation ??
+        route.source ??
+        route.origin ??
+        route.startLocation ??
+        route.from ??
+        route.startPoint ??
+        "";
+
+    if (directSource) {
+        return String(directSource);
+    }
+
+    const routeName = String(
+        route.routeName ??
+        route.name ??
+        ""
+    );
+
+    const parts = routeName.split(/\s*(?:-|–|—|→|\bto\b)\s*/i);
+
+    return parts.length >= 2 ? parts[0] : routeName;
+}
 
 
-                return (
-                    matchesSearch &&
-                    matchesDate &&
-                    matchesRoute &&
-                    matchesStatus
-                );
-            }
+/* =========================================================
+   ROUTE DESTINATION
+   ========================================================= */
+
+function getRouteDestination(route) {
+
+    if (!route) {
+        return "";
+    }
+
+    const directDestination =
+        route.destinationLocation ??
+        route.destination ??
+        route.dest ??
+        route.endLocation ??
+        route.to ??
+        route.endPoint ??
+        "";
+
+    if (directDestination) {
+        return String(directDestination);
+    }
+
+    const routeName = String(
+        route.routeName ??
+        route.name ??
+        ""
+    );
+
+    const parts = routeName.split(/\s*(?:-|–|—|→|\bto\b)\s*/i);
+
+    return parts.length >= 2 ? parts.slice(1).join(" - ") : "";
+}
+
+
+/* =========================================================
+   VEHICLE NAME
+   ========================================================= */
+
+function getVehicleName(vehicle) {
+
+    if (!vehicle || Object.keys(vehicle).length === 0) {
+        return "Not assigned";
+    }
+
+    return (
+        vehicle.registrationNo ??
+        vehicle.registrationNumber ??
+        vehicle.vehicleNumber ??
+        vehicle.number ??
+        "Vehicle assigned"
+    );
+}
+
+
+/* =========================================================
+   TRIP DATE
+   ========================================================= */
+
+function getTripDate(trip) {
+
+    const value =
+        trip.tripDate ??
+        trip.departureDate ??
+        trip.date ??
+        trip.departureDateTime ??
+        trip.departureTime ??
+        "";
+
+    if (!value) {
+        return "";
+    }
+
+    if (Array.isArray(value)) {
+        const year = value[0];
+        const month = String(value[1] || "").padStart(2, "0");
+        const day = String(value[2] || "").padStart(2, "0");
+
+        if (year && month && day) {
+            return `${year}-${month}-${day}`;
+        }
+    }
+
+    return String(value).substring(0, 10);
+}
+
+
+/* =========================================================
+   FORMAT DATE
+   ========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "Not specified";
+    }
+
+    const dateString = String(value).substring(0, 10);
+    const parts = dateString.split("-");
+
+    if (
+        parts.length === 3 &&
+        parts[0].length === 4
+    ) {
+        const date = new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
         );
 
+        if (!Number.isNaN(date.getTime())) {
+            return date.toLocaleDateString("en-LK", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            });
+        }
+    }
 
-    renderTrips(
-        filteredTrips
-    );
+    return dateString;
+}
+
+
+/* =========================================================
+   FORMAT TIME
+   ========================================================= */
+
+function formatTime(value) {
+
+    if (!value) {
+        return "Not specified";
+    }
+
+    if (Array.isArray(value)) {
+        const hours = String(value[0] ?? 0).padStart(2, "0");
+        const minutes = String(value[1] ?? 0).padStart(2, "0");
+
+        return `${hours}:${minutes}`;
+    }
+
+    const text = String(value);
+
+    /*
+     * Handles LocalTime values such as 06:30:00
+     * and ISO date-time values such as 2026-10-05T06:30:00.
+     */
+    const match = text.match(/T?(\d{2}):(\d{2})(?::\d{2})?/);
+
+    if (match) {
+        return `${match[1]}:${match[2]}`;
+    }
+
+    return text;
+}
+
+
+/* =========================================================
+   FORMAT CURRENCY
+   ========================================================= */
+
+function formatCurrency(value) {
+
+    const amount = Number(value);
+
+    if (!Number.isFinite(amount)) {
+        return "0.00";
+    }
+
+    return amount.toLocaleString("en-LK", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+
+/* =========================================================
+   GET AVAILABLE SEATS
+   ========================================================= */
+
+function getAvailableSeats(trip, vehicle) {
+
+    const seats =
+        trip.availableSeats ??
+        trip.seatsAvailable ??
+        trip.remainingSeats ??
+        trip.availableSeatCount;
+
+    if (
+        seats !== undefined &&
+        seats !== null &&
+        seats !== ""
+    ) {
+        const number = Number(seats);
+
+        return Number.isFinite(number) ? number : null;
+    }
+
+    /*
+     * If the API doesn't provide a separate available-seat value,
+     * show vehicle/trip capacity as a fallback.
+     */
+    const capacity =
+        trip.capacity ??
+        trip.totalSeats ??
+        vehicle.capacity ??
+        vehicle.seatCapacity ??
+        vehicle.seats;
+
+    if (
+        capacity !== undefined &&
+        capacity !== null &&
+        capacity !== ""
+    ) {
+        const number = Number(capacity);
+
+        return Number.isFinite(number) ? number : null;
+    }
+
+    return null;
+}
+
+
+/* =========================================================
+   NORMALIZE STATUS CLASS
+   ========================================================= */
+
+function getStatusClass(status) {
+
+    const normalized =
+        String(status || "").toUpperCase();
+
+    switch (normalized) {
+
+        case "SCHEDULED":
+        case "AVAILABLE":
+            return "scheduled";
+
+        case "COMPLETED":
+            return "completed";
+
+        case "CANCELLED":
+            return "cancelled";
+
+        case "IN_PROGRESS":
+            return "in-progress";
+
+        default:
+            return "unknown";
+    }
 }
 
 
@@ -590,28 +824,53 @@ function applyFilters() {
 function renderTrips(trips) {
 
     const container =
-        document.getElementById(
-            "tripsContainer"
-        );
-
+        document.getElementById("tripsContainer");
 
     if (!container) {
         return;
     }
 
+    const tripCount =
+        document.getElementById("tripCount");
 
-    updateTripCount(
-        trips.length
-    );
+    const seatCount =
+        document.getElementById("seatCount");
 
 
-    if (!trips.length) {
+    if (tripCount) {
+        tripCount.textContent = String(trips.length);
+    }
+
+    let totalAvailableSeats = 0;
+    let knownSeatCounts = 0;
+
+    trips.forEach(function (trip) {
+
+        const vehicle = getTripVehicle(trip);
+        const seats = getAvailableSeats(trip, vehicle);
+
+        if (seats !== null) {
+            totalAvailableSeats += seats;
+            knownSeatCounts++;
+        }
+    });
+
+    if (seatCount) {
+        seatCount.textContent =
+            knownSeatCounts > 0
+                ? String(totalAvailableSeats)
+                : "—";
+    }
+
+
+    if (trips.length === 0) {
 
         container.innerHTML = `
             <div class="empty-state">
                 <h3>No Trips Found</h3>
                 <p>
-                    No trips match your current search criteria.
+                    No trips match your search.
+                    Try another route or date, or select All under Status.
                 </p>
             </div>
         `;
@@ -621,14 +880,23 @@ function renderTrips(trips) {
 
 
     container.innerHTML =
-        trips.map(
-            function (trip) {
+        trips.map(createTripCard).join("");
 
-                return createTripCard(
-                    trip
-                );
-            }
-        ).join("");
+
+    /*
+     * Attach click handlers after rendering.
+     * Avoid inline JavaScript in generated HTML.
+     */
+    container.querySelectorAll(".select-trip-button").forEach(
+        function (button) {
+
+            button.addEventListener("click", function () {
+
+                selectTrip(button.dataset.tripId);
+
+            });
+        }
+    );
 }
 
 
@@ -638,77 +906,67 @@ function renderTrips(trips) {
 
 function createTripCard(trip) {
 
-    const route =
-        getRoute(trip.routeId);
+    const tripId = getTripId(trip);
 
-    const vehicle =
-        getVehicle(trip.vehicleId);
+    const route = getTripRoute(trip);
 
+    const vehicle = getTripVehicle(trip);
 
-    const routeName =
-        route
-            ? (
-                route.routeName ||
-                route.name ||
-                "Unknown Route"
-            )
-            : "Unknown Route";
+    const routeName = getRouteName(route);
 
+    const source = getRouteSource(route);
 
-    const vehicleName =
-        vehicle
-            ? (
-                vehicle.vehicleNumber ||
-                vehicle.registrationNumber ||
-                vehicle.number ||
-                "Vehicle"
-            )
-            : "Not Assigned";
+    const destination = getRouteDestination(route);
 
+    const vehicleName = getVehicleName(vehicle);
 
     const status =
-        trip.status ||
-        "AVAILABLE";
-
+        String(trip.status || "SCHEDULED").toUpperCase();
 
     const fare =
         trip.fare ??
+        trip.ticketPrice ??
         trip.price ??
+        trip.fareAmount ??
         0;
 
+    const seats = getAvailableSeats(trip, vehicle);
 
-    const seats =
-        trip.availableSeats ??
-        trip.seatsAvailable ??
-        trip.capacity ??
-        "-";
+    const date = formatDate(getTripDate(trip));
+
+    const departureTime = formatTime(
+        trip.departureTime ??
+        trip.startTime ??
+        trip.departureDateTime
+    );
+
+    const arrivalTime = formatTime(
+        trip.arrivalTime ??
+        trip.endTime ??
+        trip.arrivalDateTime
+    );
+
+    const statusClass = getStatusClass(status);
+
+    const noSeats =
+        seats !== null && seats <= 0;
+
+    const canBook =
+        ["SCHEDULED", "AVAILABLE"].includes(status) &&
+        !noSeats &&
+        tripId !== null &&
+        tripId !== undefined &&
+        tripId !== "";
 
 
-    const date =
-        formatDate(
-            trip.tripDate ||
-            trip.date ||
-            trip.departureDate
-        );
-
-
-    const departureTime =
-        formatTime(
-            trip.departureTime ||
-            trip.startTime ||
-            trip.time
-        );
-
-
-    const arrivalTime =
-        formatTime(
-            trip.arrivalTime ||
-            trip.endTime
-        );
+    const routeDisplay =
+        source && destination
+            ? `${escapeHtml(source)} <span class="route-arrow">→</span> ${escapeHtml(destination)}`
+            : escapeHtml(routeName);
 
 
     return `
-        <div class="trip-card">
+        <article class="trip-card">
 
             <div class="trip-card-header">
 
@@ -716,85 +974,52 @@ function createTripCard(trip) {
                     ${escapeHtml(routeName)}
                 </div>
 
-                <span class="status-badge">
-                    ${escapeHtml(status)}
+                <span class="trip-status ${statusClass}">
+                    ${escapeHtml(status.replaceAll("_", " "))}
                 </span>
 
             </div>
 
 
             <div class="trip-route">
-                ${escapeHtml(routeName)}
+                ${routeDisplay}
             </div>
 
 
             <div class="trip-details">
 
                 <div class="trip-detail">
-                    <span class="trip-detail-label">
-                        Date
-                    </span>
+                    <span class="trip-detail-label">Travel Date</span>
+                    <span class="trip-detail-value">${escapeHtml(date)}</span>
+                </div>
 
+                <div class="trip-detail">
+                    <span class="trip-detail-label">Departure</span>
+                    <span class="trip-detail-value">${escapeHtml(departureTime)}</span>
+                </div>
+
+                <div class="trip-detail">
+                    <span class="trip-detail-label">Arrival</span>
+                    <span class="trip-detail-value">${escapeHtml(arrivalTime)}</span>
+                </div>
+
+                <div class="trip-detail">
+                    <span class="trip-detail-label">Vehicle</span>
+                    <span class="trip-detail-value">${escapeHtml(vehicleName)}</span>
+                </div>
+
+                <div class="trip-detail">
+                    <span class="trip-detail-label">Available Seats</span>
                     <span class="trip-detail-value">
-                        ${escapeHtml(date)}
+                        ${seats === null ? "Not provided" : escapeHtml(String(seats))}
                     </span>
                 </div>
 
-
                 <div class="trip-detail">
-                    <span class="trip-detail-label">
-                        Departure
-                    </span>
-
-                    <span class="trip-detail-value">
-                        ${escapeHtml(departureTime)}
-                    </span>
-                </div>
-
-
-                <div class="trip-detail">
-                    <span class="trip-detail-label">
-                        Arrival
-                    </span>
-
-                    <span class="trip-detail-value">
-                        ${escapeHtml(arrivalTime)}
-                    </span>
-                </div>
-
-
-                <div class="trip-detail">
-                    <span class="trip-detail-label">
-                        Vehicle
-                    </span>
-
-                    <span class="trip-detail-value">
-                        ${escapeHtml(vehicleName)}
-                    </span>
-                </div>
-
-
-                <div class="trip-detail">
-                    <span class="trip-detail-label">
-                        Available Seats
-                    </span>
-
-                    <span class="trip-detail-value">
-                        ${escapeHtml(String(seats))}
-                    </span>
-                </div>
-
-
-                <div class="trip-detail">
-
-                    <span class="trip-detail-label">
-                        Fare
-                    </span>
-
+                    <span class="trip-detail-label">Ticket Fare</span>
                     <span class="trip-fare">
                         Rs. ${formatCurrency(fare)}
                     </span>
-
                 </div>
 
             </div>
@@ -805,14 +1030,16 @@ function createTripCard(trip) {
                 <button
                     type="button"
                     class="select-trip-button"
-                    onclick="selectTrip(${trip.id})"
+                    data-trip-id="${escapeAttribute(String(tripId))}"
+                    ${canBook ? "" : "disabled"}
                 >
-                    Select Trip
+                    ${noSeats ? "No Seats Available" :
+        (canBook ? "Select Trip" : "Not Available")}
                 </button>
 
             </div>
 
-        </div>
+        </article>
     `;
 }
 
@@ -823,31 +1050,61 @@ function createTripCard(trip) {
 
 function selectTrip(tripId) {
 
-    const trip =
-        tripData.find(
-            function (item) {
+    const trip = tripData.find(function (item) {
 
-                return String(item.id) ===
-                    String(tripId);
-            }
-        );
+        return String(getTripId(item)) === String(tripId);
 
+    });
 
     if (!trip) {
 
-        alert(
-            "Trip information not found."
-        );
+        alert("Trip information could not be found.");
 
         return;
     }
 
+    const status =
+        String(trip.status || "SCHEDULED").toUpperCase();
 
+    if (!["SCHEDULED", "AVAILABLE"].includes(status)) {
+
+        alert("This trip is not available for booking.");
+
+        return;
+    }
+
+    const vehicle = getTripVehicle(trip);
+    const seats = getAvailableSeats(trip, vehicle);
+
+    if (seats !== null && seats <= 0) {
+
+        alert("No seats are available on this trip.");
+
+        return;
+    }
+
+    const tripIdValue = getTripId(trip);
+
+    const fare =
+        trip.fare ??
+        trip.ticketPrice ??
+        trip.price ??
+        trip.fareAmount ??
+        0;
+
+
+    /*
+     * These values are used by the booking page.
+     */
     sessionStorage.setItem(
         "selectedTripId",
-        trip.id
+        String(tripIdValue)
     );
 
+    sessionStorage.setItem(
+        "selectedTripFare",
+        String(fare)
+    );
 
     sessionStorage.setItem(
         "selectedTrip",
@@ -861,243 +1118,36 @@ function selectTrip(tripId) {
 
 
 /* =========================================================
-   GET ROUTE
-   ========================================================= */
-
-function getRoute(routeId) {
-
-    return routeData.find(
-        function (route) {
-
-            return String(route.id) ===
-                String(routeId);
-        }
-    ) || null;
-}
-
-
-/* =========================================================
-   GET VEHICLE
-   ========================================================= */
-
-function getVehicle(vehicleId) {
-
-    return vehicleData.find(
-        function (vehicle) {
-
-            return String(vehicle.id) ===
-                String(vehicleId);
-        }
-    ) || null;
-}
-
-
-/* =========================================================
-   GET TRIP DATE
-   ========================================================= */
-
-function getTripDate(trip) {
-
-    const value =
-        trip.tripDate ||
-        trip.date ||
-        trip.departureDate;
-
-
-    if (!value) {
-        return "";
-    }
-
-
-    if (
-        typeof value === "string" &&
-        value.length >= 10
-    ) {
-
-        return value.substring(
-            0,
-            10
-        );
-    }
-
-
-    try {
-
-        const date =
-            new Date(value);
-
-        if (isNaN(date.getTime())) {
-            return "";
-        }
-
-        return date
-            .toISOString()
-            .substring(0, 10);
-
-    } catch (error) {
-
-        return "";
-    }
-}
-
-
-/* =========================================================
-   FORMAT DATE
-   ========================================================= */
-
-function formatDate(value) {
-
-    if (!value) {
-        return "-";
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (isNaN(date.getTime())) {
-
-        return String(value);
-    }
-
-
-    return date.toLocaleDateString(
-        "en-LK",
-        {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-        }
-    );
-}
-
-
-/* =========================================================
-   FORMAT TIME
-   ========================================================= */
-
-function formatTime(value) {
-
-    if (!value) {
-        return "-";
-    }
-
-
-    if (
-        typeof value === "string" &&
-        value.length >= 5
-    ) {
-
-        if (
-            value.includes(":") &&
-            value.length <= 8
-        ) {
-
-            return value.substring(
-                0,
-                5
-            );
-        }
-    }
-
-
-    try {
-
-        const date =
-            new Date(value);
-
-
-        if (isNaN(date.getTime())) {
-
-            return String(value);
-        }
-
-
-        return date.toLocaleTimeString(
-            "en-LK",
-            {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-        );
-
-    } catch (error) {
-
-        return String(value);
-    }
-}
-
-
-/* =========================================================
-   FORMAT CURRENCY
-   ========================================================= */
-
-function formatCurrency(value) {
-
-    const number =
-        Number(value);
-
-
-    if (isNaN(number)) {
-        return "0.00";
-    }
-
-
-    return number.toLocaleString(
-        "en-LK",
-        {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }
-    );
-}
-
-
-/* =========================================================
-   UPDATE TRIP COUNT
-   ========================================================= */
-
-function updateTripCount(count) {
-
-    const element =
-        document.getElementById(
-            "tripCount"
-        );
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.textContent =
-        `${count} trip${count === 1 ? "" : "s"} found`;
-}
-
-
-/* =========================================================
    SHOW LOADING
    ========================================================= */
 
 function showLoading() {
 
     const container =
-        document.getElementById(
-            "tripsContainer"
-        );
+        document.getElementById("tripsContainer");
 
+    const tripCount =
+        document.getElementById("tripCount");
 
-    if (!container) {
-        return;
+    const seatCount =
+        document.getElementById("seatCount");
+
+    if (tripCount) {
+        tripCount.textContent = "0";
     }
 
+    if (seatCount) {
+        seatCount.textContent = "—";
+    }
 
-    container.innerHTML = `
-        <div class="loading">
-            Loading available trips...
-        </div>
-    `;
+    if (container) {
+
+        container.innerHTML = `
+            <div class="loading">
+                Loading available trips...
+            </div>
+        `;
+    }
 }
 
 
@@ -1108,39 +1158,68 @@ function showLoading() {
 function showError(message) {
 
     const container =
-        document.getElementById(
-            "tripsContainer"
-        );
+        document.getElementById("tripsContainer");
 
+    const tripCount =
+        document.getElementById("tripCount");
 
-    if (!container) {
-        return;
+    const seatCount =
+        document.getElementById("seatCount");
+
+    if (tripCount) {
+        tripCount.textContent = "0";
     }
 
+    if (seatCount) {
+        seatCount.textContent = "—";
+    }
 
-    container.innerHTML = `
-        <div class="error-state">
-            ${escapeHtml(message)}
-        </div>
-    `;
+    if (container) {
+
+        container.innerHTML = `
+            <div class="error-state">
+                <strong>Unable to load trips</strong>
+                <p>${escapeHtml(message)}</p>
+            </div>
+        `;
+    }
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   HELPERS
    ========================================================= */
+
+function getElementValue(id) {
+
+    const element = document.getElementById(id);
+
+    return element ? element.value.trim() : "";
+}
+
+
+function setElementValue(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.value = value;
+    }
+}
+
 
 function escapeHtml(value) {
 
-    if (value === null || value === undefined) {
-        return "";
-    }
-
-
-    return String(value)
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value) {
+
+    return escapeHtml(value);
 }

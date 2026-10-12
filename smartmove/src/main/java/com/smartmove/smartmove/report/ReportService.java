@@ -11,6 +11,9 @@ import com.smartmove.smartmove.report.dto.VehicleMaintenanceDTO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -73,15 +76,51 @@ public class ReportService {
                         ((Number) row[0]).longValue(),
                         (String) row[1],
                         ((Number) row[2]).longValue(),
-                        (java.sql.Date) row[3],
+                        convertToSqlDate(row[3]),
                         (String) row[4],
                         (String) row[5],
                         (String) row[6],
                         (String) row[7],
-                        (BigDecimal) row[8],
+                        row[8] == null
+                                ? BigDecimal.ZERO
+                                : (BigDecimal) row[8],
                         (String) row[9]
                 ))
                 .toList();
+    }
+
+    private java.sql.Date convertToSqlDate(Object value) {
+
+        if (value == null) {
+            return null;
+        }
+
+        if (value instanceof java.sql.Date date) {
+            return date;
+        }
+
+        if (value instanceof LocalDateTime dateTime) {
+            return java.sql.Date.valueOf(dateTime.toLocalDate());
+        }
+
+        if (value instanceof Timestamp timestamp) {
+            return java.sql.Date.valueOf(
+                    timestamp.toLocalDateTime().toLocalDate()
+            );
+        }
+
+        if (value instanceof LocalDate localDate) {
+            return java.sql.Date.valueOf(localDate);
+        }
+
+        if (value instanceof java.util.Date date) {
+            return new java.sql.Date(date.getTime());
+        }
+
+        throw new IllegalArgumentException(
+                "Unsupported trip date type: "
+                        + value.getClass().getName()
+        );
     }
 
     public List<VehicleMaintenanceDTO>

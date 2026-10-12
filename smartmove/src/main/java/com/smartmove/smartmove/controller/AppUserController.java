@@ -70,10 +70,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       GET USER BY ID
-       ===================================================== */
-
     @GetMapping("/{id:\\d+}")
     public ResponseEntity<AppUser> getUserById(
             @PathVariable Long id
@@ -86,9 +82,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       GET USER BY USERNAME
-       ===================================================== */
 
     @GetMapping("/username/{username}")
     public ResponseEntity<AppUser> getUserByUsername(
@@ -104,10 +97,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       CREATE USER
-       ===================================================== */
-
     @PostMapping
     public ResponseEntity<AppUser> createUser(
             @RequestBody AppUser user
@@ -119,10 +108,6 @@ public class AppUserController {
 
     }
 
-
-    /* =====================================================
-       UPDATE USER
-       ===================================================== */
 
     @PutMapping("/{id:\\d+}")
     public ResponseEntity<AppUser> updateUser(
@@ -138,11 +123,6 @@ public class AppUserController {
         );
 
     }
-
-
-    /* =====================================================
-       UPDATE STATUS
-       ===================================================== */
 
     @PatchMapping("/{id:\\d+}/status")
     public ResponseEntity<AppUser> updateStatus(
@@ -160,9 +140,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       DELETE USER
-       ===================================================== */
 
     @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<String> deleteUser(
@@ -176,11 +153,6 @@ public class AppUserController {
         );
 
     }
-
-
-    /* =====================================================
-       REGISTER
-       ===================================================== */
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
@@ -232,9 +204,6 @@ public class AppUserController {
             }
 
 
-            /* =============================================
-               CHECK PASSWORD
-               ============================================= */
 
             if (
                     request.getPassword() == null ||
@@ -270,10 +239,6 @@ public class AppUserController {
             }
 
 
-            /* =============================================
-               ADMIN REGISTRATION
-               ============================================= */
-
             if (
                     role.equals("ADMIN")
             ) {
@@ -284,10 +249,6 @@ public class AppUserController {
 
             }
 
-
-            /* =============================================
-               PASSENGER REGISTRATION
-               ============================================= */
 
             return registerPassenger(
                     request
@@ -319,9 +280,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       ADMIN REGISTRATION
-       ===================================================== */
 
     private ResponseEntity<?> registerAdmin(
             RegisterRequest request
@@ -511,9 +469,6 @@ public class AppUserController {
         }
 
 
-        /* =============================================
-           CHECK DUPLICATE EMAIL
-           ============================================= */
 
         Optional<Passenger> existingPassenger =
                 passengerRepository
@@ -537,10 +492,6 @@ public class AppUserController {
 
         }
 
-
-        /* =============================================
-           CREATE PASSENGER
-           ============================================= */
 
         Passenger passenger =
                 new Passenger();
@@ -573,9 +524,6 @@ public class AppUserController {
         );
 
 
-        /* =============================================
-           SET REQUIRED DATABASE VALUES
-           ============================================= */
 
         passenger.setRegistrationDate(
                 LocalDate.now()
@@ -586,10 +534,6 @@ public class AppUserController {
                 "ACTIVE"
         );
 
-
-        /* =============================================
-           SAVE PASSENGER
-           ============================================= */
 
         Passenger savedPassenger =
                 passengerRepository.save(
@@ -622,10 +566,6 @@ public class AppUserController {
 
     }
 
-
-    /* =====================================================
-       LOGIN
-       ===================================================== */
 
     @PostMapping("/login")
     public ResponseEntity<?> login(
@@ -719,9 +659,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       ADMIN LOGIN
-       ===================================================== */
 
     private ResponseEntity<?> adminLogin(
             LoginRequest request,
@@ -864,9 +801,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       PASSENGER LOGIN
-       ===================================================== */
 
     private ResponseEntity<?> passengerLogin(
             LoginRequest request,
@@ -997,9 +931,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       PASSWORD CHECK
-       ===================================================== */
 
     private boolean checkPassword(
             String rawPassword,
@@ -1036,9 +967,6 @@ public class AppUserController {
     }
 
 
-    /* =====================================================
-       LOGOUT
-       ===================================================== */
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(

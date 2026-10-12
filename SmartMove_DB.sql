@@ -364,9 +364,9 @@ CREATE TABLE feedback (
 
 INSERT INTO app_user (username, password, role, status)
 VALUES ('admin', 'admin123', 'ADMIN', 'ACTIVE');
-    
+
 INSERT INTO app_user (username, password, role, status)
-VALUES ('staff', 'staff123', 'STAFF', 'ACTIVE');
+VALUES ('chathuni', 'chathuni123', 'PASSENGER', 'ACTIVE');
 
 INSERT INTO vehicle
 (registration_no, vehicle_type, brand, model, manufacture_year,
@@ -381,8 +381,8 @@ INSERT INTO vehicle
 VALUES
 ('NB-5678', 'VAN', 'Toyota', 'Hiace', 2023,
  15, 'ACTIVE', DATE '2027-09-15');
- 
- INSERT INTO driver
+
+INSERT INTO driver
 (first_name, last_name, nic_number, license_number,
  license_expiry, phone, email, date_of_birth, hire_date, status)
 VALUES
@@ -413,7 +413,7 @@ INSERT INTO route
 VALUES
 ('Kandy - Nuwara Eliya', 'Kandy', 'Nuwara Eliya',
  75, 150, 1000, 'ACTIVE');
- 
+
 SELECT route_id, route_name
 FROM route;
 
@@ -450,13 +450,60 @@ VALUES
 ('Amal Perera', 'amal@gmail.com',
  '0712223344', 'pass456',
  'Colombo, Sri Lanka', 'ACTIVE');
- 
+
 INSERT INTO driver
-(first_name,last_name,nic_number,license_number,license_expiry,phone,email,date_of_birth,hire_date,status)
+(
+    first_name,
+    last_name,
+    nic_number,
+    license_number,
+    license_expiry,
+    phone,
+    email,
+    date_of_birth,
+    hire_date,
+    status
+)
 VALUES
-('Kasun','Perera','199501234567','B1234567',DATE '2028-05-31','0771234567','kasun@gmail.com',DATE '1995-04-12',DATE '2023-01-10','ACTIVE');
-INSERT INTO driver(first_name,last_name,nic_number,license_number,license_expiry,phone,email,date_of_birth,hire_date,status)
-VALUES('Nimal','Fernando','199203456789','B7654321',DATE '2029-02-28','0719876543','nimal@gmail.com',DATE '1992-08-20',DATE '2022-06-15','ACTIVE');
+(
+    'Kasun',
+    'Perera',
+    '199501234567',
+    'B1234567',
+    DATE '2028-05-31',
+    '0771234567',
+    'kasun@gmail.com',
+    DATE '1995-04-12',
+    DATE '2023-01-10',
+    'ACTIVE'
+);
+
+INSERT INTO driver
+(
+    first_name,
+    last_name,
+    nic_number,
+    license_number,
+    license_expiry,
+    phone,
+    email,
+    date_of_birth,
+    hire_date,
+    status
+)
+VALUES
+(
+    'Nimal',
+    'Fernando',
+    '199203456789',
+    'B7654321',
+    DATE '2029-02-28',
+    '0719876543',
+    'nimal@gmail.com',
+    DATE '1992-08-20',
+    DATE '2022-06-15',
+    'ACTIVE'
+);
 
 COMMIT;
 
@@ -828,413 +875,8 @@ SELECT * FROM maintenance;
 
 SELECT * FROM feedback;
 
---CREATE PROCEDURES
 
---ADD VEHICLES
-CREATE OR REPLACE PROCEDURE ADD_VEHICLE (
-    p_registration_no   IN VEHICLE.REGISTRATION_NO%TYPE,
-    p_vehicle_type      IN VEHICLE.VEHICLE_TYPE%TYPE,
-    p_brand             IN VEHICLE.BRAND%TYPE,
-    p_model             IN VEHICLE.MODEL%TYPE,
-    p_manufacture_year  IN VEHICLE.MANUFACTURE_YEAR%TYPE,
-    p_seating_capacity  IN VEHICLE.SEATING_CAPACITY%TYPE,
-    p_status            IN VEHICLE.STATUS%TYPE,
-    p_insurance_expiry  IN VEHICLE.INSURANCE_EXPIRY%TYPE
-)
-IS
-BEGIN
 
-    INSERT INTO VEHICLE (
-        REGISTRATION_NO,
-        VEHICLE_TYPE,
-        BRAND,
-        MODEL,
-        MANUFACTURE_YEAR,
-        SEATING_CAPACITY,
-        STATUS,
-        INSURANCE_EXPIRY
-    )
-    VALUES (
-        p_registration_no,
-        p_vehicle_type,
-        p_brand,
-        p_model,
-        p_manufacture_year,
-        p_seating_capacity,
-        p_status,
-        p_insurance_expiry
-    );
 
-    COMMIT;
 
-    DBMS_OUTPUT.PUT_LINE('Vehicle added successfully.');
 
-EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error: Registration number already exists.'
-        );
-
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error adding vehicle: ' || SQLERRM
-        );
-END;
-/
-BEGIN
-    ADD_VEHICLE(
-        'NB-9999',
-        'BUS',
-        'Ashok Leyland',
-        'Viking',
-        2024,
-        50,
-        'ACTIVE',
-        DATE '2028-12-31'
-    );
-END;
-/
-
---ADD DRIVERS
-CREATE OR REPLACE PROCEDURE ADD_DRIVER (
-    p_first_name       IN DRIVER.FIRST_NAME%TYPE,
-    p_last_name        IN DRIVER.LAST_NAME%TYPE,
-    p_nic_number       IN DRIVER.NIC_NUMBER%TYPE,
-    p_license_number   IN DRIVER.LICENSE_NUMBER%TYPE,
-    p_license_expiry   IN DRIVER.LICENSE_EXPIRY%TYPE,
-    p_phone            IN DRIVER.PHONE%TYPE,
-    p_email            IN DRIVER.EMAIL%TYPE,
-    p_date_of_birth    IN DRIVER.DATE_OF_BIRTH%TYPE,
-    p_hire_date        IN DRIVER.HIRE_DATE%TYPE,
-    p_status           IN DRIVER.STATUS%TYPE
-)
-IS
-BEGIN
-
-    INSERT INTO DRIVER (
-        FIRST_NAME,
-        LAST_NAME,
-        NIC_NUMBER,
-        LICENSE_NUMBER,
-        LICENSE_EXPIRY,
-        PHONE,
-        EMAIL,
-        DATE_OF_BIRTH,
-        HIRE_DATE,
-        STATUS
-    )
-    VALUES (
-        p_first_name,
-        p_last_name,
-        p_nic_number,
-        p_license_number,
-        p_license_expiry,
-        p_phone,
-        p_email,
-        p_date_of_birth,
-        p_hire_date,
-        p_status
-    );
-
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE('Driver added successfully.');
-
-EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error: NIC or license number already exists.'
-        );
-
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error adding driver: ' || SQLERRM
-        );
-END;
-/
-BEGIN
-    ADD_DRIVER(
-        'Kamal',
-        'Perera',
-        '199012345678',
-        'B1234569',
-        DATE '2028-06-30',
-        '0712345678',
-        'kamal@gmail.com',
-        DATE '1990-05-15',
-        DATE '2020-01-10',
-        'ACTIVE'
-    );
-END;
-/
-
---SHEDULE TRIP
-CREATE OR REPLACE PROCEDURE SCHEDULE_TRIP (
-    p_route_id          IN TRIP.ROUTE_ID%TYPE,
-    p_vehicle_id        IN TRIP.VEHICLE_ID%TYPE,
-    p_driver_id         IN TRIP.DRIVER_ID%TYPE,
-    p_trip_date         IN TRIP.TRIP_DATE%TYPE,
-    p_departure_time    IN TRIP.DEPARTURE_TIME%TYPE,
-    p_arrival_time      IN TRIP.ARRIVAL_TIME%TYPE,
-    p_fare              IN TRIP.FARE%TYPE,
-    p_trip_status       IN TRIP.TRIP_STATUS%TYPE
-)
-IS
-    v_seating_capacity VEHICLE.SEATING_CAPACITY%TYPE;
-BEGIN
-
-    SELECT SEATING_CAPACITY
-    INTO v_seating_capacity
-    FROM VEHICLE
-    WHERE VEHICLE_ID = p_vehicle_id;
-
-    INSERT INTO TRIP (
-        ROUTE_ID,
-        VEHICLE_ID,
-        DRIVER_ID,
-        TRIP_DATE,
-        DEPARTURE_TIME,
-        ARRIVAL_TIME,
-        AVAILABLE_SEATS,
-        FARE,
-        TRIP_STATUS
-    )
-    VALUES (
-        p_route_id,
-        p_vehicle_id,
-        p_driver_id,
-        p_trip_date,
-        p_departure_time,
-        p_arrival_time,
-        v_seating_capacity,
-        p_fare,
-        p_trip_status
-    );
-
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE('Trip scheduled successfully.');
-    DBMS_OUTPUT.PUT_LINE(
-        'Available seats: ' || v_seating_capacity
-    );
-
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE('Error: Vehicle not found.');
-
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error scheduling trip: ' || SQLERRM
-        );
-END;
-/
-BEGIN
-    SCHEDULE_TRIP(
-        1,
-        1,
-        1,
-        DATE '2026-10-10',
-        TIMESTAMP '2026-10-10 07:00:00',
-        TIMESTAMP '2026-10-10 10:30:00',
-        1500,
-        'SCHEDULED'
-    );
-END;
-/
-
---Book Ticket
-CREATE OR REPLACE PROCEDURE BOOK_TICKET (
-    p_trip_id       IN TICKET.TRIP_ID%TYPE,
-    p_passenger_id  IN TICKET.PASSENGER_ID%TYPE,
-    p_seat_number   IN TICKET.SEAT_NUMBER%TYPE,
-    p_ticket_price  IN TICKET.TICKET_PRICE%TYPE
-)
-IS
-    v_available_seats TRIP.AVAILABLE_SEATS%TYPE;
-BEGIN
-
-    SELECT AVAILABLE_SEATS
-    INTO v_available_seats
-    FROM TRIP
-    WHERE TRIP_ID = p_trip_id
-    FOR UPDATE;
-
-    IF v_available_seats <= 0 THEN
-        RAISE_APPLICATION_ERROR(
-            -20001,
-            'No available seats for this trip.'
-        );
-    END IF;
-
-    INSERT INTO TICKET (
-        TRIP_ID,
-        PASSENGER_ID,
-        SEAT_NUMBER,
-        BOOKING_DATE,
-        TICKET_PRICE,
-        TICKET_STATUS
-    )
-    VALUES (
-        p_trip_id,
-        p_passenger_id,
-        p_seat_number,
-        SYSDATE,
-        p_ticket_price,
-        'BOOKED'
-    );
-
-    UPDATE TRIP
-    SET AVAILABLE_SEATS = AVAILABLE_SEATS - 1
-    WHERE TRIP_ID = p_trip_id;
-
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE(
-        'Ticket booked successfully.'
-    );
-
-EXCEPTION
-
-    WHEN NO_DATA_FOUND THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Error: Trip not found.'
-        );
-
-    WHEN DUP_VAL_ON_INDEX THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Booking failed: This seat is already booked.'
-        );
-
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Booking failed: ' || SQLERRM
-        );
-END;
-/
-
---Record Payment
-CREATE OR REPLACE PROCEDURE RECORD_PAYMENT (
-    p_ticket_id              IN PAYMENT.TICKET_ID%TYPE,
-    p_amount                 IN PAYMENT.AMOUNT%TYPE,
-    p_payment_method         IN PAYMENT.PAYMENT_METHOD%TYPE,
-    p_payment_status         IN PAYMENT.PAYMENT_STATUS%TYPE,
-    p_transaction_reference  IN PAYMENT.TRANSACTION_REFERENCE%TYPE
-)
-IS
-BEGIN
-
-    INSERT INTO PAYMENT (
-        TICKET_ID,
-        AMOUNT,
-        PAYMENT_DATE,
-        PAYMENT_METHOD,
-        PAYMENT_STATUS,
-        TRANSACTION_REFERENCE
-    )
-    VALUES (
-        p_ticket_id,
-        p_amount,
-        SYSDATE,
-        p_payment_method,
-        p_payment_status,
-        p_transaction_reference
-    );
-
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE(
-        'Payment recorded successfully.'
-    );
-
-EXCEPTION
-
-    WHEN DUP_VAL_ON_INDEX THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Payment failed: This ticket already has a payment or transaction reference already exists.'
-        );
-
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE(
-            'Payment failed: ' || SQLERRM
-        );
-
-END;
-/
-BEGIN
-    RECORD_PAYMENT(
-        3,
-        1500,
-        'CARD',
-        'PAID',
-        'TXN-10003'
-    );
-END;
-/
-
-SELECT user_id, username, role, status
-FROM app_user;
-
-ALTER TABLE app_user
-DROP CONSTRAINT ck_app_user_role;
-
-ALTER TABLE app_user
-ADD CONSTRAINT ck_app_user_role
-CHECK (role IN ('ADMIN', 'PASSENGER'));
-
-ALTER TABLE app_user
-MODIFY role DEFAULT 'PASSENGER';
-
-SELECT user_id, username, role, status
-FROM app_user;
-
-UPDATE app_user
-SET role = 'PASSENGER'
-WHERE role = 'STAFF';
-
-COMMIT;
-
-ALTER TABLE app_user
-MODIFY role DEFAULT 'PASSENGER';
-
-SELECT user_id, username, role, status
-FROM app_user;
-
-SELECT constraint_name, search_condition
-FROM user_constraints
-WHERE table_name = 'APP_USER'
-AND constraint_name = 'CK_APP_USER_ROLE';
-
-SELECT user_id, username, role, status
-FROM app_user;
-
-SELECT COUNT(*)
-FROM app_user
-WHERE role = 'STAFF';
-
-SELECT constraint_name, search_condition
-FROM user_constraints
-WHERE table_name = 'APP_USER'
-AND constraint_name = 'CK_APP_USER_ROLE';
-
-UPDATE app_user
-SET password = 'admin123'
-WHERE username = 'admin';
-
-COMMIT;
-
-SELECT username, password
-FROM app_user
-WHERE username = 'admin';
-
-SELECT * FROM maintenance
